@@ -1,0 +1,41 @@
+.aboutContainer {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    margin: 1.5rem 0 1rem;
+    color: #555;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #666;
+  }
+  
+  ul {
+    margin: 1rem 0;
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+  
+  li {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 10px;
+  }
+  
