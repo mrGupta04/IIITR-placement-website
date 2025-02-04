@@ -5,18 +5,23 @@ const About = () => {
   useEffect(() => {
     const handleScroll = () => {
       const elements = document.querySelectorAll(`.${styles.fadeIn}`);
+      const windowHeight = window.innerHeight;
+
       elements.forEach((element) => {
         const position = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        if (position < windowHeight - 100) {
+
+        if (position < windowHeight - 100 && position > 0) {
           element.classList.add(styles.visible);
+        } else if (position > windowHeight - 50) {
+          element.classList.remove(styles.visible);
         }
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   return (
     <>
@@ -28,6 +33,11 @@ const About = () => {
           <p className={styles.heroSubheading}>
             Bridging the gap between academic excellence and career success.
           </p>
+          <div className={styles.heroButtons}>
+      <a href="#recruiters" className={styles.heroButton}>Message for Recruiters</a>
+      <a href="#placement-team" className={styles.heroButton}>Training & Placement Team</a>
+      <a href="/contact" className={styles.heroButton}>Contact Us</a>
+    </div>
         </div>
       </section>
 
@@ -52,8 +62,36 @@ const About = () => {
         </div>
       </section>
 
+      {/* Invitation Section */}
+<section id="recruiters" className={`${styles.invitationSection} ${styles.fadeIn}`} >
+  <div className={styles.invitationContainer}>
+    <h2 className={styles.invitationHeading}>An Invitation to Shape the Future of Innovation</h2>
+    <p className={styles.invitationMessage}>
+      <strong>Dear Industry Leaders and Hiring Partners,</strong>
+    </p>
+    <p className={styles.invitationMessage}>
+      At <strong>IIIT Raichur</strong>, we believe that the <em>future of technology is built today</em>—in the minds of young innovators, problem-solvers, and leaders who will drive tomorrow’s industries.
+    </p>
+    <p className={styles.invitationMessage}>
+      With a <strong>cutting-edge academic system</strong>, crafted under the mentorship of <strong>IIT Hyderabad</strong>, our students immerse themselves in a curriculum that goes beyond textbooks. The <strong>Fractal Academic System</strong> ensures deep conceptual clarity through continuous learning, allowing students to master fundamentals while fostering creativity and adaptability.
+    </p>
+    <p className={styles.invitationMessage}>
+      From <strong>day one</strong>, our students engage in <strong>real-world projects</strong>—tackling industry-relevant challenges in <strong>Machine Learning, Data Science, Software Development, and beyond</strong>. Through <strong>internships at startups and tech giants</strong>, they don’t just learn; they contribute, innovate, and lead.
+    </p>
+    <p className={styles.invitationMessage}>
+      We invite you to <strong>be a part of this journey</strong>—to mentor, collaborate, and recruit the next generation of <strong>industry-ready professionals</strong> who are eager to make an impact.
+    </p>
+    <p className={styles.invitationMessage}>
+      🚀 <strong>Let’s build the future together.</strong>  
+      💡 <strong>Join us in shaping tomorrow’s pioneers.</strong>
+    </p>
+    <a href="#contact" className={styles.invitationButton}>Connect With Us</a>
+  </div>
+</section>
+
+
       {/* Meet the Team Section */}
-      <section className={`${styles.teamSection} ${styles.fadeIn}`}>
+      <section id="placement-team" className={`${styles.teamSection} ${styles.fadeIn}`}>
         <h2 className={styles.subHeading}>Meet the Placement Team</h2>
         <div className={styles.teamContainer}>
           {/* Placement Faculty */}
