@@ -1,41 +1,306 @@
-.aboutContainer {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Montserrat', sans-serif;
+/* Parallax Hero Section */
+.parallax {
+  background-image: url('/uploads/IIIT-Raichur-Transit-Campus.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.heroOverlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.heroContent {
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+/* Smooth Scroll Animation */
+.fadeIn {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .parallax {
+    height: 300px;
   }
-  
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #333;
-    text-align: center;
+}
+
+/* Hero Section Styles */
+.heroSection {
+  position: relative;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5), /* Dark gradient from top */
+    rgba(0, 0, 0, 0.5) /* Dark gradient to bottom */
+  );
+  transition: background 0.5s ease; /* Smooth transition for background */
+}
+
+.heroContent {
+  position: relative;
+  text-align: center;
+  z-index: 10;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Soft text shadow */
+}
+
+.heroHeading {
+  font-size: 3rem; /* Adjust the size for your needs */
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.heroSubheading {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  letter-spacing: 1px; /* Slight spacing to enhance readability */
+}
+
+/* About Section */
+.aboutSection {
+  padding: 4rem 2rem;
+  background-color: #f8f9fa;
+}
+
+.aboutHeading {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.aboutParagraph {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  text-align: justify;
+}
+
+.subHeading {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.featuresList {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap in multiple lines */
+  justify-content: center;
+  gap: 2rem; /* Space between each list item */
+  padding: 0;
+  list-style-type: none;
+}
+
+.featureItem {
+  width: 250px; /* Limit width of each feature */
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.featureItem:hover {
+  transform: scale(1.05); /* Hover effect */
+}
+
+.featureItem i {
+  font-size: 2.5rem; /* Icon size */
+  color: #4CAF50;
+  margin-bottom: 1rem;
+}
+
+.featureItem h4 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.featureItem p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .featureItem {
+    width: 100%; /* Full width on mobile */
+    max-width: 300px; /* Maximum width for mobile */
   }
-  
-  h2 {
-    font-size: 1.8rem;
-    margin: 1.5rem 0 1rem;
-    color: #555;
+}
+
+
+.teamSection {
+  padding: 40px;
+  background-color: #f9f9f9;
+}
+
+.subHeading {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.teamContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.teamCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 80%;
+  max-width: 1200px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.teamCard:hover {
+  transform: translateY(-5px);
+}
+
+.teamImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 20px;
+}
+
+.teamText {
+  flex: 1;
+}
+
+.teamText h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.teamText p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.teamText strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #333;
+}
+
+.reverseCard {
+  flex-direction: row-reverse;
+}
+
+.placementOfficerCard {
+  background-color: #fff; /* Same as other cards */
+  flex-direction: row; /* Ensure text is on the right and image is on the left */
+}
+
+.placementOfficerCard .teamText {
+  order: 2; /* Ensure text appears on the right side */
+}
+
+.placementOfficerCard .teamImage {
+  order: 1; /* Ensure image appears on the left side */
+  margin-right: 20px; /* Add space between image and text */
+}
+
+
+@media (max-width: 768px) {
+  .teamCard {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #666;
+
+  .teamImage {
+    margin: 0 0 20px 0;
   }
-  
-  ul {
-    margin: 1rem 0;
-    padding-left: 20px;
-    list-style-type: disc;
-  }
-  
-  li {
-    font-size: 1.1rem;
-    color: #444;
-    margin-bottom: 10px;
-  }
-  
+}
+
+.contactLink {
+  text-decoration: none;
+  color: #0077b5; /* LinkedIn Blue */
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.contactLink:hover {
+  text-decoration: underline;
+}
+.contactLink {
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 10px; /* Space between icons */
+  transition: transform 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Ensure the image sizes don't affect the layout */
+.teamText p a {
+  display: inline-block;
+  margin-right: 15px; /* Space between email and LinkedIn icons */
+}
+
