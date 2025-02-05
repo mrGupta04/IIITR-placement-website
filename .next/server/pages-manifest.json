@@ -3,5 +3,10 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/about": "pages/about.js"
+  "/students": "pages/students.js",
+  "/about": "pages/about.js",
+  "/recruiters": "pages/recruiters.js",
+  "/404": "pages/404.js",
+  "/events": "pages/events.js",
+  "/contact": "pages/contact.js"
 }
