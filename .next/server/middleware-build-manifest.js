@@ -20,15 +20,19 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+<<<<<<< HEAD
     "/admin/update": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/admin/update.js"
     ],
     "/profile": [
+=======
+    "/about": [
+>>>>>>> 20dc6e8297bc8582ff8f47ca71f11325ee58432b
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/profile.js"
+      "static/chunks/pages/about.js"
     ]
   },
   "ampFirstPages": []
