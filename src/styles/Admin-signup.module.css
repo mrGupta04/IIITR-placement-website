@@ -3,12 +3,12 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #121212;
+    background: #eeedf2;
     padding: 20px;
   }
   
   .signupBoxContainer {
-    background: #1e1e1e;
+    background: #403f4a;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);

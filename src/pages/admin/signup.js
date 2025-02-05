@@ -99,8 +99,8 @@ export default function RecruiterSignup({ setAdmin, setLoginsign }) {
           <textarea name="aboutCompany" placeholder="About Company" value={formData.aboutCompany} onChange={handleChange} className={styles.signupTextarea} required />
           <input type="text" name="industryType" placeholder="Industry Type" value={formData.industryType} onChange={handleChange} className={styles.signupInput} required />
           <input type="url" name="website" placeholder="Website URL" value={formData.website} onChange={handleChange} className={styles.signupInput} required />
-          <input type="file" onChange={(e) => setProfilepic(e.target.files[0])} className={styles.signupFileInput} required />
-          <input type="file" onChange={(e) => setLogo(e.target.files[0])} className={styles.signupFileInput} required />
+          <input type="file" onChange={(e) => setProfilepic(e.target.files[0])} className={styles.signupFileInput} required  placeholder="Upload Profile"/>
+          <input type="file" onChange={(e) => setLogo(e.target.files[0])} className={styles.signupFileInput} required placeholder="Upload Logo"/>
           <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} className={styles.signupInput} required />
           <input type="password" name="reenterpassword" placeholder="Confirm Password" value={formData.reenterpassword} onChange={handleChange} className={styles.signupInput} required />
           <button type="submit" className={styles.signupButton} disabled={loading}>

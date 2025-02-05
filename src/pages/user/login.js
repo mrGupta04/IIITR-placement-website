@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ForgotPassword from "./forget-password";
+import styles from "../../styles/Login.module.css"; // Import CSS module
 
 const Login = ({ setLoginsign, setUser }) => {
   const [email, setEmail] = useState("");
@@ -23,55 +24,65 @@ const Login = ({ setLoginsign, setUser }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-     
-        const userData = await response.json();
-        if(!response.ok) throw new Error(userData.message||"login failed")
-        console.log("Login successful, user data:", userData);
-        localStorage.setItem("User", JSON.stringify(userData.user));
-        setUser(userData.user);
-        setLoginsign(true);
-  
+
+      const userData = await response.json();
+      if (!response.ok) throw new Error(userData.message || "Login failed");
+
+      console.log("Login successful, user data:", userData);
+      localStorage.setItem("User", JSON.stringify(userData.user));
+      setUser(userData.user);
+      setLoginsign(true);
     } catch (error) {
-      console.error("Error during login:", error);
-      setError("An error occurred. Please try again.");
+      console.error("Error during login:", error.message);
+      setError(error.message || "An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleResetSuccess = () => {
-    // Switch back to login view after password reset
     setShowForgotPassword(false);
   };
 
   return (
-    <div className="login-container">
-      {/* Conditionally render ForgotPassword or Login */}
+    <div className={styles.loginContainer}>
       {!showForgotPassword ? (
         <>
-          <h2>Login</h2>
+          <h2 className={styles.heading}>Login</h2>
 
-          {error && <p className="error-message">{error}</p>}
+          {error && (
+            <p className={styles.errorMessage} aria-live="assertive">
+              {error}
+            </p>
+          )}
 
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className={styles.input}
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className={styles.input}
           />
 
-          {/* Forgot Password Link */}
-          <a href="#" onClick={() => setShowForgotPassword(true)}>
+          <button
+            className={styles.forgotPassword}
+            onClick={() => setShowForgotPassword(true)}
+          >
             Forgot password?
-          </a>
+          </button>
 
-          <button onClick={handleLogin} disabled={loading}>
+          <button
+            className={styles.loginButton}
+            onClick={handleLogin}
+            disabled={loading}
+          >
             {loading ? "Logging in..." : "Login"}
           </button>
         </>

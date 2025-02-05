@@ -1,0 +1,98 @@
+/* Profile Card Container */
+.profile-card {
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #fff;
+    margin: 30px auto;
+    font-family: "Poppins", sans-serif;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .profile-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Profile Picture */
+  .profilepicsection img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #4caf50;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .profilepicsection img:hover {
+    border-color: #3ea642;
+  }
+  
+  /* User Information */
+  .personaldetail, .linksection, .project, .workexperience, .leadership {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    text-align: left;
+  }
+  /* Links */
+.link {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+    color: #3ea642;
+  }
+  
+  
+  /* Buttons */
+  .button {
+    background: linear-gradient(135deg, #4caf50, #3ea642);
+    border: none;
+    padding: 10px 18px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 10px;
+    display: inline-block;
+  }
+  
+  .button:hover {
+    background: linear-gradient(135deg, #3ea642, #2e8b57);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    background: linear-gradient(135deg, #ff4b4b, #e63e3e);
+  }
+  
+  .logout-btn:hover {
+    background: linear-gradient(135deg, #e63e3e, #c0392b);
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .profile-card {
+      max-width: 90%;
+      padding: 15px;
+    }
+  
+    .profilepicsection img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
