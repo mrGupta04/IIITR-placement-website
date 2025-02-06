@@ -2,11 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-  "/admin/update": "pages/admin/update.js",
-  "/profile": "pages/profile.js"
-=======
+  "/profile": "pages/profile.js",
   "/": "pages/index.js",
-  "/about": "pages/about.js"
->>>>>>> 20dc6e8297bc8582ff8f47ca71f11325ee58432b
+  "/contact": "pages/contact.js"
 }

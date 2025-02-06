@@ -54,30 +54,6 @@
   gap: 15px;
 }
 
-.searchForm {
-  display: flex;
-  align-items: center;
-  background: white;
-  border-radius: 20px;
-  padding: 5px 10px;
-}
-
-.searchInput {
-  border: none;
-  outline: none;
-  padding: 5px;
-  font-size: 0.9rem;
-  border-radius: 20px;
-}
-
-.searchButton {
-  background: none;
-  border: none;
-  color: #00274d;
-  cursor: pointer;
-  padding: 5px;
-  font-size: 1.2rem;
-}
 
 .loginButton {
   display: flex;
