@@ -10,7 +10,7 @@ const InputField = ({ name, type, placeholder, value, onChange, required = false
     placeholder={placeholder}
     value={value}
     onChange={onChange}
-    className={`${styles.inputField} ${className}`}
+    className={`${styles.signupInput} ${className}`}
     required={required}
   />
 );
@@ -20,7 +20,7 @@ const SelectField = ({ name, value, options, onChange, required = false, classNa
     name={name}
     value={value}
     onChange={onChange}
-    className={`${styles.selectField} ${className}`}
+    className={`${styles.signupInput} ${className}`}
     required={required}
   >
     {options.map((option) => (
@@ -175,59 +175,50 @@ export default function Signup({ setUser, setLoginsign }) {
   };
 
   return (
-    <div className={styles.signupMaincontainer} id="signupMaincontainer">
-      <div className={styles.signupinternalcontainer} id="signupinternalcontainer">
-        <h2 className={styles.heading} id="heading">Create Account</h2>
-        {error && <p className={styles.error} id="error">{error}</p>}
-        <form onSubmit={handleSignup} className={styles.form} id="form">
-          <InputField name="name" type="text" placeholder="Full Name" value={formData.name} onChange={handleChange} className={styles.inputField} />
-          <InputField name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} className={styles.inputField} />
-          <InputField name="mobileno" type="text" placeholder="Mobile Number" value={formData.mobileno} onChange={handleChange} className={styles.inputField} />
-
+    <div className={styles.signupPageContainer}>
+      <div className={styles.signupBoxContainer}>
+        <h2 className={styles.signupHeading}>Create Account</h2>
+        {error && <p className={styles.signupErrorMessage}>{error}</p>}
+        <form onSubmit={handleSignup} className={styles.signupForm}>
+          <InputField name="name" type="text" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
+          <InputField name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
+          <InputField name="mobileno" type="text" placeholder="Mobile Number" value={formData.mobileno} onChange={handleChange} required />
           <SelectField
             name="batch"
             value={formData.batch}
             options={[{ label: "Select Batch", value: "" }, { label: "Batch 2023", value: "Batch 2023" }, { label: "Batch 2024", value: "Batch 2024" }, { label: "Batch 2025", value: "Batch 2025" }]}
             onChange={handleChange}
-            className={styles.selectField}
           />
-
-          <InputField name="rollno" type="text" placeholder="Roll Number" value={formData.rollno} onChange={handleChange} className={styles.inputField} />
-
+          <InputField name="rollno" type="text" placeholder="Roll Number" value={formData.rollno} onChange={handleChange} required />
           <SelectField
             name="department"
             value={formData.department}
             options={[{ label: "Select Department", value: "" }, { label: "Computer Science", value: "Computer Science" }, { label: "Electrical Engineering", value: "Electrical Engineering" }, { label: "Mechanical Engineering", value: "Mechanical Engineering" }, { label: "Civil Engineering", value: "Civil Engineering" }]}
             onChange={handleChange}
-            className={styles.selectField}
           />
-
-          <InputField name="cgpa" type="text" placeholder="CGPA" value={formData.cgpa} onChange={handleChange} className={styles.inputField} />
-
+          <InputField name="cgpa" type="text" placeholder="CGPA" value={formData.cgpa} onChange={handleChange} required />
           <SelectField
             name="gender"
             value={formData.gender}
             options={[{ label: "Select Gender", value: "" }, { label: "Male", value: "Male" }, { label: "Female", value: "Female" }, { label: "Other", value: "Other" }]}
             onChange={handleChange}
-            className={styles.selectField}
           />
+          <InputField name="linkedin" type="text" placeholder="LinkedIn Profile" value={formData.linkedin} onChange={handleChange} />
+          <InputField name="github" type="text" placeholder="GitHub Profile" value={formData.github} onChange={handleChange} />
+          <InputField name="leetcode" type="text" placeholder="LeetCode Profile" value={formData.leetcode} onChange={handleChange} />
+          <InputField name="portfolio" type="text" placeholder="Portfolio URL" value={formData.portfolio} onChange={handleChange} />
 
-          <InputField name="linkedin" type="text" placeholder="LinkedIn Profile" value={formData.linkedin} onChange={handleChange} className={styles.inputField} />
-          <InputField name="github" type="text" placeholder="GitHub Profile" value={formData.github} onChange={handleChange} className={styles.inputField} />
-          <InputField name="leetcode" type="text" placeholder="LeetCode Profile" value={formData.leetcode} onChange={handleChange} className={styles.inputField} />
-          <InputField name="portfolio" type="text" placeholder="Portfolio URL" value={formData.portfolio} onChange={handleChange} className={styles.inputField} />
-
-          <div className={styles.skillsContainer} id="skillsContainer">
-            <label className={styles.skillsLabel} id="skillsLabel">Skills</label>
-            <div className={styles.addSkillsBox} id="addSkillsBox" onClick={toggleDropdown}>
+          <div className={styles.skillsContainer}>
+            <label className={styles.skillsLabel}>Skills</label>
+            <div className={styles.addSkillsBox} onClick={toggleDropdown}>
               <span>{selectedSkills.length === 0 ? 'Add Skills' : 'Edit Skills'}</span>
             </div>
             {selectedSkills.length > 0 && (
-              <div className={styles.selectedSkillsBox} id="selectedSkillsBox">
+              <div className={styles.selectedSkillsBox}>
                 {selectedSkills.map(skill => (
-                  <div key={skill.value} className={styles.selectedSkill} id="selectedSkill">
+                  <div key={skill.value} className={styles.selectedSkill}>
                     {skill.label}
-                    <span className={styles.removeSkill} id="removeSkill" onClick={() => removeSkill(skill)}>
+                    <span className={styles.removeSkill} onClick={() => removeSkill(skill)}>
                       &times;
                     </span>
                   </div>
@@ -235,7 +226,7 @@ export default function Signup({ setUser, setLoginsign }) {
               </div>
             )}
             {showDropdown && (
-              <div className={styles.dropdown} id="dropdown">
+              <div className={styles.dropdown}>
                 <Select
                   options={skillsOptions}
                   isMulti
@@ -252,14 +243,13 @@ export default function Signup({ setUser, setLoginsign }) {
             onAdd={addProject}
             onChange={handleProjectChange}
             renderField={(lead, index) => (
-              <div key={index} className={styles.dynamicField} id="dynamicField">
-                <InputField name="title" type="text" placeholder="Title" value={lead.title} onChange={(e) => handleProjectChange(e, index)} className={styles.inputField} />
-                <InputField name="skillused" type="text" placeholder="Skill Used" value={lead.skillused} onChange={(e) => handleProjectChange(e, index)} className={styles.inputField} />
-                <InputField name="date" type="text" placeholder="Start-end date" value={lead.date} onChange={(e) => handleProjectChange(e, index)} className={styles.inputField} />
-                <InputField name="description" type="text" placeholder="Description" value={lead.description} onChange={(e) => handleProjectChange(e, index)} className={styles.inputField} />
+              <div key={index} className={styles.dynamicField}>
+                <InputField name="title" type="text" placeholder="Title" value={lead.title} onChange={(e) => handleProjectChange(e, index)} />
+                <InputField name="skillused" type="text" placeholder="Skill Used" value={lead.skillused} onChange={(e) => handleProjectChange(e, index)} />
+                <InputField name="date" type="text" placeholder="Start-end date" value={lead.date} onChange={(e) => handleProjectChange(e, index)} />
+                <InputField name="description" type="text" placeholder="Description" value={lead.description} onChange={(e) => handleProjectChange(e, index)} />
               </div>
             )}
-            className={styles.dynamicSection}
           />
 
           <DynamicSection
@@ -268,14 +258,13 @@ export default function Signup({ setUser, setLoginsign }) {
             onAdd={addWorkExperience}
             onChange={handleWorkExperienceChange}
             renderField={(exp, index) => (
-              <div key={index} className={styles.dynamicField} id="dynamicField">
-                <InputField name="company" type="text" placeholder="Company Name" value={exp.company} onChange={(e) => handleWorkExperienceChange(e, index)} className={styles.inputField} />
-                <InputField name="jobTitle" type="text" placeholder="Job Title" value={exp.jobTitle} onChange={(e) => handleWorkExperienceChange(e, index)} className={styles.inputField} />
-                <InputField name="duration" type="text" placeholder="Duration" value={exp.duration} onChange={(e) => handleWorkExperienceChange(e, index)} className={styles.inputField} />
-                <InputField name="description" type="text" placeholder="Job Description" value={exp.description} onChange={(e) => handleWorkExperienceChange(e, index)} className={styles.inputField} />
+              <div key={index} className={styles.dynamicField}>
+                <InputField name="company" type="text" placeholder="Company Name" value={exp.company} onChange={(e) => handleWorkExperienceChange(e, index)} />
+                <InputField name="jobTitle" type="text" placeholder="Job Title" value={exp.jobTitle} onChange={(e) => handleWorkExperienceChange(e, index)} />
+                <InputField name="duration" type="text" placeholder="Duration" value={exp.duration} onChange={(e) => handleWorkExperienceChange(e, index)} />
+                <InputField name="description" type="text" placeholder="Job Description" value={exp.description} onChange={(e) => handleWorkExperienceChange(e, index)} />
               </div>
             )}
-            className={styles.dynamicSection}
           />
 
           <DynamicSection
@@ -284,25 +273,23 @@ export default function Signup({ setUser, setLoginsign }) {
             onAdd={addLeadership}
             onChange={handleLeadershipChange}
             renderField={(lead, index) => (
-              <div key={index} className={styles.dynamicField} id="dynamicField">
-                <InputField name="activity" type="text" placeholder="Activity" value={lead.activity} onChange={(e) => handleLeadershipChange(e, index)} className={styles.inputField} />
-                <InputField name="role" type="text" placeholder="Role" value={lead.role} onChange={(e) => handleLeadershipChange(e, index)} className={styles.inputField} />
-                <InputField name="duration" type="text" placeholder="Duration" value={lead.duration} onChange={(e) => handleLeadershipChange(e, index)} className={styles.inputField} />
-                <InputField name="description" type="text" placeholder="Description" value={lead.description} onChange={(e) => handleLeadershipChange(e, index)} className={styles.inputField} />
+              <div key={index} className={styles.dynamicField}>
+                <InputField name="activity" type="text" placeholder="Activity" value={lead.activity} onChange={(e) => handleLeadershipChange(e, index)} />
+                <InputField name="role" type="text" placeholder="Role" value={lead.role} onChange={(e) => handleLeadershipChange(e, index)} />
+                <InputField name="duration" type="text" placeholder="Duration" value={lead.duration} onChange={(e) => handleLeadershipChange(e, index)} />
+                <InputField name="description" type="text" placeholder="Description" value={lead.description} onChange={(e) => handleLeadershipChange(e, index)} />
               </div>
             )}
-            className={styles.dynamicSection}
           />
 
-          <div className={styles.Profilepic} id="Profilepic">
-            <label htmlFor="profilePic" className={styles.fileLabel} id="fileLabel">Choose Profile Pic</label>
+          <div className={styles.Profilepic}>
+            <label htmlFor="profilePic" className={styles.fileLabel}>Choose Profile Pic</label>
             <input id="profilePic" type="file" onChange={(e) => setProfilepic(e.target.files[0])} className={styles.fileInput} />
-            <label htmlFor="resume" className={styles.fileLabel} id="fileLabel">Upload Resume</label>
+            <label htmlFor="resume" className={styles.fileLabel}>Upload Resume</label>
             <input id="resume" type="file" onChange={(e) => setResume(e.target.files[0])} className={styles.fileInput} />
           </div>
 
-          <InputField name="preferredLocation" type="text" placeholder="Preferred Location" value={formData.preferredLocation} onChange={handleChange} className={styles.inputField} />
-
+          <InputField name="preferredLocation" type="text" placeholder="Preferred Location" value={formData.preferredLocation} onChange={handleChange} />
           <SelectField
             name="jobType"
             value={formData.jobType}
@@ -313,13 +300,11 @@ export default function Signup({ setUser, setLoginsign }) {
               { label: "Internship", value: "Internship" },
             ]}
             onChange={handleChange}
-            className={styles.selectField}
           />
+          <InputField name="password" type="password" placeholder="Enter password" value={formData.password} onChange={handleChange} required />
+          <InputField name="reenterpassword" type="password" placeholder="Re-enter password" value={formData.reenterpassword} onChange={handleChange} required />
 
-          <InputField name="password" type="password" placeholder="Enter password" value={formData.password} onChange={handleChange} className={styles.inputField} />
-          <InputField name="reenterpassword" type="password" placeholder="Re-enter password" value={formData.reenterpassword} onChange={handleChange} className={styles.inputField} />
-
-          <button type="submit" disabled={loading} className={styles.submitButton} id="submitButton">
+          <button type="submit" disabled={loading} className={styles.signupButton}>
             {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </form>
