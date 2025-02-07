@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ForgotPassword from "./forget-password";
-import styles from "../../styles/Login.module.css"; // Import CSS module
+import styles from "../../styles/User-login.module.css"; // Import CSS module
 
 const Login = ({ setLoginsign, setUser }) => {
   const [email, setEmail] = useState("");
