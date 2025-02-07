@@ -1,5 +1,18 @@
 import React, { useEffect } from 'react';
-import styles from '../styles/about.module.css';  
+import Card from "./Card.js";
+import styles from '../styles/about.module.css';
+
+const additionalMembers = [
+  { image: "/uploads/coordinator.jpg", name: "David Wilson", position: "Lead Developer", info: "Full-stack developer with expertise in JavaScript.", linkedin: "https://linkedin.com/in/david", email: "david@example.com" },
+  { image: "/uploads/coordinator.jpg", name: "Sophia Brown", position: "UX Designer", info: "Designing seamless user experiences.", linkedin: "https://linkedin.com/in/sophia", email: "sophia@example.com" },
+  { image: "/uploads/coordinator.jpg", name: "Michael Lee", position: "Data Scientist", info: "Turning data into actionable insights.", linkedin: "https://linkedin.com/in/michael", email: "michael@example.com" },
+  { image: "/uploads/coordinator.jpg", name: "Emma Wilson", position: "HR Manager", info: "Managing talent with care and expertise.", linkedin: "https://linkedin.com/in/emma", email: "emma@example.com" },
+  { image: "/uploads/coordinator.jpg", name: "Daniel Martinez", position: "DevOps Engineer", info: "Optimizing infrastructure and CI/CD pipelines.", linkedin: "https://linkedin.com/in/daniel", email: "daniel@example.com" },
+  { image: "/uploads/coordinator.jpg", name: "Daniel Martinez", position: "DevOps Engineer", info: "Optimizing infrastructure and CI/CD pipelines.", linkedin: "https://linkedin.com/in/daniel", email: "daniel@example.com" },
+  { image: "/uploads/coordinator.jpg", name: "Olivia White", position: "QA Engineer", info: "Ensuring software quality and testing automation.", linkedin: "https://linkedin.com/in/olivia", email: "olivia@example.com" },
+  { image: "/uploads/coordinator.jpg", name: "James Anderson", position: "Cybersecurity Analyst", info: "Protecting data and network security.", linkedin: "https://linkedin.com/in/james", email: "james@example.com" },
+  { image: "/uploads/coordinator.jpg", name: "Grace Thomas", position: "Project Manager", info: "Driving projects from start to success.", linkedin: "https://linkedin.com/in/grace", email: "grace@example.com" }
+];
 
 const About = () => {
   useEffect(() => {
@@ -21,7 +34,7 @@ const About = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
 
   return (
     <>
@@ -34,10 +47,10 @@ const About = () => {
             Bridging the gap between academic excellence and career success.
           </p>
           <div className={styles.heroButtons}>
-      <a href="#recruiters" className={styles.heroButton}>Message for Recruiters</a>
-      <a href="#placement-team" className={styles.heroButton}>Training & Placement Team</a>
-      <a href="/contact" className={styles.heroButton}>Contact Us</a>
-    </div>
+            <a href="#recruiters" className={styles.heroButton}>Message for Recruiters</a>
+            <a href="#placement-team" className={styles.heroButton}>Training & Placement Team</a>
+            <a href="/contact" className={styles.heroButton}>Contact Us</a>
+          </div>
         </div>
       </section>
 
@@ -63,31 +76,31 @@ const About = () => {
       </section>
 
       {/* Invitation Section */}
-<section id="recruiters" className={`${styles.invitationSection} ${styles.fadeIn}`} >
-  <div className={styles.invitationContainer}>
-    <h2 className={styles.invitationHeading}>An Invitation to Shape the Future of Innovation</h2>
-    <p className={styles.invitationMessage}>
-      <strong>Dear Industry Leaders and Hiring Partners,</strong>
-    </p>
-    <p className={styles.invitationMessage}>
-      At <strong>IIIT Raichur</strong>, we believe that the <em>future of technology is built today</em>—in the minds of young innovators, problem-solvers, and leaders who will drive tomorrow’s industries.
-    </p>
-    <p className={styles.invitationMessage}>
-      With a <strong>cutting-edge academic system</strong>, crafted under the mentorship of <strong>IIT Hyderabad</strong>, our students immerse themselves in a curriculum that goes beyond textbooks. The <strong>Fractal Academic System</strong> ensures deep conceptual clarity through continuous learning, allowing students to master fundamentals while fostering creativity and adaptability.
-    </p>
-    <p className={styles.invitationMessage}>
-      From <strong>day one</strong>, our students engage in <strong>real-world projects</strong>—tackling industry-relevant challenges in <strong>Machine Learning, Data Science, Software Development, and beyond</strong>. Through <strong>internships at startups and tech giants</strong>, they don’t just learn; they contribute, innovate, and lead.
-    </p>
-    <p className={styles.invitationMessage}>
-      We invite you to <strong>be a part of this journey</strong>—to mentor, collaborate, and recruit the next generation of <strong>industry-ready professionals</strong> who are eager to make an impact.
-    </p>
-    <p className={styles.invitationMessage}>
-      🚀 <strong>Let’s build the future together.</strong>  
-      💡 <strong>Join us in shaping tomorrow’s pioneers.</strong>
-    </p>
-    <a href="#contact" className={styles.invitationButton}>Connect With Us</a>
-  </div>
-</section>
+      <section id="recruiters" className={`${styles.invitationSection} ${styles.fadeIn}`} >
+        <div className={styles.invitationContainer}>
+          <h2 className={styles.invitationHeading}>An Invitation to Shape the Future of Innovation</h2>
+          <p className={styles.invitationMessage}>
+            <strong>Dear Industry Leaders and Hiring Partners,</strong>
+          </p>
+          <p className={styles.invitationMessage}>
+            At <strong>IIIT Raichur</strong>, we believe that the <em>future of technology is built today</em>—in the minds of young innovators, problem-solvers, and leaders who will drive tomorrow’s industries.
+          </p>
+          <p className={styles.invitationMessage}>
+            With a <strong>cutting-edge academic system</strong>, crafted under the mentorship of <strong>IIT Hyderabad</strong>, our students immerse themselves in a curriculum that goes beyond textbooks. The <strong>Fractal Academic System</strong> ensures deep conceptual clarity through continuous learning, allowing students to master fundamentals while fostering creativity and adaptability.
+          </p>
+          <p className={styles.invitationMessage}>
+            From <strong>day one</strong>, our students engage in <strong>real-world projects</strong>—tackling industry-relevant challenges in <strong>Machine Learning, Data Science, Software Development, and beyond</strong>. Through <strong>internships at startups and tech giants</strong>, they don’t just learn; they contribute, innovate, and lead.
+          </p>
+          <p className={styles.invitationMessage}>
+            We invite you to <strong>be a part of this journey</strong>—to mentor, collaborate, and recruit the next generation of <strong>industry-ready professionals</strong> who are eager to make an impact.
+          </p>
+          <p className={styles.invitationMessage}>
+            🚀 <strong>Let’s build the future together.</strong>
+            💡 <strong>Join us in shaping tomorrow’s pioneers.</strong>
+          </p>
+          <a href="#contact" className={styles.invitationButton}>Connect With Us</a>
+        </div>
+      </section>
 
 
       {/* Meet the Team Section */}
@@ -146,6 +159,12 @@ const About = () => {
                 </a>
               </p>
             </div>
+          </div>
+          {/* New Members - 2 Rows of 4 Cards */}
+          <div className={styles.additionalGrid}>
+            {additionalMembers.map((member, index) => (
+              <Card key={index} {...member} small />
+            ))}
           </div>
         </div>
       </section>

@@ -67,6 +67,7 @@
 
 /* Profile Image */
 .image {
+  margin: 10px;
   width: 80%;
   height: auto;
   border-radius: 50%;
