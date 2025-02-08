@@ -43,41 +43,49 @@ const Login = ({ setLoginsign, setAdmin }) => {
   };
 
   return (
-    <div className={styles.adminloginContainer}>
-      {!showForgotPassword ? (
-        <>
-          <h2 className={styles.loginheading}>Admin Login</h2>
-          {error && <p className={styles.errorMessage}>{error}</p>}
+    <div className={styles.pageWrapper}>
+      <div className={styles.adminloginContainer}>
+        {!showForgotPassword ? (
+          <>
+            <h2 className={styles.loginheading}>Admin Login</h2>
+            {error && <p className={styles.errorMessage}>{error}</p>}
 
-          <div className={styles.inputWrapper}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={styles.adminlogininput}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={styles.adminlogininput}
-            />
-          </div>
+            <div className={styles.inputWrapper}>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={styles.inputField}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={styles.inputField}
+              />
+            </div>
 
-         
-          <button
-            onClick={handleLogin}
-            disabled={loading}
-            className={styles.adminloginbutton}
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </>
-      ) : (
-        <ForgotPassword onResetSuccess={handleResetSuccess} />
-      )}
+            <button
+              onClick={handleLogin}
+              disabled={loading}
+              className={styles.adminloginbutton}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+
+            <button
+              onClick={() => setShowForgotPassword(true)}
+              className={styles.forgotPasswordButton}
+            >
+              Forgot Password?
+            </button>
+          </>
+        ) : (
+          <ForgotPassword onResetSuccess={handleResetSuccess} />
+        )}
+      </div>
     </div>
   );
 };
