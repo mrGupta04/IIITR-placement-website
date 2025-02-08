@@ -43,30 +43,35 @@ const Login = ({ setLoginsign, setAdmin }) => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <div className={styles.adminloginContainer}>
       {!showForgotPassword ? (
         <>
-          <h2>Login</h2>
+          <h2 className={styles.loginheading}>Admin Login</h2>
           {error && <p className={styles.errorMessage}>{error}</p>}
 
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className={styles.inputWrapper}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.adminlogininput}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.adminlogininput}
+            />
+          </div>
 
-          <a href="#" onClick={() => setShowForgotPassword(true)}>
-            Forgot password?
-          </a>
-
-          <button onClick={handleLogin} disabled={loading}>
+         
+          <button
+            onClick={handleLogin}
+            disabled={loading}
+            className={styles.adminloginbutton}
+          >
             {loading ? "Logging in..." : "Login"}
           </button>
         </>

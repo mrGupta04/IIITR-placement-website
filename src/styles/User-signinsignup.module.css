@@ -1,61 +1,50 @@
-.profileContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 50px auto;
-    font-family: 'Montserrat', sans-serif;
+.container {
+  text-align: center;
+}
+
+/* Toggle Buttons */
+.toggleButtons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.toggleButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  background-color: #ccc;
+  color: #333;
+  transition: background 0.3s ease-in-out;
+  margin: 0 5px;
+}
+
+.toggleButton.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Form Wrapper */
+.formWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Show Animation */
+.form {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  .buttonContainer {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-    width: 100%;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .signupButton {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .signupButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .signupButton:hover:not(:disabled) {
-    background-color: #218838;
-  }
-  
-  .loginButton {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .loginButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .loginButton:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  
+}

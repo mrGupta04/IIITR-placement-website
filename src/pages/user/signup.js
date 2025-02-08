@@ -1,5 +1,7 @@
 import { useState } from "react";
+import Select from 'react-select';
 import { useRouter } from "next/router";
+import styles from '../../styles/User-signup.module.css';
 
 const InputField = ({ name, type, placeholder, value, onChange, required = false }) => (
   <input
@@ -25,7 +27,7 @@ const DynamicSection = ({ label, fields, onAdd, onChange, renderField }) => (
   <div className>
     <label>{label}:</label>
     {fields.map((field, index) => renderField(field, index, onChange))}
-    <button type="button" onClick={onAdd} >+</button>
+    <button type="button" onClick={onAdd} >Add</button>
   </div>
 );
 
@@ -61,19 +63,26 @@ export default function Signup({ setUser, setLoginsign }) {
   const [project, setProject] = useState([]);
   const [workExperience, setWorkExperience] = useState([]);
   const [leadership, setLeadership] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const skillsOptions = [
     { value: "Python", label: "Python" }, { value: "JavaScript", label: "JavaScript" }, { value: "React", label: "React" },
     { value: "SQL", label: "SQL" }, { value: "Node.js", label: "Node.js" }, { value: "AWS", label: "AWS" },
     { value: "Django", label: "Django" }, { value: "C++", label: "C++" }, { value: "Java", label: "Java" }
   ];
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSkillChange = (e, index) => {
-    const updatedSkills = [...selectedSkills];
-    updatedSkills[index] = e.target.value;
-    setSelectedSkills(updatedSkills);
+  const handleSkillChange = (selectedOptions) => {
+    setSelectedSkills(selectedOptions);
+  };
+
+  const removeSkill = (skillToRemove) => {
+    setSelectedSkills(selectedSkills.filter(skill => skill.value !== skillToRemove.value));
   };
 
   const addSkill = () => setSelectedSkills([...selectedSkills, ""]);
@@ -173,9 +182,9 @@ export default function Signup({ setUser, setLoginsign }) {
   };
 
   return (
-    <div className>
-      <div className>
-        <h2 className>Create Account</h2>
+    <div className={styles.signupMaincontainer}>
+      <div className={styles.signupinternalcontainer}>
+        <h2 className={styles.heading}>Create Account</h2>
         {error && <p className>{error}</p>}
         <form onSubmit={handleSignup} >
           {/* Form Fields */}
@@ -218,24 +227,44 @@ export default function Signup({ setUser, setLoginsign }) {
             value={formData.portfolio}
             onChange={handleChange}
           />
+          <div className={styles.skillsContainer}>
+            {/* Skills Label */}
+            <label className={styles.skillsLabel}>Skills</label>
 
-          {/* Dynamic Fields */}
-          <DynamicSection
-            label="Skills"
-            fields={selectedSkills}
-            onAdd={addSkill}
-            onChange={handleSkillChange}
-            renderField={(field, index) => (
-              <div key={index} className>
-                <SelectField
-                  name={`skill-${index}`}
-                  value={field}
+            {/* Add Skills Box */}
+            <div className={styles.addSkillsBox} onClick={toggleDropdown}>
+              <span>{selectedSkills.length === 0 ? 'Add Skills' : 'Edit Skills'}</span>
+            </div>
+
+            {/* Selected Skills Box */}
+            {selectedSkills.length > 0 && (
+              <div className={styles.selectedSkillsBox}>
+                {selectedSkills.map(skill => (
+                  <div key={skill.value} className={styles.selectedSkill}>
+                    {skill.label}
+                    <span
+                      className="remove-skill"
+                      onClick={() => removeSkill(skill)}
+                    >
+                      &times;
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Dropdown for selecting skills */}
+            {showDropdown && (
+              <div className={styles.dropdown}>
+                <Select
                   options={skillsOptions}
-                  onChange={(e) => handleSkillChange(e, index)}
+                  isMulti
+                  value={selectedSkills}
+                  onChange={handleSkillChange}
                 />
               </div>
             )}
-          />
+          </div>
           <DynamicSection
             label="project"
             fields={project}
@@ -244,7 +273,7 @@ export default function Signup({ setUser, setLoginsign }) {
             renderField={(lead, index) => (
               <div key={index} >
                 <InputField
-                  name="Title"
+                  name="title"
                   type="text"
                   placeholder="Title"
                   value={lead.activity}
@@ -328,7 +357,7 @@ export default function Signup({ setUser, setLoginsign }) {
             )}
           />
           {/* File Upload Section */}
-          <div className>
+          <div className={styles.Profilepic}>
             {/* Profile Pic */}
             <label htmlFor="profilePic" className>Choose Profile Pic</label>
             <input
@@ -376,8 +405,8 @@ export default function Signup({ setUser, setLoginsign }) {
             {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 
 }

@@ -36,16 +36,7 @@ const Header = () => {
           </ul>
         </nav>
         <div className={styles.actions}>
-          <form className={styles.searchForm}>
-            <input
-              type="text"
-              placeholder="Search..."
-              className={styles.searchInput}
-            />
-            <button type="submit" className={styles.searchButton}>
-              <FaSearch />
-            </button>
-          </form>
+          
           <Link href="/profile" className={styles.loginButton}>
             <FaUser className={styles.userIcon} /> Profile
           </Link>

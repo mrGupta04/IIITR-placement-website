@@ -1,0 +1,121 @@
+.adminupdatepage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e1e2f, #3a3a52);
+    padding: 20px;
+  }
+  
+  .adminupdatebox {
+    width: 100%;
+    max-width: 500px;
+    background: #2a2a3a;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    text-align: center;
+    color: #ffffff;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .adminupdatebox:hover {
+    transform: scale(1.02);
+  }
+  
+  .adminupdateheading {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #f0f0f0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .adminupdaterror {
+    background: #ff4d4d;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .adminupdatefrom {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .adminupdateinput {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #f0f0f0;
+    background: #3a3a52;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .adminupdateinput:focus {
+    background: #4a4a62;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+  
+  .file-upload-label {
+    text-align: left;
+    font-size: 14px;
+    color: #bbb;
+  }
+  
+  .update-file-input {
+    padding: 10px;
+    background: #3a3a52;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .adminupdateformbutton {
+    width: 100%;
+    background: linear-gradient(45deg, #ff7eb3, #ff758c);
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  
+  .adminupdateformbutton:hover {
+    background: linear-gradient(45deg, #ff5f9e, #ff466e);
+  }
+  
+  .adminupdateformbutton:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+  
+  .adminupdatecancel {
+    width: 100%;
+    background: transparent;
+    color: #ff7eb3;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px;
+    border: 2px solid #ff7eb3;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+  
+  .adminupdatecancel:hover {
+    background: #ff7eb3;
+    color: white;
+  }
+  

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Signinsignup from "./signinsignup";
 import ProfileCard from "./profilecard";
+import Update from './update';
 
 const Userprofile = ({ onLogout }) => {
   const [user, setUser] = useState(null);

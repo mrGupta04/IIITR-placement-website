@@ -1,88 +1,250 @@
-.signup-page-container {
+/* Main container styling */
+.signupMaincontainer {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1e90ff, #6a5acd);
+  background-color: #e9ecef;
+  padding: 40px;
 }
 
-.signup-box-container {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  width: 400px;
+/* Internal container for the form */
+.signupinternalcontainer {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-.signup-heading {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.8rem;
+.signupinternalcontainer:hover {
+  transform: translateY(-5px); /* Subtle hover effect */
+}
+
+/* Heading */
+.heading {
+  font-family: 'Montserrat', sans-serif;
   color: #333;
-  text-align: center;
-  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-.signup-error-message {
-  color: #ff4d4f;
+/* Error message */
+.signupinternalcontainer p {
+  color: red;
   font-size: 0.9rem;
-  margin-bottom: 1rem;
-  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
-.signup-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.signup-input,
-.signup-select,
-.signup-file-input {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
+/* Form field styling */
+.signupMaincontainer input[type="text"],
+.signupMaincontainer input[type="email"],
+.signupMaincontainer input[type="file"],
+.signupMaincontainer select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  border: 1px solid #ced4da;
   border-radius: 8px;
   font-size: 1rem;
+  box-sizing: border-box;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
-.signup-input:focus,
-.signup-select:focus {
-  border-color: #1e90ff;
+/* Input focus effect */
+.signupMaincontainer input[type="text"]:focus,
+.signupMaincontainer input[type="email"]:focus,
+.signupMaincontainer select:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
   outline: none;
-  box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
 }
 
-.signup-button {
-  padding: 0.8rem;
+/* Scoped label styling */
+.signupMaincontainer label {
   font-size: 1rem;
-  background: #1e90ff;
+  color: #495057;
+  margin-bottom: 8px;
+  display: block;
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Submit button styling */
+.submit {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.1rem;
+  background-color: #4caf50;
   color: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: 600;
 }
 
-.signup-button:disabled {
-  background: #ccc;
+.submit:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.submit:disabled {
+  background-color: #bbb;
   cursor: not-allowed;
 }
 
-.signup-button:hover:enabled {
-  background: #4169e1;
+/* Dynamic section container */
+.dynamic-section {
+  margin-bottom: 30px;
+  text-align: left;
 }
 
-.signup-login-text {
+/* File Upload Section */
+.Profilepic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.Profilepic input {
+  margin-bottom: 20px;
+}
+
+/* SelectField styling */
+.signupMaincontainer select {
+  background-color: #ffffff;
+  color: #495057;
+  font-size: 1rem;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Select input focus effect */
+.signupMaincontainer select:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+  outline: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .signupinternalcontainer {
+    padding: 30px;
+  }
+
+  .heading {
+    font-size: 1.8rem;
+  }
+
+  .submit {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .Profilepic input {
+    width: 100%;
+  }
+
+  .signupMaincontainer {
+    padding: 20px;
+  }
+}
+
+/* Loading spinner style */
+.loading-spinner {
+  margin: 0 auto;
+  display: block;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4caf50;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.dynamicSkills {
+  font-family: 'Arial', sans-serif;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.skillsSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.skillsLabel {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.addSkillsBox {
+  padding: 12px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
   text-align: center;
-  margin-top: 1rem;
-  font-size: 0.9rem;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: #333;
 }
 
-.signup-login-link {
-  color: #1e90ff;
-  text-decoration: none;
-  font-weight: bold;
+.addSkillsBox:hover {
+  background-color: #ccc;
 }
 
-.signup-login-link:hover {
-  text-decoration: underline;
+.selectedSkillsBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skillTag {
+  background-color: #4caf50;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.removeSkillBtn {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.removeSkillBtn:hover {
+  color: red;
+}
+
+.dropdown {
+  margin-bottom: 20px;
+}
+
+.skillsSelect {
+  width: 100%;
+  margin-top: 10px;
 }

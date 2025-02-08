@@ -6,13 +6,8 @@ import styles from '../../styles/Admin-signinsignup.module.css';
 const Signinsignup = ({ setAdmin, setLoginsign }) => {
   const [isLogin, setIsLogin] = useState(true);
   return (
-    <div className={styles.profileContainer}>
-      {isLogin ? (
-        <Login setAdmin={setAdmin} setLoginsign={setLoginsign} />
-      ) : (
-        <Signup setAdmin={setAdmin} setLoginsign={setLoginsign} />
-      )}
-      <div className={styles.buttonContainer}>
+    <div className={styles.signupsignincontainer}>
+      <div className={styles.signupsignbuttonContainer}>
         <button
           className={`${styles.signupButton} ${!isLogin ? styles.disabled : ''}`}
           onClick={() => setIsLogin(false)}
@@ -30,6 +25,12 @@ const Signinsignup = ({ setAdmin, setLoginsign }) => {
           Login
         </button>
       </div>
+      {isLogin ? (
+        <Login setAdmin={setAdmin} setLoginsign={setLoginsign} />
+      ) : (
+        <Signup setAdmin={setAdmin} setLoginsign={setLoginsign} />
+      )}
+
     </div>
   );
 };
