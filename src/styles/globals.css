@@ -9,8 +9,6 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #333;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
 a {

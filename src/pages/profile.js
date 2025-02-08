@@ -3,13 +3,13 @@ import Userprofile from './user/profile';
 import Adminprofile from './admin/profile';
 
 const Profile = () => {
-  const [showUser, setShowUser] = useState(null); //false
-  const [showAdmin, setShowAdmin] = useState(null); //false
+  const [showUser, setShowUser] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
 
   // Check login state on component mount
-  // useEffect(() => {
-  //   checkLoginStatus();
-  // }, []);
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
 
   // Function to check login status
   const checkLoginStatus = () => {

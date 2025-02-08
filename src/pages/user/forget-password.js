@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styles from './/..//../styles/User-Forget-password.module.css'; // Import the CSS Module
 
 const ForgotPassword = ({ onResetSuccess }) => {
   const [email, setEmail] = useState('');
@@ -62,66 +61,63 @@ const ForgotPassword = ({ onResetSuccess }) => {
   };
 
   return (
-    <div className={styles.forgotPasswordContainer}>
-      <div className={`${styles.card} ${otpSent ? styles.flipped : ''}`}>
-        {/* Front of the Card: Email Input */}
-        <div className={styles.cardFront}>
-          <h2 className={styles.heading}>Forgot Password</h2>
-          <form onSubmit={handleSendOtp}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="email" className={styles.label}>Email Address</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.input}
-                required
-              />
-            </div>
-            <button type="submit" disabled={loading} className={styles.button}>
-              {loading ? 'Sending OTP...' : 'Send OTP'}
-            </button>
-          </form>
-          {message && <p className={styles.message}>{message}</p>}
-        </div>
+    <div style={{ maxWidth: '400px', margin: 'auto', padding: '20px' }}>
+      <h2>Forgot Password</h2>
 
-        {/* Back of the Card: OTP and New Password Input */}
-        <div className={styles.cardBack}>
-          <h2 className={styles.heading}>Reset Password</h2>
-          <form onSubmit={handleVerifyOtpAndResetPassword}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="otp" className={styles.label}>OTP</label>
-              <input
-                type="text"
-                id="otp"
-                name="otp"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                className={styles.input}
-                required
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="newPassword" className={styles.label}>New Password</label>
-              <input
-                type="password"
-                id="newPassword"
-                name="newPassword"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className={styles.input}
-                required
-              />
-            </div>
-            <button type="submit" disabled={loading} className={styles.button}>
-              {loading ? 'Resetting...' : 'Reset Password'}
-            </button>
-          </form>
-          {message && <p className={styles.message}>{message}</p>}
+      {/* Step 1: Request OTP */}
+      {!otpSent && !success ? (
+        <form onSubmit={handleSendOtp}>
+          <div>
+            <label htmlFor="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Sending OTP...' : 'Send OTP'}
+          </button>
+        </form>
+      ) : success ? (
+        <div>
+          <p>{message}</p>
         </div>
-      </div>
+      ) : (
+        <form onSubmit={handleVerifyOtpAndResetPassword}>
+          <div>
+            <label htmlFor="otp">OTP</label>
+            <input
+              type="text"
+              id="otp"
+              name="otp"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="newPassword">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Resetting...' : 'Reset Password'}
+          </button>
+        </form>
+      )}
+
+      {message && <p>{message}</p>}
     </div>
   );
 };

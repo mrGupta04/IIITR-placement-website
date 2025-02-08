@@ -7,26 +7,32 @@ const Signinsignup = ({ setUser, setLoginsign }) => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className={styles.signupsignincontainer}>
-      <div className={styles.signupsignbuttonContainer}>
+    <div className={styles.container}>
+      <div className={styles.toggleButtons}>
         <button
-          className={`${styles.signupButton} ${!isLogin ? styles.active : ""}`}
-          onClick={() => setIsLogin(false)}
-        >
-          Signup
-        </button>
-        <button
-          className={`${styles.loginButton} ${isLogin ? styles.active : ""}`}
+          className={`${styles.toggleButton} ${isLogin ? styles.active : ""}`}
           onClick={() => setIsLogin(true)}
         >
           Login
         </button>
+        <button
+          className={`${styles.toggleButton} ${!isLogin ? styles.active : ""}`}
+          onClick={() => setIsLogin(false)}
+        >
+          Signup
+        </button>
       </div>
-      {isLogin ? (
-        <Login setAdmin={setUser} setLoginsign={setLoginsign} />
-      ) : (
-        <Signup setAdmin={setUser} setLoginsign={setLoginsign} />
-      )}
+      <div className={styles.formWrapper}>
+        {isLogin ? (
+          <div className={`${styles.form} ${styles.show}`}>
+            <Login setUser={setUser} setLoginsign={setLoginsign} />
+          </div>
+        ) : (
+          <div className={`${styles.form} ${styles.show}`}>
+            <Signup setUser={setUser} setLoginsign={setLoginsign} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
