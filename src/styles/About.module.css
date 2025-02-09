@@ -173,7 +173,6 @@
 
 
 .teamSection {
-  padding: 40px;
   background-color: #f9f9f9;
 }
 
@@ -188,7 +187,14 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 40px;
   justify-content: center;
+  align-items: center;
+}
+
+.cteamContainer {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -203,18 +209,22 @@
   width: 80%;
   max-width: 1200px;
   padding: 20px;
+  margin: 0 10px;
   transition: transform 0.3s ease;
 }
 
 .teamCard:hover {
   transform: translateY(-5px);
 }
+.iconlink{
+  margin: 20px 0;
+}
 
 .teamImage {
-  width: 150px;
-  height: 150px;
+  width: 20%;
+  height: auto;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 80%;
   margin: 0 20px;
 }
 
@@ -398,3 +408,24 @@
   background: #0056b3;
 }
 
+.additionalGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  gap: auto;
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.small {
+  width: 100%; /* Ensures it fills its grid cell */
+  height: auto;
+}
