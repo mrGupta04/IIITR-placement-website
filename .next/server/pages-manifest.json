@@ -2,7 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/contact": "pages/contact.js",
-  "/": "pages/index.js",
-  "/about": "pages/about.js"
+  "/about": "pages/about.js",
+  "/404": "pages/404.js",
+  "/recruiters": "pages/recruiters.js",
+  "/contact": "pages/contact.js"
 }

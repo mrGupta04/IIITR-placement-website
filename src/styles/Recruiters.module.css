@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+
+/* Recruiters Page Styles */
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.recruitersContainer {
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Merriweather', serif;
+    background-color: #f0f4f8;
+    color: #4b4b4b;
+    position: relative;
+}
+
+
+/* Invitation Section */
+.invitationSection {
+    background: #e3eaf1;
+    padding: 50px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 1.2s forwards;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero Section */
+.invitationContainer {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.invitationContainer::before {
+    content: '';
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(164, 207, 235, 0.3) 10%, transparent 10.01%);
+    background-size: 100px 100px; /* Increase the size to reduce dots */
+    animation: moveBackground 100s linear infinite;
+    z-index: -1;
+}
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+.invitationHeading {
+    font-size: 2rem;
+    color: #002752;
+    font-weight: 700;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.invitationHeading:hover {
+    transform: scale(1.05);
+}
+
+.invitationMessage {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.invitationButton {
+    display: inline-block;
+    background: #002752;
+    color: #fff;
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    border-radius: 8px;
+    transition: 0.3s;
+    opacity: 0;
+    animation: fadeInButton 1.5s ease forwards;
+    animation-delay: 1s;
+}
+
+
+@keyframes fadeInButton {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.invitationButton:hover {
+    background: #2c3e50;
+}
+
+
+/* Sections */
+.section {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeInSection 1s ease forwards;
+}
+
+@keyframes fadeInSection {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    color: #002752;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+    animation: fadeInUp 1.2s forwards;
+}
+
+.processList {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.processList li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.processList li a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.processList li a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.recruitersList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeInSection 1.2s ease forwards;
+    animation-delay: 0.5s;
+}
+
+.recruitersList img {
+    width: 140px;
+    height: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.recruitersList img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.section p {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Animation for fade-in effect on scroll */
+@keyframes fadeInOnScroll {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Timeline Section */
+.timeline {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    margin-left: 50px;
+}
+
+.timelineItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.timelineItem:nth-child(even) {
+    align-items: flex-end;
+}
+
+.timelineItem:nth-child(odd) {
+    align-items: flex-start;
+}
+
+.timelineSeparator {
+    position: absolute;
+    left: 50%;
+    /* Center the line */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #002752;
+    transform: translateX(-50%);
+}
+
+.timelineDot {
+    width: 20px;
+    height: 20px;
+    background-color: #002752;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    /* Center the dot horizontally */
+    transform: translateX(-50%);
+    /* Center the dot horizontally */
+}
+
+.timelineContent {
+    width: 40%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.timelineCard {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.timelineItem:nth-child(even) .timelineContent {
+    margin-left: 0;
+    margin-right: 30px;
+}
+
+.timelineItem:nth-child(odd) .timelineContent {
+    margin-left: 30px;
+    margin-right: 0;
+}
+
+.recruitersList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.recruitersList img {
+    max-width: 150px;
+    margin: 10px;
+}
+
+.recButton {
+    display: inline-block;
+    background: #002752;
+    color: #fff;
+    margin: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    border-radius: 8px;
+}
+
+.recButton:hover {
+    background: #2c3e50;
+}
+
+
+.fadeIn {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
