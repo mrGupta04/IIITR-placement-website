@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 import styles from '../../styles/Admin-update.module.css';
 import { useRouter } from "next/router";
 
-export default function Update({ onUpdateSuccess }) {
+export default function Update() {
   const router = useRouter();
   let storedAdmin = {};
 
   try {
-    storedAdmin = JSON.parse(localStorage.getItem("Admin")) || {};
+    storedAdmin = JSON.parse(localStorage.getItem("admin")) || {};
   } catch (error) {
     console.error("Error parsing Admin data from localStorage:", error);
     storedAdmin = {};
   }
-
+    console.log(storedAdmin.email);
   const [name, setName] = useState(storedAdmin?.name || "");
   const [mobileno, setMobileno] = useState(storedAdmin?.mobileno || "");
   const [city, setCity] = useState(storedAdmin?.city || "");
@@ -23,8 +23,10 @@ export default function Update({ onUpdateSuccess }) {
   const [profilepic, setProfilepic] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  
   const handleCancelupdate = () => {
-    router.back();
+    router.push("/admin/profile");
   };
 
 
@@ -32,10 +34,9 @@ export default function Update({ onUpdateSuccess }) {
     e.preventDefault();
     setLoading(true);
     setError("");
-    router.back()
 
    
-    
+    console.log(storedAdmin.email);
     const formData = new FormData();
     formData.append("email", storedAdmin.email);
     formData.append("name", name);
@@ -59,10 +60,10 @@ export default function Update({ onUpdateSuccess }) {
         throw new Error(data.message || "Update failed.");
       }
 
-      localStorage.setItem("Admin", JSON.stringify(data.Admin));
+      localStorage.setItem("admin", JSON.stringify(data.admin));
 
-      // Update parent component and close form
-      onUpdateSuccess(data.Admin);
+      
+      router.push("/admin/profilecard");
     } catch (err) {
       setError(err.message);
     } finally {

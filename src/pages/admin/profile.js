@@ -7,7 +7,7 @@ const AdminProfile = ({ onLogout }) => {
   const [loginsign, setLoginsign] = useState(false);
 
   useEffect(() => {
-    const storedAdmin = localStorage.getItem("Admin");
+    const storedAdmin = localStorage.getItem("admin");
   
     if (storedAdmin) {
       try {
