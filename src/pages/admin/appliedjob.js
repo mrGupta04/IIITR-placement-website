@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import JobCard from "./jobCard";
+import styles from "../../styles/Appliedjob.module.css"; // Import the CSS module
 
 const AppliedJobs = () => {
     const router = useRouter();
@@ -45,7 +46,6 @@ const AppliedJobs = () => {
                 method: "DELETE",
             });
 
-            
             setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
         } catch (err) {
             console.error("Error deleting job:", err);
@@ -60,22 +60,33 @@ const AppliedJobs = () => {
     return (
         <div>
             <h2>Jobs for {storedAdmin?.email}</h2>
-            <div className="job-list">
+            <div className={styles.appliedJobsContainer}>
                 {jobs.map((job) => (
-                    <div key={job._id}>
+                    <div key={job._id} className={styles.jobCardWrapper}>
                         <JobCard job={job} />
-                        <button onClick={() => router.push("/admin/appliedstudent")}>
-                            Applied students
-                        </button>
-                        <button onClick={() => {
-                            console.log("Navigating to job update with jobId:", job._id);
-                            router.push(`/admin/jobupdate?jobId=${job._id}`);
-                        }}>
-                            Modify
-                        </button>
-                        <button onClick={() => handleDelete(job._id)}>
-                            Delete
-                        </button>
+                        <div className={styles.buttonGroup}>
+                            <button
+                                className={styles.appliedButton}
+                                onClick={() => router.push("/admin/appliedstudent")}
+                            >
+                                Applied Students
+                            </button>
+                            <button
+                                className={styles.updateButton}
+                                onClick={() => {
+                                    console.log("Navigating to job update with jobId:", job._id);
+                                    router.push(`/admin/jobupdate?jobId=${job._id}`);
+                                }}
+                            >
+                                Modify
+                            </button>
+                            <button
+                                className={styles.stopResponseButton}
+                                onClick={() => handleDelete(job._id)}
+                            >
+                                Stop Response
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>

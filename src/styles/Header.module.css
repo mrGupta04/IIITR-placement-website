@@ -1,4 +1,3 @@
-
 .header {
   background-color: #00274d;
   color: white;
@@ -25,6 +24,11 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.nav {
+  display: flex;
+  position: relative;
+}
+
 .nav ul {
   list-style: none;
   display: flex;
@@ -34,6 +38,7 @@
 }
 
 .nav ul li {
+  position: relative;
   font-size: 1rem;
 }
 
@@ -42,18 +47,60 @@
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
   transition: color 0.3s ease;
+  padding: 10px;
+  display: block;
 }
 
 .nav ul li a:hover {
-  color: #f8c146; 
+  color: #f8c146;
 }
 
+/* Dropdown menu */
+.nav ul li .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #00274d;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+}
+
+.nav ul li:hover .dropdown {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav ul li .dropdown li {
+  padding: 10px;
+  text-align: left;
+}
+
+.nav ul li .dropdown li a {
+  color: white;
+  display: block;
+  padding: 10px;
+  transition: background 0.3s ease;
+}
+
+.nav ul li .dropdown li a:hover {
+  background: #f8c146;
+  color: #00274d;
+}
+
+/* Actions section */
 .actions {
   display: flex;
   align-items: center;
   gap: 15px;
 }
-
 
 .loginButton {
   display: flex;
@@ -76,13 +123,60 @@
   margin-right: 5px;
 }
 
+/* Mobile Menu Button */
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
-  .nav ul {
+  .nav {
+    display: none;
     flex-direction: column;
-    gap: 10px;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #00274d;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .container {
+  .navOpen {
+    display: flex;
+  }
+
+  .nav ul {
     flex-direction: column;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav ul li {
+    width: 100%;
+    position: relative;
+  }
+
+  .nav ul li .dropdown {
+    position: static;
+    width: 100%;
+    background: #003366;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .nav ul li:hover .dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .menuToggle {
+    display: block;
   }
 }

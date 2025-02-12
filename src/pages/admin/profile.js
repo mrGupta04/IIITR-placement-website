@@ -3,57 +3,48 @@ import Signinsignup from "./signinsignup";
 import AdminProfileCard from "./profilecard";
 
 const AdminProfile = ({ onLogout }) => {
-  const [Admin, setAdmin] = useState(null);
-  const [loginsign, setLoginsign] = useState(false);
+  const [admin, setAdmin] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const storedAdmin = localStorage.getItem("admin");
-  
+
     if (storedAdmin) {
       try {
         const parsedAdmin = JSON.parse(storedAdmin);
-  
         if (parsedAdmin && typeof parsedAdmin === "object") {
-          console.log("Retrieved Admin:", parsedAdmin);
           setAdmin(parsedAdmin);
-          setLoginsign(true);
+          setIsLoggedIn(true);
         } else {
-          console.error("Invalid Admin data structure:", parsedAdmin);
-          localStorage.removeItem("Admin");
+          localStorage.removeItem("admin");
         }
       } catch (error) {
-        console.error("Error parsing Admin data:", error);
-        localStorage.removeItem("Admin");
+        localStorage.removeItem("admin");
       }
     }
   }, []);
-  
-  const handleLogin = (AdminData) => {
-    console.log("Login successful, Admin data:", AdminData);
-    if (AdminData) {
-      localStorage.setItem("Admin", JSON.stringify(AdminData)); // Store AdminData directly
-      setAdmin(AdminData); // Update state with the correct structure
-      setLoginsign(true);
-      alert("Login successful!");
-    } else {
-      console.error("Invalid Admin data received:", AdminData);
+
+  const handleLogin = (adminData) => {
+    if (adminData) {
+      localStorage.setItem("admin", JSON.stringify(adminData));
+      setAdmin(adminData);
+      setIsLoggedIn(true);
     }
   };
 
   const handleLogout = () => {
-    console.log("Admin logged out");
-    localStorage.removeItem("Admin");
+    localStorage.removeItem("admin");
     setAdmin(null);
-    setLoginsign(false);
-    onLogout();
+    setIsLoggedIn(false);
+    if (onLogout) onLogout();
   };
 
   return (
     <div>
-      {loginsign ? (
-        <AdminProfileCard Admin={Admin} handleLogout={handleLogout} />
+      {isLoggedIn ? (
+        <AdminProfileCard handleLogout={handleLogout} />
       ) : (
-        <Signinsignup setAdmin={handleLogin} setLoginsign={setLoginsign} />
+        <Signinsignup setAdmin={handleLogin} />
       )}
     </div>
   );

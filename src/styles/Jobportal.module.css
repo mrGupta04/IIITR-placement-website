@@ -1,0 +1,52 @@
+.applyBtn,
+.cancelBtn,
+.applyForJobBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.applyBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+.applyBtn:hover {
+  background-color: #0056b3;
+}
+
+.cancelBtn {
+  background-color: #dc3545;
+  color: white;
+  margin-right: 10px;
+}
+
+.cancelBtn:hover {
+  background-color: #b52a37;
+}
+
+.applyForJobBtn {
+  background-color: #28a745;
+  color: white;
+}
+
+.applyForJobBtn:hover {
+  background-color: #1e7e34;
+}
+
+.jobDetails {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}

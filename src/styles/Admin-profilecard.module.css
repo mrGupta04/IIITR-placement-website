@@ -1,151 +1,101 @@
-/* Main Container */
-.adminprofilecard {
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 25px;
-    background: rgba(255, 255, 255, 0.2); /* Glassmorphism effect */
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    color: #333;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  
-  
-  /* Profile Picture */
-  .admindataprofilepic {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .adminprofilepicinside {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #4a90e2; /* Fresh blue color */
-  }
-  
-  .adminprofile {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  /* Admin Name */
-  .adminname {
-    font-size: 22px;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-top: 10px;
-  }
-  
-  /* Admin Details */
-  .admindetail {
-    width: 100%;
-    text-align: left;
-    background: rgba(255, 255, 255, 0.6);
+/* Container for the entire profile card */
+.adminProfileCard {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #ffffff;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* Hover effect for the profile card */
+.adminProfileCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Container for the profile picture */
+.ProfilePicContainer {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 15px; /* Center the image and add bottom margin */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the profile image */
+.adminprofile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Styling for the admin's name */
+.adminName {
+  font-size: 1.5em;
+  color: #333;
+  margin: 0;
+}
+
+/* Styling for admin details */
+.adminDetails p {
+  margin: 10px 0;
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* Styling for strong tags within admin details */
+.adminDetails p strong {
+  color: #333;
+}
+
+/* Container for buttons */
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Styling for buttons */
+.button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Responsive design adjustments */
+@media (max-width: 500px) {
+  .adminProfileCard {
     padding: 15px;
-    border-radius: 12px;
-    margin-top: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
-  .admindetail p {
-    font-size: 15px;
-    margin: 6px 0;
-    color: #34495e;
+
+  .adminName {
+    font-size: 1.2em;
   }
-  
-  .admindetail strong {
-    color: #4a90e2;
+
+  .adminDetails p {
+    font-size: 0.8em;
   }
-  
-  .admindetail a {
-    color: #2980b9;
-    text-decoration: none;
-    font-weight: 500;
+
+  .button {
+    padding: 8px 12px;
+    font-size: 0.9em;
   }
-  
-  .admindetail a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Buttons */
-  .adminprofileupdatebutton,
-  .adminprofilelogoutbutton {
-    width: 40%;
-    padding: 12px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin-top: 10px;
-  }
-  
-  .adminprofileupdatebutton {
-    background: linear-gradient(135deg, #6dd5ed, #2193b0);
-    color: white;
-  }
-  
-  .adminprofileupdatebutton:hover {
-    background: linear-gradient(135deg, #2193b0, #6dd5ed);
-  }
-  
-  .adminprofilelogoutbutton {
-    background: linear-gradient(135deg, #ff6b6b, #d63031);
-    color: white;
-  }
-  
-  .adminprofilelogoutbutton:hover {
-    background: linear-gradient(135deg, #d63031, #ff6b6b);
-  }
-  
-  /* 
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Responsive */
-  @media (max-width: 500px) {
-    .adminprofilecard {
-      width: 90%;
-      padding: 20px;
-    }
-  
-    .adminprofilepicinside {
-      width: 90px;
-      height: 90px;
-    }
-  
-    .adminname {
-      font-size: 20px;
-    }
-  
-    .admindetail p {
-      font-size: 14px;
-    }
-  
-    .adminprofileupdatebutton,
-    .adminprofilelogoutbutton {
-      font-size: 13px;
-    }
-  }
-  
+}

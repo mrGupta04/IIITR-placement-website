@@ -1,0 +1,50 @@
+/* AppliedJobs.module.css */
+
+.appliedJobsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.jobCardWrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.jobCardWrapper:hover {
+    transform: translateY(-3px);
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: #ede7e7;
+}
+
+.appliedButton,
+.updateButton,
+.stopResponseButton {
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.appliedButton:hover,
+.updateButton:hover,
+.stopResponseButton:hover {
+    background-color: #005bb5;
+}

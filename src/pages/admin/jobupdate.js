@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Select from "react-select";
-import styles from "../../styles/jobForm.module.css";
+import styles from "../../styles/Jobupdate.module.css";
 
 const skillsOptions = [
-    { value: "JavaScript", label: "JavaScript" },
-    { value: "Python", label: "Python" },
-    { value: "React", label: "React" },
-    { value: "Node.js", label: "Node.js" }
-];
+    { value: "Python", label: "Python" }, { value: "JavaScript", label: "JavaScript" }, { value: "React", label: "React" },
+    { value: "SQL", label: "SQL" }, { value: "Node.js", label: "Node.js" }, { value: "AWS", label: "AWS" },
+    { value: "Django", label: "Django" }, { value: "C++", label: "C++" }, { value: "Java", label: "Java" }
+  ];
 
 const batchOptions = [
     { value: "2023", label: "2023" },
@@ -18,7 +17,7 @@ const batchOptions = [
 
 const UpdateJobForm = () => {
     const router = useRouter();
-    const { jobId } = router.query;  // Get jobId from URL query params
+    const { jobId } = router.query;
 
     const [jobData, setJobData] = useState({
         title: "",
@@ -28,11 +27,9 @@ const UpdateJobForm = () => {
         eligibleBatch: [],
         description: ""
     });
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // Fetch job details when component mounts
     useEffect(() => {
         if (!router.isReady || !jobId) return;
 
@@ -42,15 +39,18 @@ const UpdateJobForm = () => {
                 if (!response.ok) throw new Error("Failed to fetch job details");
 
                 const data = await response.json();
-                setJobData({
-                    title: data.title || "",
-                    location: data.location || "",
-                    salary: data.salary || "",
-                    skills: data.skills || [],
-                    eligibleBatch: data.eligibleBatch || [],
-                    description: data.description || ""
-                });
+                console.log(data);
+                console.log(data.job.title);
+                console.log(data.job.skills);
 
+                setJobData({
+                    title: data.job.title || "",
+                    location: data.job.location || "",
+                    salary: data.job.salary || "",
+                    skills: data.job.skills || [],
+                    eligibleBatch: data.job.eligibleBatch || [],
+                    description: data.job.description || ""
+                });
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -60,6 +60,13 @@ const UpdateJobForm = () => {
 
         fetchJobDetails();
     }, [router.isReady, jobId]);
+
+
+    const handleCancel=()=>
+    { router.push("/admin/appliedjob");
+      
+
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,11 +79,12 @@ const UpdateJobForm = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(jobData),
             });
+            console.log(jobData);
 
-            if (!response.ok) throw new Error("Failed to update job");
+            if (!response.ok) throw new Error("Failed to update  job");
 
-            alert("Job updated successfully!");
-            router.push("/jobs");  // Redirect after update
+            
+            router.push("/admin/appliedjob");
         } catch (err) {
             setError(err.message);
         } finally {
@@ -89,7 +97,7 @@ const UpdateJobForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className={styles.jobForm}>
-            <label>Job Title</label>
+            <label className={styles.jobtitle}>Job Title</label>
             <input
                 type="text"
                 value={jobData.title}
@@ -99,6 +107,7 @@ const UpdateJobForm = () => {
 
             <label>Location</label>
             <input
+                className={styles.jobtitle}
                 type="text"
                 value={jobData.location}
                 onChange={(e) => setJobData({ ...jobData, location: e.target.value })}
@@ -107,6 +116,7 @@ const UpdateJobForm = () => {
 
             <label>Salary</label>
             <input
+                className={styles.jobtitle}
                 type="text"
                 value={jobData.salary}
                 onChange={(e) => setJobData({ ...jobData, salary: e.target.value })}
@@ -115,8 +125,9 @@ const UpdateJobForm = () => {
             <label>Skills Required</label>
             <Select
                 options={skillsOptions}
+                className={styles.dropdownskills}
                 isMulti
-                value={jobData.skills.map((s) => ({ value: s, label: s }))}
+                value={skillsOptions.filter(option => jobData.skills.includes(option.value))}
                 onChange={(selected) =>
                     setJobData({ ...jobData, skills: selected.map((s) => s.value) })
                 }
@@ -125,8 +136,9 @@ const UpdateJobForm = () => {
             <label>Eligible Batch</label>
             <Select
                 options={batchOptions}
+                className={styles.dropdownskills}
                 isMulti
-                value={jobData.eligibleBatch.map((b) => ({ value: b, label: b }))}
+                value={batchOptions.filter(option => jobData.eligibleBatch.includes(option.value))}
                 onChange={(selected) =>
                     setJobData({ ...jobData, eligibleBatch: selected.map((b) => b.value) })
                 }
@@ -135,13 +147,18 @@ const UpdateJobForm = () => {
             <label>Job Description</label>
             <textarea
                 value={jobData.description}
+                className={styles.description}
                 onChange={(e) => setJobData({ ...jobData, description: e.target.value })}
                 required
             />
 
-            <button type="submit" disabled={loading}>
-                {loading ? "Updating..." : "Update Job"}
-            </button>
+            <div className={styles.buttonsection}>
+                <button type="submit" disabled={loading} className={styles.submitbutton}>
+                    {loading ? "Updating..." : "Update Job"}
+                </button>
+
+                <button className={styles.cancelbutton}  onClick={handleCancel}>Cancel</button>
+            </div>
         </form>
     );
 };

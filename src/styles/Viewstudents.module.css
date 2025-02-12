@@ -1,0 +1,60 @@
+/* Container for the entire form */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-family);
+}
+
+/* Container for dropdown elements */
+.dropdownContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual form group styling */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Label styling */
+.formLabel {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* Submit button styling */
+.submitButton {
+  background-color: cornflowerblue;
+  width: 25vw;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color var(--transition-duration);
+  align-self: center; /* Centers the button horizontally */
+}
+
+.submitButton:hover {
+  background-color: #2107ed; 
+}
+
+/* Media query for screens wider than 768px */
+@media (min-width: 768px) {
+  .dropdownContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .formGroup {
+    flex-basis: calc(20% - 16px); /* Adjusts width for five items per row with 20px gap */
+  }
+}

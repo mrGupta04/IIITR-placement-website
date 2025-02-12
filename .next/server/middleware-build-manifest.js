@@ -15,19 +15,6 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-<<<<<<< HEAD
-    "/404": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/404.js"
-    ],
-    "/Stats": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Stats.js"
-    ],
-=======
->>>>>>> a169b0d (Your commit message)
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -38,27 +25,15 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-<<<<<<< HEAD
-    "/about": [
+    "/jobs": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/about.js"
+      "static/chunks/pages/jobs.js"
     ],
-    "/events": [
+    "/profile": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/events.js"
-    ],
-    "/students": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/students.js"
-=======
-    "/admin/jobs": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/admin/jobs.js"
->>>>>>> a169b0d (Your commit message)
+      "static/chunks/pages/profile.js"
     ]
   },
   "ampFirstPages": []

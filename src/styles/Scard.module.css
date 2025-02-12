@@ -1,0 +1,73 @@
+/* Scard.module.css */
+
+.card {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 25px;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #333;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.profilePicContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profilePic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #0073e6;
+}
+
+.studentName {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #0073e6;
+  text-align: center;
+}
+
+.info {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.link {
+  color: #0073e6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.section {
+  margin-top: 25px;
+}
+
+.sectionTitle {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  color: #0073e6;
+}
+
+.list {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.listItem {
+  margin-bottom: 15px;
+}

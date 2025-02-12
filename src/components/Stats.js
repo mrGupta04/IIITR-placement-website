@@ -2,9 +2,10 @@ import { useState } from "react";
 import styles from "../styles/Stats.module.css";
 
 const Stats = () => {
+  
   const [selectedBatch, setSelectedBatch] = useState("");
 
-  // Mock Data (Can be replaced with API call)
+ 
   const data = {
     overall: { total: 500, placed: 350 },
     batches: {

@@ -2,14 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-  "/Stats": "pages/Stats.js",
-  "/404": "pages/404.js",
-  "/students": "pages/students.js",
-  "/events": "pages/events.js",
-  "/about": "pages/about.js",
-=======
-  "/admin/jobs": "pages/admin/jobs.js",
->>>>>>> a169b0d (Your commit message)
-  "/": "pages/index.js"
+  "/": "pages/index.js",
+  "/profile": "pages/profile.js",
+  "/jobs": "pages/jobs.js",
+  "/api/auth/admin/login": "pages/api/auth/admin/login.js"
 }
