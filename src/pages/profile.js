@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Userprofile from './user/profile';
 import Adminprofile from './admin/profile';
+import styles from '../styles/profile.module.css'
 
 const Profile = () => {
   const [showUser, setShowUser] = useState(false);
@@ -50,20 +51,28 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      {/* Show login buttons only if no user/admin is logged in */}
-      {!showUser && !showAdmin ? (
-        <>
-          <h2>Please select your role</h2>
-          <button onClick={() => handleLogin('user')}>Student</button>
-          <button onClick={() => handleLogin('admin')}>Recruiter</button>
-        </>
-      ) : showUser ? (
-        <Userprofile onLogout={handleLogout} />
-      ) : (
-        <Adminprofile onLogout={handleLogout} />
-      )}
+    <div className={styles.container}>
+  {!showUser && !showAdmin ? (
+    <>
+      <h2 className={styles.title}>Please select your role</h2>
+      <div className={styles.buttons}>
+        <button className={styles.button} onClick={() => handleLogin('user')}>Student</button>
+        <button className={styles.button} onClick={() => handleLogin('admin')}>Recruiter</button>
+      </div>
+    </>
+  ) : showUser ? (
+    <div className={styles.profileContainer}>
+      <Userprofile onLogout={handleLogout} />
+      <button className={styles.logoutButton} onClick={handleLogout}>Logout</button>
     </div>
+  ) : (
+    <div className={styles.profileContainer}>
+      <Adminprofile onLogout={handleLogout} />
+      <button className={styles.logoutButton} onClick={handleLogout}>Logout</button>
+    </div>
+  )}
+</div>
+
   );
 };
 

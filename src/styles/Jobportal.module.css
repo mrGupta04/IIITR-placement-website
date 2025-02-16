@@ -1,52 +1,167 @@
+/* General Page Styles */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Welcome Section */
+.welcomeSection {
+  background: linear-gradient(135deg, #4f8ef7, #1c2b49);
+  color: white;
+  text-align: center;
+  padding: 50px 30px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.welcomeSection h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.welcomeSection p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.authButtons {
+  margin-top: 20px;
+}
+
+.signupBtn {
+  background: #ffd700;
+  color: #222;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.signupBtn:hover {
+  background: #e6c200;
+}
+
+/* Job Listings Section */
+.jobsSection {
+  margin-top: 50px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.jobsSection h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.jobGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.jobCardWrapper {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.jobCardWrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* No Job Postings */
+.noJobs {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #777;
+}
+
+/* Buttons */
 .applyBtn,
 .cancelBtn,
 .applyForJobBtn {
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  text-transform: uppercase;
 }
 
 .applyBtn {
   background-color: #007bff;
   color: white;
+  box-shadow: 0px 3px 8px rgba(0, 123, 255, 0.3);
 }
 
 .applyBtn:hover {
   background-color: #0056b3;
+  box-shadow: 0px 4px 12px rgba(0, 86, 179, 0.4);
 }
 
 .cancelBtn {
   background-color: #dc3545;
   color: white;
   margin-right: 10px;
+  box-shadow: 0px 3px 8px rgba(220, 53, 69, 0.3);
 }
 
 .cancelBtn:hover {
   background-color: #b52a37;
+  box-shadow: 0px 4px 12px rgba(181, 42, 55, 0.4);
 }
 
 .applyForJobBtn {
   background-color: #28a745;
   color: white;
+  box-shadow: 0px 3px 8px rgba(40, 167, 69, 0.3);
 }
 
 .applyForJobBtn:hover {
   background-color: #1e7e34;
+  box-shadow: 0px 4px 12px rgba(30, 126, 52, 0.4);
 }
 
+/* Job Details */
 .jobDetails {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   padding: 15px;
   border-radius: 10px;
   margin-top: 10px;
   animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Action Buttons */
 .actionButtons {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
