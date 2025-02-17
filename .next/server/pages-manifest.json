@@ -2,8 +2,11 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/404": "pages/404.js",
   "/": "pages/index.js",
   "/profile": "pages/profile.js",
+  "/api/auth/jobs": "pages/api/auth/jobs.js",
   "/jobs": "pages/jobs.js",
-  "/api/auth/admin/login": "pages/api/auth/admin/login.js"
+  "/about": "pages/about.js",
+  "/recruiters": "pages/recruiters.js"
 }
