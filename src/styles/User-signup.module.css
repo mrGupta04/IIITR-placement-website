@@ -1,250 +1,297 @@
-/* Main container styling */
-.signupMaincontainer {
+.signupPageContainer {
+  display: grid;
+  grid-template-columns: 1fr minmax(350px, 40vw) 1fr; 
+  min-height: 100vh;
+  background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Left Side - Animated Art Component */
+.signupArtContainer {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #e9ecef;
-  padding: 40px;
 }
 
-/* Internal container for the form */
-.signupinternalcontainer {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+.signupBoxContainer {
+  grid-column: 2;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
   width: 100%;
-  max-width: 600px;
-  text-align: center;
-  transition: transform 0.3s ease;
+  border-radius: 16px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
 }
 
-.signupinternalcontainer:hover {
-  transform: translateY(-5px); /* Subtle hover effect */
+
+.signupHeading {
+  font-size: 2.8rem;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading */
-.heading {
-  font-family: 'Montserrat', sans-serif;
-  color: #333;
-  font-size: 2.2rem;
-  margin-bottom: 30px;
-  font-weight: 600;
-  letter-spacing: 1px;
+.signupForm {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  position: relative;
 }
 
-/* Error message */
-.signupinternalcontainer p {
-  color: red;
-  font-size: 0.9rem;
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-/* Form field styling */
-.signupMaincontainer input[type="text"],
-.signupMaincontainer input[type="email"],
-.signupMaincontainer input[type="file"],
-.signupMaincontainer select {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 20px;
-  border: 1px solid #ced4da;
+/* Form Elements Styling */
+.signupInput, .signupTextarea {
+  padding: .9rem;
+  border: none;
   border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
   font-size: 1rem;
-  box-sizing: border-box;
-  transition: border 0.3s ease, box-shadow 0.3s ease;
+  color: #2c3e50;
 }
 
-/* Input focus effect */
-.signupMaincontainer input[type="text"]:focus,
-.signupMaincontainer input[type="email"]:focus,
-.signupMaincontainer select:focus {
-  border-color: #4caf50;
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+.signupInput:focus, .signupTextarea:focus {
   outline: none;
+  box-shadow: 0 0 0 2px #6a11cb, 0 8px 20px rgba(106, 17, 203, 0.2);
+  transform: translateY(-2px);
 }
 
-/* Scoped label styling */
-.signupMaincontainer label {
+.signupTextarea {
+  grid-column: span 2;
+  min-height: 120px;
+  resize: vertical;
+}
+
+
+.fileUploadContainer {
+  grid-column: span 2;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.customFileInput {
+  flex: 1;
+  position: relative;
+  border: 2px dashed #6a11cb;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(106, 17, 203, 0.04), rgba(37, 117, 252, 0.04));
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 0.8rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px; 
+}
+
+.customFileInput:hover {
+  background: rgba(106, 17, 203, 0.08);
+  transform: translateY(-2px); 
+  border-color: #2575fc;
+}
+
+
+.fileLabel {
   font-size: 1rem;
-  color: #495057;
-  margin-bottom: 8px;
-  display: block;
-  text-align: left;
+  color: #6a11cb;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+
+.fileName {
+  margin-top: 0.5rem; 
+  font-size: 0.85rem; 
+  color: #2c3e50;
+  word-break: break-word;
+  text-align: center;
   font-weight: 500;
 }
 
-/* Submit button styling */
-.submit {
-  width: 100%;
-  padding: 14px;
+.fileInput {
+  display: none;
+}
+
+.customFileInput::before {
+  display: block;
+  font-size: 0.95rem; 
+  color: #6a11cb;
+  font-weight: 600;
+}
+
+
+@media (max-width: 768px) {
+  .fileUploadContainer {
+    flex-direction: column;
+  }
+
+  .customFileInput {
+    width: 100%;
+    min-height: 90px; 
+  }
+}
+
+
+
+.signupButton {
+  grid-column: span 2;
+  padding: 1.2rem;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  border-radius: 8px;
   font-size: 1.1rem;
-  background-color: #4caf50;
-  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+}
+
+.signupButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(106, 17, 203, 0.4);
+}
+
+.signupErrorMessage {
+  grid-column: span 2;
+  color: #ff4757;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(255, 71, 87, 0.1);
+  animation: errorShake 0.4s ease;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .signupPageContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .signupBoxContainer {
+    margin: 2rem;
+    padding: 2rem;
+  }
+
+  .signupArtContainer {
+    display: none;
+  }
+}
+
+/* Dynamic Sections Styling */
+.dynamicSection {
+  grid-column: span 2;
+  margin-bottom: 1.5rem;
+}
+
+.dynamicSectionLabel {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.dynamicField {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.addButton {
+  padding: 0.8rem 1.5rem;
+  background: #6a11cb;
+  color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.submit:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
+.addButton:hover {
+  background: #2575fc;
+  transform: translateY(-2px);
 }
 
-.submit:disabled {
-  background-color: #bbb;
-  cursor: not-allowed;
-}
-
-/* Dynamic section container */
-.dynamic-section {
-  margin-bottom: 30px;
-  text-align: left;
-}
-
-/* File Upload Section */
-.Profilepic {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 30px;
-}
-
-.Profilepic input {
-  margin-bottom: 20px;
-}
-
-/* SelectField styling */
-.signupMaincontainer select {
-  background-color: #ffffff;
-  color: #495057;
-  font-size: 1rem;
-  padding: 14px;
-  border-radius: 8px;
-  border: 1px solid #ced4da;
-  transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Select input focus effect */
-.signupMaincontainer select:focus {
-  border-color: #4caf50;
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
-  outline: none;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .signupinternalcontainer {
-    padding: 30px;
-  }
-
-  .heading {
-    font-size: 1.8rem;
-  }
-
-  .submit {
-    font-size: 1rem;
-    padding: 12px;
-  }
-
-  .Profilepic input {
-    width: 100%;
-  }
-
-  .signupMaincontainer {
-    padding: 20px;
-  }
-}
-
-/* Loading spinner style */
-.loading-spinner {
-  margin: 0 auto;
-  display: block;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #4caf50;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
-.dynamicSkills {
-  font-family: 'Arial', sans-serif;
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-}
-
-.skillsSection {
-  display: flex;
-  flex-direction: column;
+/* Skills Container Styling */
+.skillsContainer {
+  grid-column: span 2;
+  margin-bottom: 1.5rem;
 }
 
 .skillsLabel {
   font-size: 1.2rem;
-  margin-bottom: 10px;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 .addSkillsBox {
-  padding: 12px;
-  background-color: #e0e0e0;
+  padding: 1rem;
+  border: 2px dashed #6a11cb;
   border-radius: 8px;
+  background: rgba(106, 17, 203, 0.05);
   cursor: pointer;
+  transition: all 0.3s ease;
   text-align: center;
-  margin-bottom: 15px;
-  font-size: 1rem;
-  color: #333;
+  color:#0f0c29;
 }
 
 .addSkillsBox:hover {
-  background-color: #ccc;
+  background: rgba(106, 17, 203, 0.1);
+  transform: translateY(-2px);
 }
 
 .selectedSkillsBox {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
-.skillTag {
-  background-color: #4caf50;
+.selectedSkill {
+  padding: 0.5rem 1rem;
+  background: #6a11cb;
   color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
-.removeSkillBtn {
-  margin-left: 8px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
+.removeSkill {
   cursor: pointer;
-}
-
-.removeSkillBtn:hover {
-  color: red;
+  font-size: 1.2rem;
 }
 
 .dropdown {
-  margin-bottom: 20px;
-}
-
-.skillsSelect {
-  width: 100%;
-  margin-top: 10px;
+  margin-top: 1rem;
+  color:#0f0c29;
 }

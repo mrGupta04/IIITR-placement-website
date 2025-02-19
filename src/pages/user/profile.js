@@ -6,6 +6,7 @@ import Update from './update';
 const Userprofile = ({ onLogout }) => {
   const [user, setUser] = useState(null);
   const [loginsign, setLoginsign] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("User");
@@ -44,10 +45,12 @@ const Userprofile = ({ onLogout }) => {
 
   return (
     <div>
-      {loginsign ? (
+      {showSignup ? (
+        <Signup setUser={setUser} setLoginsign={setLoginsign} />
+      ) : loginsign ? (
         <ProfileCard user={user} handleLogout={handleLogout} />
       ) : (
-        <Signinsignup setUser={handleLogin} setLoginsign={setLoginsign} />
+        <Signinsignup setUser={setUser} setLoginsign={setLoginsign} />
       )}
     </div>
   );
