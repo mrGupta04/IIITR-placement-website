@@ -1,0 +1,97 @@
+/* UpdateLeadership.module.css */
+.pageContainer {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #1e1e2e;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+  
+  .leadershipEntry {
+    background: #2a2a3a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: #333;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s;
+  }
+  
+  .inputField:focus {
+    border-color: #5e8bff;
+    box-shadow: 0 0 8px rgba(94, 139, 255, 0.5);
+  }
+  
+  .deleteButton {
+    background: #ff4b4b;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .deleteButton:hover {
+    background: #e63939;
+  }
+  
+  .addButton {
+    background: #5e8bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    transition: background 0.3s;
+  }
+  
+  .addButton:hover {
+    background: #4a76e0;
+  }
+  
+  .submitButton {
+    background: #4caf50;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    transition: background 0.3s;
+  }
+  
+  .submitButton:hover {
+    background: #45a045;
+  }
+  

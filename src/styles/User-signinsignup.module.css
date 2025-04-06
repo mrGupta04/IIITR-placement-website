@@ -1,0 +1,84 @@
+/* Main container */
+.signupsignincontainer {
+  max-width: 700px; /* Increased form width */
+  margin: 20px auto;
+  padding: 30px;
+  background: #23252b;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Button container - Positioned ABOVE the form */
+.signupsignbuttonContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px; /* Reduced spacing between buttons and form */
+}
+
+/* Buttons - Reduced Size */
+.signupButton,
+.loginButton {
+  flex: 1;
+  padding: 8px 10px; /* Smaller buttons */
+  font-size: 14px; /* Reduced text size */
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  max-width: 30%; /* Smaller width for buttons */
+}
+
+/* Button spacing */
+.signupButton {
+  background: #5a67d8;
+  color: white;
+  margin-right: 8px;
+}
+
+.loginButton {
+  background:  #5a67d8;
+  color: white;
+  margin-left: 8px;
+}
+
+/* Hover effect */
+.signupButton:hover {
+  background: #36429b;
+}
+
+.loginButton:hover {
+  background: #36429b;
+}
+
+/* Disabled button style */
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Form container - Increased width */
+.signupsignincontainer > div {
+  width: 100%;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Smooth switch animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "ecommerce-clothing",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "autoprefixer": "^10.4.20",
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "cookie": "^1.0.2",
+    "cra-template": "1.2.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.7",
+    "express-session": "^1.18.1",
+    "formidable": "^2.1.2",
+    "framer-motion": "^12.0.11",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.9.5",
+    "multer": "^1.4.5-lts.1",
+    "next": "^15.1.7",
+    "next-connect": "^1.0.0",
+    "next-session": "^4.0.5",
+    "nodemailer": "^6.10.0",
+    "postcss": "^8.5.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.10.0",
+    "select": "^1.1.2",
+    "tailwindcss": "^4.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-flow": "^7.26.0",
+    "@babel/plugin-transform-react-jsx": "^7.25.9",
+    "@types/react": "^19.0.10",
+    "typescript": "^5.7.3"
+  }
+}

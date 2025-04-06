@@ -1,0 +1,126 @@
+/* styles/globals.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+/* Global variables */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Base HTML and body styles */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  height: 100%; /* Ensures full height usage */
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px; /* Base font size for readability */
+  line-height: 1.5; /* Improved readability */
+}
+
+/* Reset styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Dark mode color scheme */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* Media Queries for Responsiveness */
+
+/* Laptops (1024px and above) */
+@media (min-width: 1024px) {
+  body {
+    font-size: 18px; /* Slightly larger text for laptop screens */
+    line-height: 1.6;
+  }
+
+  html,
+  body {
+    overflow-x: hidden; /* Maintain no horizontal scroll */
+  }
+}
+
+/* Tablets (481px - 1023px) */
+@media (max-width: 1023px) and (min-width: 481px) {
+  body {
+    font-size: 16px; /* Default size maintained */
+    line-height: 1.5;
+  }
+}
+
+/* Phones (up to 480px) */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px; /* Smaller text for phone screens */
+    line-height: 1.4; /* Tighter line spacing for compact display */
+  }
+
+  html,
+  body {
+    overflow-x: hidden; /* Ensures no horizontal scroll on small screens */
+    padding: 0 0.5rem; /* Adds slight padding to prevent edge-to-edge text */
+  }
+
+  /* Ensure content stays within viewport */
+  * {
+    max-width: 100%; /* Prevents elements from exceeding viewport width */
+    word-wrap: break-word; /* Breaks long words to avoid overflow */
+  }
+}
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0070f3;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #005bb5;
+}

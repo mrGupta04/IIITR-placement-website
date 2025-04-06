@@ -1,0 +1,95 @@
+.container {
+  max-width: 900px;
+  width: 90%; /* Makes it fluid, taking 90% of the viewport width up to 900px */
+  margin: 50px auto;
+  padding: 0 15px; /* Adds some padding on the sides for small screens */
+}
+
+/* Card styles */
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Allows content to wrap on smaller screens */
+  gap: 20px; /* Adds spacing between flex items */
+}
+
+/* Quote icon styles */
+.quoteIcon {
+  font-size: 40px;
+  color: gray;
+}
+
+/* Video styles */
+.video {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Laptop screens (up to 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 700px; /* Slightly smaller max-width for laptops */
+    margin: 40px auto; /* Reduced margin */
+  }
+
+  .card {
+    padding: 20px; /* Slightly less padding */
+  }
+
+  .quoteIcon {
+    font-size: 32px; /* Slightly smaller icon */
+  }
+
+  .video {
+    max-width: 350px; /* Adjust video size */
+  }
+}
+
+/* Tablet screens (up to 768px) */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%; /* More fluid width */
+    margin: 30px auto;
+  }
+
+  .card {
+    padding: 15px;
+    flex-direction: column; /* Stack items vertically */
+    text-align: center; /* Center text for better readability */
+  }
+
+  .quoteIcon {
+    font-size: 28px;
+  }
+
+  .video {
+    max-width: 300px;
+  }
+}
+
+/* Phone screens (up to 480px) */
+@media (max-width: 480px) {
+  .container {
+    margin: 20px auto; /* Even less margin */
+    padding: 0 10px;
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .quoteIcon {
+    font-size: 24px; /* Smaller icon for phones */
+  }
+
+  .video {
+    max-width: 100%; /* Full width on small screens */
+  }
+}

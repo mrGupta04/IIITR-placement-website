@@ -1,0 +1,85 @@
+/* jobForm.module.css */
+
+.jobForm {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: linear-gradient(135deg, #cac7da, #9f90d4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #333;
+}
+
+.jobForm label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #555;
+}
+
+.jobForm input[type="text"],
+.jobForm textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.jobForm input[type="text"]:focus,
+.jobForm textarea:focus {
+    border-color: #0070f3;
+    box-shadow: 0 0 8px rgba(0, 112, 243, 0.2);
+    outline: none;
+}
+
+.jobForm textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.dropdownskills {
+    margin-bottom: 20px;
+}
+
+.buttonsection {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submitbutton,
+.cancelbutton {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submitbutton {
+    background-color: #0070f3;
+    color: #fff;
+}
+
+.submitbutton:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+}
+
+.cancelbutton {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.cancelbutton:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+}

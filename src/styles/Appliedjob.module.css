@@ -1,0 +1,86 @@
+/* Main container for the applied jobs */
+.appliedJobsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr)); /* 3 jobs per row */
+    gap: 20px;
+    width: 100%; /* Ensures full width */
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Job Card Styling */
+.jobCardWrapper {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    width: 100%; /* Makes each job card take full width within its column */
+}
+
+.jobCardWrapper:hover {
+    transform: translateY(-5px);
+}
+
+/* Button Group Styling */
+.buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-top: 2px solid #ddd;
+}
+
+/* Buttons Styling */
+.appliedButton,
+.updateButton,
+.stopResponseButton {
+    flex: 1;
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.appliedButton:hover {
+    background-color: #005bb5;
+}
+
+.updateButton {
+    background-color: #f39c12;
+}
+
+.updateButton:hover {
+    background-color: #d98208;
+}
+
+.stopResponseButton {
+    background-color: #e74c3c;
+}
+
+.stopResponseButton:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .appliedJobsContainer {
+        grid-template-columns: repeat(2, minmax(300px, 1fr)); /* 2 jobs per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .appliedJobsContainer {
+        grid-template-columns: 1fr; /* 1 job per row on small screens */
+    }
+}

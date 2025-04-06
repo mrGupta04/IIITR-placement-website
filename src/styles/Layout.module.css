@@ -1,0 +1,12 @@
+/* src/styles/Layout.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main {
+    flex: 1;
+    padding: 2rem;
+  }
+  

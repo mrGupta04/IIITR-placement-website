@@ -1,0 +1,98 @@
+.pageContainer {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #1e1e2e;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .error {
+    color: #ff4d4d;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .projectEntry {
+    background: #2a2a3c;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #2e2e42;
+    color: #ffffff;
+    font-size: 14px;
+    transition: 0.3s ease;
+  }
+  
+  .inputField:focus {
+    border-color: #8a2be2;
+    outline: none;
+    box-shadow: 0 0 5px #8a2be2;
+  }
+  
+  .addProjectButton,
+  .submitButton,
+  .deleteButton {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .addProjectButton {
+    background: #4caf50;
+    color: white;
+  }
+  
+  .addProjectButton:hover {
+    background: #45a049;
+  }
+  
+  .submitButton {
+    background: #007bff;
+    color: white;
+  }
+  
+  .submitButton:hover {
+    background: #0056b3;
+  }
+  
+  .deleteButton {
+    background: #ff4d4d;
+    color: white;
+    align-self: flex-start;
+  }
+  
+  .deleteButton:hover {
+    background: #e60000;
+  }
+  

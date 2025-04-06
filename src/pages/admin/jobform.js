@@ -1,0 +1,209 @@
+import React, { useState, useEffect } from "react";
+import styles from "../../styles/jobForm.module.css"; // Ensure you have styles
+import { useRouter } from "next/router";
+import Select from "react-select"; // Import react-select for multi-select dropdown
+
+const skillsOptions = [
+  { value: "JavaScript", label: "JavaScript" },
+  { value: "Python", label: "Python" },
+  { value: "React", label: "React" },
+  { value: "Node.js", label: "Node.js" },
+  { value: "Java", label: "Java" },
+  { value: "C++", label: "C++" },
+  { value: "C#", label: "C#" },
+];
+
+const batchOptions = [
+  { value: "2024", label: "2024" },
+  { value: "2025", label: "2025" },
+  { value: "2026", label: "2026" },
+];
+
+const branchOptions = [
+  { value: "CSE", label: "Computer Science (CSE)" },
+  { value: "AIDS", label: "Artificial Intelligence and Data Science (AIDS)" },
+  { value: "MNC", label: "Mathematics and Computing (MNC)" },
+];
+
+const JobForm = () => {
+  const router = useRouter();
+  const [jobType, setJobType] = useState("Job");
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [salary, setSalary] = useState("");
+  const [duration, setDuration] = useState("");
+  const [description, setDescription] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [eligibleBatch, setEligibleBatch] = useState([]);
+  const [eligibleBranch, setEligibleBranch] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [status, setStatus] = useState("active");
+  const [storedAdmin, setStoredAdmin] = useState(null);
+
+  useEffect(() => {
+    const adminData = JSON.parse(localStorage.getItem("admin")) || null;
+    setStoredAdmin(adminData);
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    if (!storedAdmin) {
+      setError("Admin not found. Please log in again.");
+      setLoading(false);
+      return;
+    }
+
+    // Construct JSON data object
+    const jobData = {
+      jobType,
+      title,
+      location,
+      salary,
+      description,
+      status,
+      duration: jobType === "Internship" ? duration : null, // Include duration only if Internship
+      email: storedAdmin.email,
+      skills: skills.map((s) => s.value), // Convert selected options to array
+      eligibleBatch: eligibleBatch.map((b) => b.value),
+      eligibleBranch: eligibleBranch.map((br) => br.value),
+    };
+
+
+    
+
+
+    console.log("Sending data:", jobData); // Debugging log
+   
+
+    try {
+      const res = await fetch("/api/auth/admin/jobs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jobData), // Convert data to JSON
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Job posting failed.");
+      }
+
+      alert("Job posted successfully!");
+      router.push("/jobs"); // Redirect to jobs page after submission
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  return (
+    <div className={styles.jobCardContainer}>
+      <h2 className={styles.jobcardheading}>Post a Job or Internship</h2>
+      {error && <p className={styles.jobcarderror}>{error}</p>}
+      <form onSubmit={handleSubmit} className={styles.jobForm}>
+        <label className={styles.jobcardlabel}>Job Type</label>
+        <select  type="text" value={jobType} onChange={(e) => setJobType(e.target.value)} required className={styles.jobcardjobtypedropdown}>
+          <option value="Job">Job</option>
+          <option value="Internship">Internship</option>
+        </select>
+
+        {jobType === "Internship" && (
+          <>
+            <label>Duration (in months)</label>
+            <input
+              type="text"
+              min="1"
+              placeholder="e.g., 6"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              required
+              className={styles.jobcardjobtypedropdown}
+            />
+          </>
+        )}
+
+        <label>Job Title</label>
+        <input
+          type="text"
+          placeholder="e.g., Software Engineer"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          className={styles.jobcardinput}
+        />
+
+        <label>Location</label>
+        <input
+          type="text"
+          placeholder="e.g., Remote, New York"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          required
+          className={styles.jobcardinput}
+        />
+
+        <label>Salary (Optional)</label>
+        <input
+          type="text"
+          placeholder="e.g., $60,000/year or Unpaid"
+          value={salary}
+          onChange={(e) => setSalary(e.target.value)}
+          className={styles.jobcardinput}
+        />
+
+        <label>Skills Required</label>
+        <Select
+          options={skillsOptions}
+          isMulti
+          value={skills}
+          onChange={setSkills}
+          placeholder="Select required skills..."
+          className={styles.jobcardinputskills}
+        />
+
+        <label>Eligible Batch</label>
+        <Select
+          options={batchOptions}
+          isMulti
+          value={eligibleBatch}
+          onChange={setEligibleBatch}
+          placeholder="Select eligible batches..."
+          className={styles.jobcardinputbatch}
+        />
+
+        <label>Eligible Branch</label>
+        <Select
+          options={branchOptions}
+          isMulti
+          value={eligibleBranch}
+          onChange={setEligibleBranch}
+          placeholder="Select eligible branches..."
+          className={styles.jobcardinputbranch}
+        />
+
+        <label>Job Description</label>
+        <textarea
+        type="text"
+          placeholder="Describe the job responsibilities, skills required, etc."
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+          className={styles.jobcardinputdescripton}
+        />
+
+        <button type="submit" disabled={loading} className={styles.jobcardsubmit}>
+          {loading ? "Posting..." : "Post Job"}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default JobForm;
