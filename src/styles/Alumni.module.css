@@ -1,0 +1,965 @@
+/* Base Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  color: #2d3748;
+}
+
+/* Hero Section */
+.hero {
+  height: 250px;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  border-radius: 16px;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('/images/pattern.svg') center/cover no-repeat;
+  opacity: 0.05;
+}
+
+.heroContent {
+  text-align: center;
+  z-index: 1;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span {
+  color: #fbbf24;
+}
+
+.hero p {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+}
+
+.searchContainer {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 3rem;
+  border-radius: 50px;
+  border: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 1.2rem;
+}
+
+/* Stats Section */
+.statsSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.statCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.statCard h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #1f2937;
+}
+
+.statCard p {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Section Headers - Centered */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.sectionHeader h2 {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.sectionHeader h2 span {
+  color: #4f8ef7;
+}
+
+.sectionHeader p {
+  color: #6b7280;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.5;
+}
+
+.sectionIcon {
+  font-size: 1.8rem;
+  color: #f59e0b;
+  margin-bottom: 1rem;
+}
+
+/* Top Alumni Section */
+.topAlumniSection {
+  margin: 4rem 0;
+  padding: 3rem 0;
+  background: #f8fafc;
+  border-radius: 16px;
+}
+
+/* Alumni Grid */
+.alumniGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Alumni Cards */
+.alumniCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.alumniCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.topAlumniCard {
+  border: 2px solid #f59e0b;
+}
+
+.alumniImage {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 36px;
+  height: 36px;
+  background: #f59e0b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.companyLogo {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+}
+
+.companyLogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.alumniInfo {
+  padding: 1.5rem;
+}
+
+.alumniInfo h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.role {
+  color: #4f8ef7;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.companyInfo {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.achievement {
+  display: flex;
+  align-items: center;
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-radius: 6px;
+}
+
+.awardIcon {
+  margin-right: 0.5rem;
+  color: #f59e0b;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.socialLinks a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.socialLinks a:hover {
+  background: #4f8ef7;
+  color: white;
+}
+
+/* Batch Selection Section */
+.batchSelectionSection {
+  margin: 3rem 0;
+  padding: 3rem 0;
+}
+
+/* Modern Batch Selector */
+.batchSelectorModern {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 1400px;
+  flex-wrap: wrap;
+}
+
+.batchPill {
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.batchPill:hover {
+   background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.activeBatch {
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color: white;
+  box-shadow: 0 4px 20px rgba(79, 142, 247, 0.3);
+}
+
+.activeBatch .batchYear,
+.activeBatch .batchCount {
+  color: white;
+}
+
+.batchYear {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1c2b49;
+}
+
+.batchCount {
+  font-size: 0.8rem;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2rem 0.5rem;
+  border-radius: 50px;
+  color: #6b7280;
+}
+
+/* Modern Alumni Container */
+.batchAlumniContainer {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin: 2rem auto 0;
+  max-width: 1400px;
+}
+
+.batchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.batchHeader h3 {
+  font-size: 1.5rem;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.batchHeader h3 span {
+  color: #4f8ef7;
+  font-weight: 700;
+}
+
+.alumniCount {
+  font-size: 0.9rem;
+  background: #f3f4f6;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  color: #6b7280;
+}
+
+.searchWrapper {
+  position: relative;
+  min-width: 300px;
+}
+
+.searchWrapper input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  border-radius: 50px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.searchWrapper input:focus {
+  outline: none;
+  border-color: #4f8ef7;
+  box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.2);
+}
+
+.searchWrapper .searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+/* Modern Alumni Grid */
+.modernAlumniGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.modernAlumniCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.modernAlumniCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  height: 160px;
+  position: relative;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+.alumniAvatar {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.companyBadge {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+
+.companyBadge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cardBody {
+  padding: 2rem 1.5rem 1rem;
+  flex-grow: 1;
+}
+
+.cardBody h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.role {
+  color: #4f8ef7;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.company {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.achievementBadge {
+  display: inline-flex;
+  align-items: center;
+  background: #fff8e6;
+  color: #d97706;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.achievementBadge svg {
+  margin-right: 0.4rem;
+}
+
+.cardFooter {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.socialLinks a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.socialLinks a:hover {
+  background: #4f8ef7;
+  color: white;
+}
+
+/* Modern Prompt */
+.batchPromptModern {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin: 2rem auto 0;
+  max-width: 1400px;
+}
+
+.patternOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.03;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l-5.373 5.373V0h5.373zm-5.373 5.373l-5.374 5.373V5.373h5.374zm-5.374 5.374l-5.373 5.373v-5.373h5.373zm-5.373 5.373L33.134 21.48v-5.374h5.374zm-5.374 5.374l-5.373 5.373v-5.373h5.373zm-5.373 5.373l-5.374 5.374v-5.374h5.374zm-5.374 5.374l-5.373 5.373v-5.373h5.373zm-5.373 5.373L5.373 54.627V49.254h5.374zm-5.374 5.374L0 60v-5.373h5.373zm5.373 0h5.374v5.373H5.373zm5.374 0h5.373v5.373h-5.373zm5.373 0h5.374v5.373h-5.374zm5.374 0h5.373v5.373h-5.373zm5.373 0h5.374v5.373h-5.374zm5.374 0h5.373v5.373h-5.373zm5.373 0h5.374v5.373h-5.374zm5.374 0H60v5.373h-5.373zM0 54.627V49.254h5.373v5.373H0zm0-5.374v-5.374h5.373v5.374H0zm0-5.374v-5.373h5.373v5.373H0zm0-5.373v-5.374h5.373v5.374H0zm0-5.374v-5.373h5.373v5.373H0zm0-5.373v-5.374h5.373v5.374H0zm0-5.374v-5.373h5.373v5.373H0zm0-5.373V5.373h5.373v5.374H0zM5.373 0v5.373h5.374V0H5.373zm5.374 0v5.373h5.373V0h-5.373zm5.373 0v5.373h5.374V0h-5.374zm5.374 0v5.373h5.373V0h-5.373zm5.373 0v5.373h5.374V0h-5.374zm5.374 0v5.373h5.373V0h-5.373zm5.373 0v5.373h5.374V0h-5.374zm5.374 0v5.373H60V0h-5.373z' fill='%234f8ef7' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.promptContent {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.promptIcon {
+  font-size: 3rem;
+  color: #4f8ef7;
+  margin-bottom: 1.5rem;
+}
+
+.batchPromptModern h3 {
+  font-size: 1.8rem;
+  color: #1c2b49;
+  margin-bottom: 1rem;
+}
+
+.batchPromptModern p {
+  color: #6b7280;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.batchHighlights {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin: 3rem auto;
+  flex-wrap: wrap;
+  padding: 1rem;
+  max-width: 1400px;
+}
+
+.highlightCard {
+  width: calc(25% - 2rem);
+  min-width: 240px;
+  height: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.highlightCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Subtle Hover Effects */
+.highlightCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.highlightCard:hover::before {
+  opacity: 0.9;
+}
+
+.highlightCard:hover .viewButton {
+  background: #3a7de5;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem;
+  color: white;
+  text-align: center;
+}
+
+.highlightYear {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.highlightCount {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.viewButton {
+  background: #053bb8;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+
+/* Batch Pill Hover - Works on all screens */
+.batchPill {
+  /* ... existing styles ... */
+  transition: all 0.3s ease;
+}
+
+.batchPill:hover {
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(79, 142, 247, 0.3);
+}
+
+.batchPill:hover .batchYear,
+.batchPill:hover .batchCount {
+  color: white;
+}
+
+.noResultsModern {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+}
+
+.noResultsIcon {
+  font-size: 3rem;
+  color: #e5e7eb;
+  margin-bottom: 1rem;
+}
+
+.clearButton {
+  background: none;
+  border: 1px solid #e5e7eb;
+  color: #4f8ef7;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background: #f3f4f6;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .batchHighlights {
+    min-height: 350px;
+    gap: 1.5rem;
+  }
+  .highlightCard {
+    width: calc(50% - 1.5rem); /* 2 cards per row */
+    height: 280px;
+  }
+  
+  .highlightYear {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .batchHighlights {
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .highlightCard {
+    width: 100%; /* 1 card per row on smallest screens */
+    max-width: 400px;
+    height: 250px;
+  }
+  
+  .highlightYear {
+    font-size: 2rem;
+  }
+  .cardContent {
+    padding: 1.2rem;
+  }
+  
+  .viewButton {
+    padding: 0.65rem 1.25rem;
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 576px) {
+  .batchHighlights {
+    min-height: 250px;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
+  
+  .highlightCard {
+    width: 160px;
+    padding: 1.5rem;
+  }
+  
+  .highlightYear {
+    font-size: 1.8rem;
+  }
+  
+  .highlightCount {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .viewButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    max-width: 140px;
+  }
+}
+/* No Results Modern */
+
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 2rem;
+  }
+  .highlightCard {
+    width: calc(33.333% - 1.5rem); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 992px) {
+  .hero {
+    height: 220px;
+  }
+  .highlightCard {
+    width: calc(50% - 1.5rem); /* 2 cards per row */
+    height: 280px;
+  }
+
+  .statsSection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .alumniGrid,
+  .modernAlumniGrid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .hero {
+    height: 200px;
+    margin: 1.5rem 0;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .sectionHeader h2 {
+    font-size: 1.8rem;
+  }
+
+  .batchSelectorModern {
+    gap: 0.8rem;
+  }
+
+  .batchPill {
+    padding: 0.6rem 1.2rem;
+  }
+
+  .highlightCard {
+    width: 140px;
+    padding: 1.2rem;
+  }
+}
+
+
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0; /* Remove horizontal padding */
+    width: 100%; /* Ensure full width */
+  }
+
+  .hero {
+    height: 180px;
+    border-radius: 0; /* Remove border radius for full width */
+    margin: 0 0 1rem 0; /* Only bottom margin */
+  }
+
+  .heroContent {
+    padding: 1.5rem 1rem; /* Keep vertical padding, minimal horizontal */
+    width: calc(100% - 2rem); /* Account for horizontal padding */
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .statsSection {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem 1rem 2rem 1rem; /* Minimal horizontal margin */
+    width: calc(100% - 2rem); /* Account for margins */
+  }
+
+  .sectionHeader {
+    padding: 0 1rem; /* Minimal horizontal padding */
+  }
+
+  .sectionHeader h2 {
+    font-size: 1.6rem;
+  }
+
+  .batchSelectorModern {
+    gap: 0.5rem;
+    padding: 0 1rem; /* Contain pills within safe area */
+  }
+
+  .batchPill {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .highlightCard {
+    width: 120px;
+    padding: 1rem;
+  }
+
+  .highlightYear {
+    font-size: 1.5rem;
+  }
+
+  .alumniGrid,
+  .modernAlumniGrid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem; /* Keep content within safe area */
+  }
+
+  .topAlumniSection {
+    margin: 2rem 0;
+    padding: 2rem 0;
+    border-radius: 0; /* Remove border radius for full width */
+  }
+
+  .batchSelectionSection {
+    margin: 2rem 0;
+  }
+
+  /* Additional full-width elements */
+  .batchPromptModern,
+  .batchAlumniContainer {
+    border-radius: 0; /* Remove border radius */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+
+  /* Ensure search inputs don't touch screen edges */
+  .searchContainer,
+  .searchWrapper {
+    padding: 0 1rem;
+    width: calc(100% - 2rem);
+  }
+}
