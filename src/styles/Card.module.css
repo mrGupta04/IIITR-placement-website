@@ -1,140 +1,220 @@
+/* card.module.css */
 /* Card Container */
 .card {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    padding: 15px;
-    width: 100%;
-    perspective: 1000px;
-  }
-  
-  /* Small Version */
-  .small {
-    width: 100%; /* Smaller size */
-    height: 220px;
-    margin: 5%;
-  }
-  
-  /* Inner Wrapper for Flip Effect */
-  .inner {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-  }
-  
-  /* Flip Effect */
-  .flipped {
-    transform: rotateY(180deg);
-  }
-  
-  /* Front and Back Common Styles */
-  .front, .back {
+  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+}
 
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  /* Front Side - Two Column Layout */
-  .front {
-    background: linear-gradient(180deg, #9fbcda, #779fc6);
-    color: white;
-    display: grid;
-    grid-template-columns: 50% 50%; /* Two columns */
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-  }
-  
-  /* Image Container */
-  .image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Profile Image */
-  .image {
-    margin: 10px;
-    width: 80%;
-    height: auto;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  /* Info Section (Name & Position) */
-  .info {
-    font-size: 16px;
-    font-weight: 500;
-    opacity: 0.9;
-    margin-bottom: 12px;
-    letter-spacing: 0.5px;  /* Adds a subtle, elegant spacing */
-    color: rgba(255, 255, 255, 0.85); /* Soft white for a refined look */
+/* Small Version */
+.small {
+  height: 280px;
+}
+
+/* Inner Wrapper for Flip Effect */
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Flip Effect */
+.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Front and Back Common Styles */
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Front Side */
+.front {
+  background: linear-gradient(135deg,#00274d 0%,#0251a0 40%,#036fdc 70%,#1a4b8c 90%,#266ecd 100%);
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+/* Profile Image */
+.image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Name Styling */
 .name {
-    font-size: 20px;
-    margin: 15px 0;
-    font-weight: 700;
-    text-transform: capitalize; /* Makes it look sleek */
-    letter-spacing: 0.8px;
-    color: #f8f9fa; /* Light color for a high-end feel */
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Position Styling */
 .position {
-    margin: 5px 0;
-    font-size: 15px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.75); /* Subtle white for elegance */
-    letter-spacing: 0.6px;
-    transition: color 0.3s ease-in-out;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
 }
 
+/* Back Side */
+.back {
+  background: linear-gradient(135deg, #00274d, #1a4b8c);
+  color: white;
+  transform: rotateY(180deg);
+  padding: 1.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* If inheritance isn't working, set colors directly */
+.back h5,
+.back .info,
+.back .details {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Contact links (icons) should be white */
+.back .contactLink {
+  color: white;
+}
+
+.back h5 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.info {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Contact Links */
 .pinfo {
-    margin: 20px 0;
-    font-size: 15px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.75); /* Subtle white for elegance */
-    letter-spacing: 0.6px;
-    transition: color 0.3s ease-in-out;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: center;
 }
 
-  
-  /* Back Side */
-  .back {
-    background-color: #85a1c0;
-    color: white;
-    transform: rotateY(180deg);
-    padding: 20px;
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.contactLink:hover {
+  background: var(--accent);
+  transform: translateY(-3px);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.details {
+  color: rgba(255, 255, 255, 0.9);
+  /* Test with !important */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .small {
+    height: 260px;
   }
-  
-  /* Icons */
-  
-  .contactLink {
-    display: inline-block;
-    margin: 0 10px;
+
+  .image {
+    width: 100px;
+    height: 100px;
   }
-  
-  .icon {
-    width: 30px;
-    height: 30px;
-    transition: transform 0.3s ease;
+
+  .name {
+    font-size: 1.2rem;
   }
-  
-  .icon:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Add these to your existing card styles */
+
+/* Mobile-friendly flip */
+@media (max-width: 768px) {
+  .card {
+    perspective: none;
   }
+
+  .inner {
+    transform-style: flat;
+  }
+
+  .flipped .back {
+    transform: rotateY(0);
+    position: relative;
+  }
+
+  .flipped .front {
+    display: none;
+  }
+}
+
+/* Image container for Next.js optimization */
+.imageContainer {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+}
+
+/* Text container for better spacing */
+.textContainer {
+  text-align: center;
+}
+
+/* Contact links with icons */
+.contactLinks {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.contactLink {
+  color: white;
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.contactLink:hover {
+  transform: scale(1.2);
+}
