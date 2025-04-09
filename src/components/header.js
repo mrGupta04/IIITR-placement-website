@@ -31,10 +31,10 @@ const Header = () => {
               <Link href="/recruiters">Recruiters</Link>
             </li>
             <li>
-              <Link href="/Stats">Statistics</Link>
+              <Link href="/stats">Statistics</Link>
             </li>
             <li>
-              <Link href="/events">Events</Link>
+              <Link href="/alumni">Alumni</Link>
             </li>
             <li>
               <Link href="/contact">Contact Us</Link>
