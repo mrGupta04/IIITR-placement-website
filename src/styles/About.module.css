@@ -473,7 +473,7 @@
 
 /* ========== Coordinators Section ========== */
 .coordinatorsSection {
-  padding: 5rem 2rem;
+  padding: 1rem 2rem;
   background: var(--light);
 }
 
@@ -482,7 +482,7 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
   max-width: 1000px;
-  margin: 2rem auto 0;
+  margin: 1rem auto 0;
 }
 
 .coordinatorCard {

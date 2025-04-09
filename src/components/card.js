@@ -17,9 +17,9 @@ const Card = ({ image, name, position, idno, branch, info, small }) => {
                 {/* Front Side */}
                 <div className={styles.front}>
                     <div className={styles.imageContainer}>
-                        <Image 
-                            src={image} 
-                            alt={name} 
+                        <Image
+                            src={image}
+                            alt={name}
                             width={150}
                             height={150}
                             className={styles.image}

@@ -28,7 +28,8 @@
 }
 
 /* Front and Back Common Styles */
-.front, .back {
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -40,7 +41,7 @@
 
 /* Front Side */
 .front {
-  background: linear-gradient(135deg, var(--secondary), #6e8efb);
+  background: linear-gradient(135deg,#00274d 0%,#0251a0 40%,#036fdc 70%,#1a4b8c 90%,#266ecd 100%);
   color: white;
   flex-direction: column;
   align-items: center;
@@ -89,6 +90,18 @@
   text-align: center;
 }
 
+/* If inheritance isn't working, set colors directly */
+.back h5,
+.back .info,
+.back .details {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Contact links (icons) should be white */
+.back .contactLink {
+  color: white;
+}
+
 .back h5 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
@@ -132,17 +145,23 @@
   filter: brightness(0) invert(1);
 }
 
+.details {
+  color: rgba(255, 255, 255, 0.9);
+  /* Test with !important */
+}
+
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .small {
     height: 260px;
   }
-  
+
   .image {
     width: 100px;
     height: 100px;
   }
-  
+
   .name {
     font-size: 1.2rem;
   }
@@ -155,13 +174,16 @@
   .card {
     perspective: none;
   }
+
   .inner {
     transform-style: flat;
   }
+
   .flipped .back {
     transform: rotateY(0);
     position: relative;
   }
+
   .flipped .front {
     display: none;
   }

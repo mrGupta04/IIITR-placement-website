@@ -3,13 +3,15 @@ import styles from "../styles/Recruiters.module.css";
 
 const Recruiters = () => {
   useEffect(() => {
-    const elements = document.querySelectorAll('.section, .invitationMessage, .invitationButton');
+    const elements = document.querySelectorAll('.animate-on-scroll');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate');
         }
       });
+    }, {
+      threshold: 0.1
     });
 
     elements.forEach(element => {
@@ -23,123 +25,184 @@ const Recruiters = () => {
 
   return (
     <div className={styles.recruitersContainer}>
+      {/* Hero Section */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroContent}>
+          <h1 className={`${styles.heroTitle} animate-on-scroll`}>An Invitation to Shape the Future of Innovation</h1>
+          <p className={`${styles.heroSubtitle} animate-on-scroll`}>
+            Partner with IIIT Raichur to recruit exceptional talent trained under the mentorship of IIT Hyderabad
+          </p>
+          <a href="#recruiters" className={`${styles.heroButton} animate-on-scroll`}>Explore Partnership</a>
+        </div>
+      </section>
+
       {/* Invitation Section */}
-      <section id="recruiters" className={`${styles.invitationSection} ${styles.fadeIn}`}>
+      <section id="recruiters" className={`${styles.invitationSection} animate-on-scroll`}>
         <div className={styles.invitationContainer}>
-          <h2 className={styles.invitationHeading}>An Invitation to Shape the Future of Innovation</h2>
+          <div className={styles.invitationHeader}>
+            <h2 className={styles.invitationHeading}>Join Hands with Future Innovators</h2>
+            <div className={styles.divider}></div>
+          </div>
 
-          <p className={styles.invitationMessage}>
-            <strong>Dear Industry Leaders and Hiring Partners,</strong>
-          </p>
+          <div className={styles.invitationContent}>
+            <p className={styles.invitationMessage}>
+              <strong>Dear Industry Leaders and Hiring Partners,</strong>
+            </p>
 
-          <p className={styles.invitationMessage}>
-            At <strong>IIIT Raichur</strong>, we believe that the <em>future of technology is built today</em>—in the minds of young innovators, problem-solvers, and leaders who will drive tomorrow’s industries.
-          </p>
-          <p className={styles.invitationMessage}><strong>Why IIIT Raichur?</strong></p>
-          <p className={styles.invitationMessage}>
-            With a <strong>cutting-edge academic system</strong>, crafted under the mentorship of <strong>IIT Hyderabad</strong>, our students immerse themselves in a curriculum that goes beyond textbooks. The <strong>Fractal Academic System</strong> ensures deep conceptual clarity through continuous learning, allowing students to master fundamentals. From day one, our students engage in <strong>real-world projects</strong>—tackling industry-relevant challenges. Through <strong>internships at startups and tech giants</strong>, they don’t just learn; they contribute, innovate, and lead.
-          </p>
+            <p className={styles.invitationMessage}>
+              At <strong>IIIT Raichur</strong>, we believe that the <em>future of technology is built today</em>—in the minds of young innovators, problem-solvers, and leaders who will drive tomorrow's industries.
+            </p>
 
-          <p className={styles.invitationMessage}>
-            We invite you to mentor, collaborate, and recruit the next generation of <strong>industry-ready professionals</strong>.
-          </p>
+            <div className={styles.featureHighlight}>
+              <h3>Why IIIT Raichur?</h3>
+              <ul className={styles.featureList}>
+                <li>
+                  <span className={styles.featureIcon}>🚀</span>
+                  <strong>Cutting-edge academic system</strong> mentored by IIT Hyderabad
+                </li>
+                <li>
+                  <span className={styles.featureIcon}>🧩</span>
+                  <strong>Fractal Academic System</strong> for deep conceptual clarity
+                </li>
+                <li>
+                  <span className={styles.featureIcon}>💡</span>
+                  <strong>Real-world projects</strong> tackling industry challenges
+                </li>
+                <li>
+                  <span className={styles.featureIcon}>🌐</span>
+                  <strong>Industry internships</strong> at startups and tech giants
+                </li>
+              </ul>
+            </div>
 
-          <a href="/contact" className={styles.invitationButton}>Connect With Us</a>
+            <p className={styles.invitationMessage}>
+              We invite you to mentor, collaborate, and recruit the next generation of <strong>industry-ready professionals</strong>.
+            </p>
+
+            <div className={styles.buttonGroup}>
+              <a href="/contact" className={styles.invitationButton}>Connect With Us</a>
+              <a href="#process" className={styles.secondaryButton}>View Process</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className={styles.statsSection}>
+        <div className={styles.statsContainer}>
+          <div className={`${styles.statCard} animate-on-scroll`}>
+            <h3 className={styles.statNumber}>100+</h3>
+            <p className={styles.statLabel}>Companies Visited</p>
+          </div>
+          <div className={`${styles.statCard} animate-on-scroll`}>
+            <h3 className={styles.statNumber}>90%+</h3>
+            <p className={styles.statLabel}>Placement Rate</p>
+          </div>
+          <div className={`${styles.statCard} animate-on-scroll`}>
+            <h3 className={styles.statNumber}>50+</h3>
+            <p className={styles.statLabel}>Industry Projects</p>
+          </div>
+          <div className={`${styles.statCard} animate-on-scroll`}>
+            <h3 className={styles.statNumber}>4.0+</h3>
+            <p className={styles.statLabel}>Average Package (LPA)</p>
+          </div>
         </div>
       </section>
 
       {/* Recruitment Process Section */}
-      <section className={styles.section}>
-        <h2 className={`${styles.sectionTitle} ${styles.fadeIn}`}>Recruitment Process</h2>
+      <section id="process" className={styles.processSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Recruitment Process</h2>
+          <p className={styles.sectionSubtitle}>Simple steps to hire the best talent</p>
+        </div>
+
         <div className={styles.processSteps}>
-          <ul className={styles.timeline}>
-            <li className={styles.timelineItem}>
-              <div className={styles.timelineSeparator}>
-                <span className={styles.timelineDot}></span>
-                <span className={styles.timelineConnector}></span>
-              </div>
-              <div className={styles.timelineContent}>
-                <div className={styles.timelineCard}>
-                  Company Invitation: The placement office sends invitations to companies with relevant information. You can also email us the same at tnp@iiitr.ac.in
+          <div className={styles.processTimeline}>
+            {[
+              {
+                title: "Company Invitation",
+                content: "The placement office sends invitations to companies with relevant information. You can also email us at tnp@iiitr.ac.in",
+                icon: "📨"
+              },
+              {
+                title: "Registration",
+                content: "Companies interested in recruiting can register on our portal. Please use your corporate email ID for registration.",
+                action: "Recruiter SignUp",
+                icon: "📝"
+              },
+              {
+                title: "SPOC Allocation",
+                content: "Student coordinators are assigned as SPOCs (Single Point of Contact) for each registered company.",
+                icon: "👥"
+              },
+              {
+                title: "Announcement Forms",
+                content: "Companies fill out Job/Internship Announcement Forms for each hiring profile.",
+                icon: "📋"
+              },
+              {
+                title: "Pre-Hiring Process",
+                content: "View resumes, shortlist candidates, and conduct pre-placement activities.",
+                icon: "🔍"
+              },
+              {
+                title: "Offer Rolling",
+                content: "Finalize selections and announce the list of selected students.",
+                icon: "🎯"
+              }
+            ].map((step, index) => (
+              <div key={index} className={`${styles.processStep} animate-on-scroll`}>
+                <div className={styles.stepIndicator}>
+                  <span className={styles.stepNumber}>{index + 1}</span>
+                  <span className={styles.stepIcon}>{step.icon}</span>
+                </div>
+                <div className={styles.stepContent}>
+                  <h3 className={styles.stepTitle}>{step.title}</h3>
+                  <p className={styles.stepDescription}>{step.content}</p>
+                  {step.action && (
+                    <a href="/" className={styles.stepAction}>{step.action}</a>
+                  )}
                 </div>
               </div>
-            </li>
-
-            <li className={styles.timelineItem}>
-              <div className={styles.timelineSeparator}>
-                <span className={styles.timelineDot}></span>
-                <span className={styles.timelineConnector}></span>
-              </div>
-              <div className={styles.timelineContent}>
-                <div className={styles.timelineCard}>
-                  Registration: Companies interested in recruiting can register on the Training-Placement website. Please use your corporate email ID for registration.
-                  <a href="/" className={styles.recButton}>Recruiter SignUp</a>
-                </div>
-              </div>
-            </li>
-
-            <li className={styles.timelineItem}>
-              <div className={styles.timelineSeparator}>
-                <span className={styles.timelineDot}></span>
-                <span className={styles.timelineConnector}></span>
-              </div>
-              <div className={styles.timelineContent}>
-                <div className={styles.timelineCard}>
-                  SPOC Allocation: Student coordinators are assigned as SPOCs (Single Point of Contact) for each registered company and they verify the company's details.
-                </div>
-              </div>
-            </li>
-
-            <li className={styles.timelineItem}>
-              <div className={styles.timelineSeparator}>
-                <span className={styles.timelineDot}></span>
-                <span className={styles.timelineConnector}></span>
-              </div>
-              <div className={styles.timelineContent}>
-                <div className={styles.timelineCard}>
-                  Announcement forms: Companies may fill out the Job Announcement Form or Internships Announcement Form for each profile they wish to hire for. Once the completed form with all required details is received, the company is registered and contacted for further processes.
-                </div>
-              </div>
-            </li>
-
-            <li className={styles.timelineItem}>
-              <div className={styles.timelineSeparator}>
-                <span className={styles.timelineDot}></span>
-                <span className={styles.timelineConnector}></span>
-              </div>
-              <div className={styles.timelineContent}>
-                <div className={styles.timelineCard}>
-                  Pre-Hiring Process: Students can view the details and eligible students may apply. You can use this account to view resumes of interested students and shortlist applicants. Companies/organizations can request to conduct pre-processes (tests, assignments, etc.) along with their preferred date.
-                </div>
-              </div>
-            </li>
-
-            <li className={styles.timelineItem}>
-              <div className={styles.timelineSeparator}>
-                <span className={styles.timelineDot}></span>
-                <span className={styles.timelineConnector}></span>
-              </div>
-              <div className={styles.timelineContent}>
-                <div className={styles.timelineCard}>
-                  Offer Rolling: Students are selected and hired by companies through rolling offers. After completing the selection process, the company must announce the final list of selected students on the same day.
-                </div>
-              </div>
-            </li>
-          </ul>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Past Recruiters Section */}
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Past Recruiters</h2>
-        <div className={styles.recruitersList}>
-          <img src="/uploads/infosys.webp" alt="infosys" />
-          <img src="/uploads/capgemini.png" alt="Capgemini" />
-          <img src="/uploads/amazon.png" alt="Amazon" />
-          <img src="/uploads/tcs.png" alt="infosys" />
+      <section className={styles.recruitersSection}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Our Esteemed Recruiters</h2>
+          <p className={styles.sectionSubtitle}>Companies who trust our talent</p>
+        </div>
+
+        <div className={styles.recruitersGrid}>
+          {['infosys', 'capgemini', 'amazon', 'tcs', 'google', 'microsoft', 'accenture', 'wipro'].map((company) => (
+            <div key={company} className={`${styles.recruiterLogo} animate-on-scroll`}>
+              <img
+                src={`/uploads/${company}.png`}
+                alt={company}
+                onError={(e) => {
+                  e.target.src = `/uploads/${company}.webp`;
+                  e.target.onerror = null;
+                }}
+              />
+            </div>
+          ))}
         </div>
       </section>
 
+      {/* CTA Section */}
+      <section className={styles.ctaSection}>
+        <div className={styles.ctaContainer}>
+          <h2 className={styles.ctaTitle}>Ready to Hire Exceptional Talent?</h2>
+          <p className={styles.ctaText}>Join our growing network of recruiters and get access to the brightest minds in technology.</p>
+          <div className={styles.ctaButtons}>
+            <a href="/register" className={styles.primaryCta}>Register as Recruiter</a>
+            <a href="/contact" className={styles.secondaryCta}>Schedule Campus Visit</a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
