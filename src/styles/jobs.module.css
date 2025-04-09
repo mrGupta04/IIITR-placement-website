@@ -1,105 +1,157 @@
 /* jobs.module.css */
 
-.jobsContainer {
-    display: flex;
+.jobsDashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.dashboardHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.dashboardTitle {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #4f8ef7 0%, #1c2b49 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.dashboardSubtitle {
+  margin: 0.75rem 0 0;
+  color: #64748b;
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navigationTabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  color: #64748b;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tabButton:hover {
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color:white;
+}
+
+.tabButton svg {
+  transition: all 0.3s ease;
+}
+
+.tabButton:hover svg {
+  stroke: #4f8ef7;
+}
+
+.activeTab {
+  background: #cdd7f3;
+  color: #4f8ef7;
+  box-shadow: 0 4px 6px -1px rgba(79, 142, 247, 0.1);
+}
+
+.activeTab svg {
+  stroke: #4f8ef7;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: -1.1rem;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #4f8ef7;
+  border-radius: 3px 3px 0 0;
+}
+
+.tabContent {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  min-height: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .jobsDashboard {
+    padding: 1.5rem;
+  }
+
+  .dashboardTitle {
+    font-size: 1.875rem;
+  }
+
+  .dashboardSubtitle {
+    font-size: 1rem;
+  }
+
+  .navigationTabs {
     flex-direction: column;
-    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .tabButton {
     justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #5287dd, #474a4c);
-    color: #ffffff;
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-    text-align: center;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
   }
-  
-  .header {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+
+  .activeTab {
+    border-color: #4f8ef7;
   }
-  
-  .buttonGroup {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 30px;
+
+  .activeTab::after {
+    display: none;
   }
-  
-  .buttonGroup button {
-    background: linear-gradient(135deg, #2563eb, #7490eb);
-    color: #ffffff;
-    padding: 14px 24px;
-    border: none;
+
+  .tabContent {
+    padding: 1.5rem;
     border-radius: 12px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
-  
-  .buttonGroup button:hover {
-    background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 480px) {
+  .jobsDashboard {
+    padding: 1rem;
   }
-  
-  .content {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    width: 100%;
-    max-width: 100%;
-    animation: fadeIn 0.5s ease-in-out;
+
+  .dashboardTitle {
+    font-size: 1.5rem;
   }
-  
-  .content > * {
-    font-size: 1rem;
-    color: #e5e7eb;
-    text-align: left;
+
+  .tabContent {
+    padding: 1.25rem;
   }
-  
-  .contentTitle {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
-  
-  .contentParagraph {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    color: #d1d5db;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .buttonGroup {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .buttonGroup button {
-      width: 100%;
-    }
-  
-    .content {
-      padding: 20px;
-    }
-  }
-  
+}

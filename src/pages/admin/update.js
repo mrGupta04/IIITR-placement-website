@@ -4,66 +4,73 @@ import { useRouter } from "next/router";
 
 export default function Update() {
   const router = useRouter();
-  let storedAdmin = {};
-
-  try {
-    storedAdmin = JSON.parse(localStorage.getItem("admin")) || {};
-  } catch (error) {
-    console.error("Error parsing Admin data from localStorage:", error);
-    storedAdmin = {};
-  }
-    console.log(storedAdmin.email);
-  const [name, setName] = useState(storedAdmin?.name || "");
-  const [mobileno, setMobileno] = useState(storedAdmin?.mobileno || "");
-  const [city, setCity] = useState(storedAdmin?.city || "");
-  const [state, setState] = useState(storedAdmin?.state || "");
-  const [aboutCompany, setAboutCompany] = useState(storedAdmin?.aboutCompany || "");
-  const [industryType, setIndustryType] = useState(storedAdmin?.industryType || "");
-  const [website, setWebsite] = useState(storedAdmin?.website || "");
+  const [storedAdmin, setStoredAdmin] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    mobileno: "",
+    city: "",
+    state: "",
+    aboutCompany: "",
+    industryType: "",
+    website: ""
+  });
   const [profilepic, setProfilepic] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
 
-  
-  const handleCancelupdate = () => {
-    router.push("/admin/profile");
+  useEffect(() => {
+    try {
+      const admin = JSON.parse(localStorage.getItem("admin")) || {};
+      setStoredAdmin(admin);
+      setFormData({
+        name: admin?.name || "",
+        mobileno: admin?.mobileno || "",
+        city: admin?.city || "",
+        state: admin?.state || "",
+        aboutCompany: admin?.aboutCompany || "",
+        industryType: admin?.industryType || "",
+        website: admin?.website || ""
+      });
+      if (admin?.profilePic) setPreviewImage(admin.profilePic);
+    } catch (error) {
+      console.error("Error parsing Admin data:", error);
+    }
+  }, []);
+
+  const handleCancel = () => router.push("/admin/profile");
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfilepic(file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-   
-    console.log(storedAdmin.email);
-    const formData = new FormData();
-    formData.append("email", storedAdmin.email);
-    formData.append("name", name);
-    formData.append("mobileno", mobileno);
-    formData.append("city", city);
-    formData.append("state", state);
-    formData.append("aboutCompany", aboutCompany);
-    formData.append("industryType", industryType);
-    formData.append("website", website);
-
-    if (profilepic) formData.append("profilepic", profilepic);
+    const data = new FormData();
+    data.append("email", storedAdmin.email);
+    Object.entries(formData).forEach(([key, value]) => {
+      data.append(key, value);
+    });
+    if (profilepic) data.append("profilepic", profilepic);
 
     try {
       const res = await fetch("/api/auth/admin/update", {
         method: "POST",
-        body: formData,
+        body: data,
       });
 
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message || "Update failed.");
-      }
+      const response = await res.json();
+      if (!res.ok) throw new Error(response.message || "Update failed");
 
-      localStorage.setItem("admin", JSON.stringify(data.admin));
-
-      
-      router.push("/admin/profilecard");
+      localStorage.setItem("admin", JSON.stringify(response.admin));
+      router.push("/admin/profile");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -71,30 +78,152 @@ export default function Update() {
     }
   };
 
-  return (
-    <div className={styles.adminupdatepage}>
-      <div className={styles.adminupdatebox}>
-        <h2 className={styles.adminupdateheading}>Update Admin Account</h2>
-        {error && <p className={styles.adminupdaterror}>{error}</p>}
-        <form onSubmit={handleSubmit} className={styles.adminupdatefrom}>
-          <input type="text" placeholder="Company Name" value={name} onChange={(e) => setName(e.target.value)} className={styles.adminupdateinput} required />
-          <input type="text" placeholder="Mobile Number" value={mobileno} onChange={(e) => setMobileno(e.target.value)} className={styles.adminupdateinput} required />
-          <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} className={styles.adminupdateinput} required />
-          <input type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} className={styles.adminupdateinput} required />
-          <input type="text" placeholder="About Company" value={aboutCompany} onChange={(e) => setAboutCompany(e.target.value)} className={styles.adminupdateinput} />
-          <input type="text" placeholder="Industry Type" value={industryType} onChange={(e) => setIndustryType(e.target.value)} className={styles.adminupdateinput} />
-          <input type="text" placeholder="Website" value={website} onChange={(e) => setWebsite(e.target.value)} className={styles.adminupdateinput} />
-          
-          <label className="file-upload-label">Profile Picture</label>
-          <input type="file" onChange={(e) => setProfilepic(e.target.files[0])} className="update-file-input" />
-          
-          <button type="submit" disabled={loading} className={styles.adminupdateformbutton}>
-            {loading ? "Updating..." : "Submit"}
-          </button>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-          <button type="button" onClick={handleCancelupdate} className={styles.adminupdatecancel}>
-            Cancel
-          </button>
+  return (
+    <div className={styles.container}>
+      <div className={styles.glassCard}>
+        <div className={styles.header}>
+          <h1>Update Profile</h1>
+          <p>Manage your admin account details</p>
+        </div>
+
+        {error && (
+          <div className={styles.errorAlert}>
+            <svg width="20" height="20" viewBox="0 0 20 20">
+              <path fill="currentColor" d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm1 15H9v-2h2v2zm0-4H9V5h2v6z"/>
+            </svg>
+            <span>{error}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.avatarUpload}>
+            <div className={styles.avatarPreview}>
+              {previewImage ? (
+                <img src={previewImage} alt="Profile preview" />
+              ) : (
+                <div className={styles.avatarPlaceholder}>
+                  {formData.name ? formData.name.charAt(0) : "A"}
+                </div>
+              )}
+            </div>
+            <label className={styles.uploadButton}>
+              <input 
+                type="file" 
+                onChange={handleImageChange} 
+                accept="image/*"
+              />
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+              </svg>
+              Change Photo
+            </label>
+          </div>
+
+          <div className={styles.formGrid}>
+            <div className={styles.inputGroup}>
+              <label>Company Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Mobile Number</label>
+              <input
+                type="text"
+                name="mobileno"
+                value={formData.mobileno}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>City</label>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>State</label>
+              <input
+                type="text"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>About Company</label>
+              <input
+                type="text"
+                name="aboutCompany"
+                value={formData.aboutCompany}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Industry Type</label>
+              <input
+                type="text"
+                name="industryType"
+                value={formData.industryType}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Website</label>
+              <input
+                type="url"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                placeholder="https://example.com"
+              />
+            </div>
+          </div>
+
+          <div className={styles.buttonGroup}>
+            <button 
+              type="button" 
+              onClick={handleCancel}
+              className={styles.cancelButton}
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit" 
+              disabled={loading}
+              className={styles.submitButton}
+            >
+              {loading ? (
+                <>
+                  <span className={styles.spinner}></span>
+                  Updating...
+                </>
+              ) : (
+                "Save Changes"
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -1,21 +1,671 @@
 /* styles/Home.module.css */
-.homeContainer {
-    text-align: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 50px auto;
-  }
+.container {
+  min-height: 100vh;
+  background: #f9f9f9;
+}
+
+/* Hero Section Styles */
+.hero {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+  margin-bottom: 4rem;
+}
+
+.heroImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #082552e6 0%, rgba(43, 45, 66, 0.8) 100%);
+  z-index: 2;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.heroTitle {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 800px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transform: translateZ(0);
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  line-height: 1.1;
+  margin-top: 1.5rem;
+  animation: slideUp 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+}
+
+.heroSubtitle {
+  display: block;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-top: 1.5rem;
+}
+
+/* About Section Styles */
+.aboutSection {
+  max-width: 1200px;
+  width: 90%; /* Fluid width */
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #2b2d42;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #ef233c;
+}
+
+.content {
+  column-count: 2;
+  column-gap: 3rem;
+}
+
+.paragraph {
+  font-family: 'Lora', serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+  hyphens: auto;
+  break-inside: avoid;
+}
+
+.highlight {
+  color: #2b2d42;
+  font-weight: 600;
+  position: relative;
+}
+
+.highlight::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(120deg, #f8ad9d30 0%, #f4978e30 100%);
+  z-index: -1;
+}
+
+/* Introduction Section */
+.introduction {
+  padding: 6rem 2rem;
+  text-align: center;
+  background-color: #fff;
+  position: relative;
+}
+
+.introduction::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background: #0070f3;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.sectionText {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* Featured Programs Section */
+.featuredPrograms {
+  padding: 6rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+}
+
+.programList {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+  gap: 2rem;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.programCard {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  max-width: 300px;
+  text-align: center;
+}
+
+.programCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.programCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #0070f3;
+}
+
+.programCard p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* CTA Button */
+.ctaButton {
+  display: block;
+  margin: 0 auto;
+  padding: 1rem 2.5rem;
+  font-size: 2.1rem;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ctaButton:hover {
+  background-color: #c9d4d7;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(43, 138, 62, 0.3);
+}
+
+/* Navigation Bar Styles */
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  animation: slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navLeft, .navRight {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.navLeft span, .navRight span {
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.navLeft span::after, .navRight span::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: #64ffda;
+  transition: width 0.3s ease;
+}
+
+.navLeft span:hover::after, .navRight span:hover::after {
+  width: 100%;
+}
+
+/* Scrolling Banner Styles */
+.scrollingBanner {
+  background: rgba(255, 255, 255, 0.1);
+  color: #0a192f;
+  padding: 1.1rem 0;
+  position: relative;
+  bottom: -2%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 5000;
+}
+.scrollingWrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+}
+
+.scrollingContent {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.scrollingContent span {
+  margin: 0 4rem;
+  position: relative;
+  display: inline-block;
   
-  .heading {
+}
+
+.scrollingContent span:not(:last-child)::after {
+  content: '•';
+  position: absolute;
+  right: -3rem;
+  animation: pulse 1s infinite;
+}
+
+.container :global(::-webkit-scrollbar) {
+  width: 10px;
+}
+
+.container :global(::-webkit-scrollbar-track) {
+  background: #f1f1f1;
+}
+
+.container :global(::-webkit-scrollbar-thumb) {
+  background: #0070f3;
+  border-radius: 10px;
+}
+
+.container :global(::-webkit-scrollbar-thumb:hover) {
+  background: #005bb5;
+}
+/* Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Responsive Design */
+@media (min-width: 1024px) {
+  .heroTitle {
+    font-size: 4.5rem; /* Slightly larger for laptops */
+  }
+
+  .navBar {
+    padding: 1.5rem 4rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    height: 70vh;
+  }
+
+  .heroTitle {
+    font-size: 3rem;
+    padding: 1.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.25rem;
+  }
+
+  .aboutSection {
+    max-width: 900px;
+  }
+
+  .content {
+    column-count: 1;
+  }
+
+  .sectionTitle {
+    font-size: 2.2rem;
+  }
+
+  .introduction, .featuredPrograms {
+    padding: 4rem 1.5rem;
+  }
+
+  .navBar {
+    padding: 1.2rem 2rem;
+  }
+
+  .scrollingContent {
+    font-size: 1.1rem;
+  }
+
+  .ctaButton {
+    font-size: 1.8rem;
+    padding: 0.9rem 2rem;
+  }
+
+  .footer {
+    padding: 3rem 1.5rem 0;
+  }
+
+
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+  }
+
+  .heroContent {
+    padding: 1.5rem;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+    padding: 1.2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .aboutSection {
+    padding: 0 1.5rem 3rem;
+  }
+
+  .sectionTitle {
     font-size: 2rem;
-    color: #333;
   }
-  
-  .description {
+
+  .paragraph {
+    font-size: 1rem;
+  }
+
+  .introduction {
+    padding: 3rem 1rem;
+  }
+
+  .introduction::after {
+    width: 80px;
+    height: 80px;
+    bottom: -40px;
+  }
+
+  .sectionText {
+    font-size: 1.1rem;
+  }
+
+  .featuredPrograms {
+    padding: 3rem 1rem;
+  }
+
+  .programList {
+    gap: 1.5rem;
+  }
+
+  .programCard {
+    padding: 1.5rem;
+    max-width: 250px;
+  }
+
+  .programCard h3 {
+    font-size: 1.3rem;
+  }
+
+  .navBar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .navLeft, .navRight {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .scrollingContent {
+    font-size: 1rem;
+  }
+
+  .ctaButton {
+    font-size: 1.5rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .footer {
+    padding: 2.5rem 1rem 0;
+  }
+
+  .footerContent {
+    gap: 2rem;
+  }
+
+
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 50vh;
+  }
+
+  .heroContent {
+    padding: 1rem;
+  }
+
+  .heroTitle {
+    font-size: 1.8rem;
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .heroSubtitle {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .aboutSection {
+    padding: 0 1rem 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .sectionTitle::after {
+    width: 60px;
+  }
+
+  .paragraph {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .introduction {
+    padding: 2rem 1rem;
+  }
+
+  .introduction::after {
+    width: 60px;
+    height: 60px;
+    bottom: -30px;
+  }
+
+  .sectionText {
+    font-size: 1rem;
+  }
+
+  .featuredPrograms {
+    padding: 2rem 1rem;
+  }
+
+  .programList {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .programCard {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .programCard h3 {
     font-size: 1.2rem;
-    color: #666;
   }
-  
+
+  .programCard p {
+    font-size: 0.9rem;
+  }
+
+  .navBar {
+    padding: 0.8rem;
+  }
+
+  .navLeft, .navRight {
+    gap: 1rem;
+  }
+
+  .scrollingContent {
+    font-size: 0.9rem;
+  }
+
+  .scrollingContent span {
+    margin: 0 2rem;
+  }
+
+  .scrollingContent span:not(:last-child)::after {
+    right: -2rem;
+  }
+
+  .ctaButton {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .footer {
+    padding: 2rem 1rem 0;
+  }
+
+  .footerSection {
+    padding: 0.8rem;
+  }
+
+  .footerHeading {
+    font-size: 1.3rem;
+  }
+
+  .footerText {
+    font-size: 0.9rem;
+  }
+
+  .socialLink {
+    width: 35px;
+    height: 35px;
+  }
+
+  .newsletterInput {
+    padding: 0.6rem;
+  }
+
+  .newsletterButton {
+    padding: 0.6rem 1.2rem;
+  }
+
+  .footerBottom {
+    padding: 1.5rem 0;
+  }
+
+
+}

@@ -1,0 +1,20 @@
+{
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
+    "id": "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app",
+    "files": [
+      "static/chunks/node_modules_next_dist_pages__app_js.js"
+    ]
+  },
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
+    "id": "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error",
+    "files": [
+      "static/chunks/node_modules_next_dist_pages__error_js.js"
+    ]
+  },
+  "components\\footer.js -> @fortawesome/react-fontawesome": {
+    "id": "components\\footer.js -> @fortawesome/react-fontawesome",
+    "files": [
+      "static/chunks/node_modules_fortawesome_react-fontawesome_index_es_js.js"
+    ]
+  }
+}

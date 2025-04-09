@@ -1,0 +1,8 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/admin/jobs": "pages/admin/jobs.js",
+  "/admin/jobupdate": "pages/admin/jobupdate.js",
+  "/admin/appliedjob": "pages/admin/appliedjob.js"
+}

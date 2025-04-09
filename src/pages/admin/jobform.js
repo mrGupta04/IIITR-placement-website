@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/jobForm.module.css"; // Ensure you have styles
+import styles from "../../styles/jobForm.module.css";
 import { useRouter } from "next/router";
-import Select from "react-select"; // Import react-select for multi-select dropdown
+import Select from "react-select";
 
 const skillsOptions = [
   { value: "JavaScript", label: "JavaScript" },
@@ -57,7 +57,6 @@ const JobForm = () => {
       return;
     }
 
-    // Construct JSON data object
     const jobData = {
       jobType,
       title,
@@ -65,19 +64,12 @@ const JobForm = () => {
       salary,
       description,
       status,
-      duration: jobType === "Internship" ? duration : null, // Include duration only if Internship
+      duration: jobType === "Internship" ? duration : null,
       email: storedAdmin.email,
-      skills: skills.map((s) => s.value), // Convert selected options to array
+      skills: skills.map((s) => s.value),
       eligibleBatch: eligibleBatch.map((b) => b.value),
       eligibleBranch: eligibleBranch.map((br) => br.value),
     };
-
-
-    
-
-
-    console.log("Sending data:", jobData); // Debugging log
-   
 
     try {
       const res = await fetch("/api/auth/admin/jobs", {
@@ -85,7 +77,7 @@ const JobForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(jobData), // Convert data to JSON
+        body: JSON.stringify(jobData),
       });
 
       const data = await res.json();
@@ -94,7 +86,7 @@ const JobForm = () => {
       }
 
       alert("Job posted successfully!");
-      router.push("/jobs"); // Redirect to jobs page after submission
+      router.push("/jobs");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -102,21 +94,32 @@ const JobForm = () => {
     }
   };
 
+  const handleCancel = () => {
+    router.push("/admin/jobs");
+  };
 
   return (
-    <div className={styles.jobCardContainer}>
-      <h2 className={styles.jobcardheading}>Post a Job or Internship</h2>
-      {error && <p className={styles.jobcarderror}>{error}</p>}
-      <form onSubmit={handleSubmit} className={styles.jobForm}>
-        <label className={styles.jobcardlabel}>Job Type</label>
-        <select  type="text" value={jobType} onChange={(e) => setJobType(e.target.value)} required className={styles.jobcardjobtypedropdown}>
-          <option value="Job">Job</option>
-          <option value="Internship">Internship</option>
-        </select>
+    <div className={styles.container}>
+      <h2 className={styles.header}>Post a Job or Internship</h2>
+      {error && <div className={styles.error}>{error}</div>}
+      
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Job Type</label>
+          <select
+            value={jobType}
+            onChange={(e) => setJobType(e.target.value)}
+            required
+            className={styles.select}
+          >
+            <option value="Job">Job</option>
+            <option value="Internship">Internship</option>
+          </select>
+        </div>
 
         {jobType === "Internship" && (
-          <>
-            <label>Duration (in months)</label>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Duration (in months)</label>
             <input
               type="text"
               min="1"
@@ -124,83 +127,112 @@ const JobForm = () => {
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
               required
-              className={styles.jobcardjobtypedropdown}
+              className={styles.input}
             />
-          </>
+          </div>
         )}
 
-        <label>Job Title</label>
-        <input
-          type="text"
-          placeholder="e.g., Software Engineer"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          className={styles.jobcardinput}
-        />
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Job Title</label>
+          <input
+            type="text"
+            placeholder="e.g., Software Engineer"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
 
-        <label>Location</label>
-        <input
-          type="text"
-          placeholder="e.g., Remote, New York"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          required
-          className={styles.jobcardinput}
-        />
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Location</label>
+          <input
+            type="text"
+            placeholder="e.g., Remote, New York"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
 
-        <label>Salary (Optional)</label>
-        <input
-          type="text"
-          placeholder="e.g., $60,000/year or Unpaid"
-          value={salary}
-          onChange={(e) => setSalary(e.target.value)}
-          className={styles.jobcardinput}
-        />
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Salary (Optional)</label>
+          <input
+            type="text"
+            placeholder="e.g., $60,000/year or Unpaid"
+            value={salary}
+            onChange={(e) => setSalary(e.target.value)}
+            className={styles.input}
+          />
+        </div>
 
-        <label>Skills Required</label>
-        <Select
-          options={skillsOptions}
-          isMulti
-          value={skills}
-          onChange={setSkills}
-          placeholder="Select required skills..."
-          className={styles.jobcardinputskills}
-        />
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Skills Required</label>
+          <Select
+            options={skillsOptions}
+            isMulti
+            value={skills}
+            onChange={setSkills}
+            placeholder="Select required skills..."
+            className={styles.reactSelect}
+            classNamePrefix="rs"
+          />
+        </div>
 
-        <label>Eligible Batch</label>
-        <Select
-          options={batchOptions}
-          isMulti
-          value={eligibleBatch}
-          onChange={setEligibleBatch}
-          placeholder="Select eligible batches..."
-          className={styles.jobcardinputbatch}
-        />
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Eligible Batch</label>
+          <Select
+            options={batchOptions}
+            isMulti
+            value={eligibleBatch}
+            onChange={setEligibleBatch}
+            placeholder="Select eligible batches..."
+            className={styles.reactSelect}
+            classNamePrefix="rs"
+          />
+        </div>
 
-        <label>Eligible Branch</label>
-        <Select
-          options={branchOptions}
-          isMulti
-          value={eligibleBranch}
-          onChange={setEligibleBranch}
-          placeholder="Select eligible branches..."
-          className={styles.jobcardinputbranch}
-        />
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Eligible Branch</label>
+          <Select
+            options={branchOptions}
+            isMulti
+            value={eligibleBranch}
+            onChange={setEligibleBranch}
+            placeholder="Select eligible branches..."
+            className={styles.reactSelect}
+            classNamePrefix="rs"
+          />
+        </div>
 
-        <label>Job Description</label>
-        <textarea
-        type="text"
-          placeholder="Describe the job responsibilities, skills required, etc."
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          className={styles.jobcardinputdescripton}
-        />
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Job Description</label>
+          <textarea
+            placeholder="Describe the job responsibilities, skills required, etc."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            className={styles.textarea}
+          />
+        </div>
 
-        <button type="submit" disabled={loading} className={styles.jobcardsubmit}>
-          {loading ? "Posting..." : "Post Job"}
-        </button>
+        <div className={styles.buttonGroup}>
+          <button
+            type="button"
+            onClick={handleCancel}
+            className={styles.cancelButton}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className={styles.submitButton}
+          >
+            {loading ? "Posting..." : "Post Job"}
+          </button>
+        </div>
       </form>
     </div>
   );

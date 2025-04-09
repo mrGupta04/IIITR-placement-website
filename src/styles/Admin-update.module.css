@@ -1,121 +1,301 @@
-.adminupdatepage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #1e1e2f, #3a3a52);
-    padding: 20px;
+/* Admin-update.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.glassCard {
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glassCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.header p {
+  margin: 0.5rem 0 0;
+  color: #64748b;
+  font-size: 0.9375rem;
+}
+
+.errorAlert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.errorAlert svg {
+  flex-shrink: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.avatarUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.avatarPreview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.avatarPreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.uploadButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.uploadButton:hover {
+  background: linear-gradient(135deg, #1454c2 0%, #1c2b49 100%);
+  box-shadow: 0 4px 12px rgba(110, 142, 251, 0.4);
+  transform: translateY(-2px);
+}
+
+.uploadButton input {
+  display: none;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+}
+
+.inputGroup input {
+  padding: 0.875rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  color: #1e293b;
+  transition: all 0.2s ease;
+  background: #f8fafc;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #a5b4fc;
+  box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.2);
+  background: white;
+}
+
+.inputGroup input::placeholder {
+  color: #94a3b8;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cancelButton {
+  padding: 0.875rem 1.5rem;
+  background: white;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cancelButton:hover {
+  background: #d30606;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton {
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.submitButton:hover {
+  background: linear-gradient(135deg, #1454c2 0%, #1c2b49 100%);
+  box-shadow: 0 4px 12px rgba(110, 142, 251, 0.4);
+  transform: translateY(-2px);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+.submitButton:hover::before {
+  left: 100%;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
   }
   
-  .adminupdatebox {
-    width: 100%;
-    max-width: 500px;
-    background: #2a2a3a;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    text-align: center;
-    color: #ffffff;
-    transition: transform 0.3s ease-in-out;
+  .glassCard {
+    padding: 1.75rem;
   }
   
-  .adminupdatebox:hover {
-    transform: scale(1.02);
+  .header h1 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glassCard {
+    padding: 1.5rem;
   }
   
-  .adminupdateheading {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #f0f0f0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  .formGrid {
+    grid-template-columns: 1fr;
   }
   
-  .adminupdaterror {
-    background: #ff4d4d;
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-  
-  .adminupdatefrom {
-    display: flex;
+  .buttonGroup {
     flex-direction: column;
-    gap: 15px;
   }
   
-  .adminupdateinput {
+  .cancelButton,
+  .submitButton {
     width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    color: #f0f0f0;
-    background: #3a3a52;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.3s ease-in-out;
+    text-align: center;
+    justify-content: center;
   }
-  
-  .adminupdateinput:focus {
-    background: #4a4a62;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-  }
-  
-  .file-upload-label {
-    text-align: left;
-    font-size: 14px;
-    color: #bbb;
-  }
-  
-  .update-file-input {
-    padding: 10px;
-    background: #3a3a52;
-    color: #ffffff;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .adminupdateformbutton {
-    width: 100%;
-    background: linear-gradient(45deg, #ff7eb3, #ff758c);
-    border: none;
-    color: white;
-    font-size: 18px;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s;
-  }
-  
-  .adminupdateformbutton:hover {
-    background: linear-gradient(45deg, #ff5f9e, #ff466e);
-  }
-  
-  .adminupdateformbutton:disabled {
-    background: gray;
-    cursor: not-allowed;
-  }
-  
-  .adminupdatecancel {
-    width: 100%;
-    background: transparent;
-    color: #ff7eb3;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 12px;
-    border: 2px solid #ff7eb3;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s;
-  }
-  
-  .adminupdatecancel:hover {
-    background: #ff7eb3;
-    color: white;
-  }
-  
+}
