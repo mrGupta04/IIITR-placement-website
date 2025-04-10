@@ -83,37 +83,25 @@ const Signinsignup = ({ setUser, setLoginsign }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.signupsignincontainer}>
+      <div className={styles.signupsignbuttonContainer}>
+        <button
+          className={`${styles.signupButton} ${!isLogin ? styles.active : ""}`}
+          onClick={() => setIsLogin(false)}
+        >
+          Signup
+        </button>
+        <button
+          className={`${styles.loginButton} ${isLogin ? styles.active : ""}`}
+          onClick={() => setIsLogin(true)}
+        >
+          Login
+        </button>
+      </div>
       {isLogin ? (
-        <>
-          <div className={`${styles.panel} ${styles.leftPanel}`}>
-            <LoginContent />
-            <button
-              className={styles.switchFormButton}
-              onClick={() => setIsLogin(false)}
-            >
-              CREATE ACCOUNT
-            </button>
-          </div>
-          <div className={`${styles.panel} ${styles.rightPanel}`}>
-            <Login setAdmin={setUser} setLoginsign={setLoginsign} />
-          </div>
-        </>
+        <Login setUser={setUser} setLoginsign={setLoginsign} />
       ) : (
-        <>
-          <div className={`${styles.panel} ${styles.rightPanel}`}>
-            <Signup setAdmin={setUser} setLoginsign={setLoginsign} />
-          </div>
-          <div className={`${styles.panel} ${styles.leftPanel}`}>
-            <SignupContent />
-            <button
-              className={styles.switchFormButton}
-              onClick={() => setIsLogin(true)}
-            >
-              SIGN IN
-            </button>
-          </div>
-        </>
+        <Signup setUser={setUser} setLoginsign={setLoginsign} />
       )}
     </div>
   );

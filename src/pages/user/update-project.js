@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import styles from "../../styles/UpdateProject.module.css"; // Importing CSS Module
+import styles from "../../styles/UpdateProject.module.css";
 
 const InputField = ({ name, type, placeholder, value, onChange }) => (
   <input
@@ -9,7 +9,19 @@ const InputField = ({ name, type, placeholder, value, onChange }) => (
     placeholder={placeholder}
     value={value}
     onChange={onChange}
-    className={styles.inputField} // Applying module CSS class
+    className={styles.inputField}
+    required
+  />
+);
+
+const TextAreaField = ({ name, placeholder, value, onChange }) => (
+  <textarea
+    name={name}
+    placeholder={placeholder}
+    value={value}
+    onChange={onChange}
+    className={styles.textareaField}
+    rows="3"
     required
   />
 );
@@ -59,7 +71,7 @@ export default function UpdateProjects({ onClose }) {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update project");
+        throw new Error(errorData.message || "Failed to update projects");
       }
 
       const updatedData = await response.json();
@@ -67,8 +79,11 @@ export default function UpdateProjects({ onClose }) {
       storedUser.project = projects;
       localStorage.setItem("User", JSON.stringify(storedUser));
 
-      alert("Projects updated successfully!");
-      router.push("/user/update");
+      if (onClose) {
+        onClose();
+      } else {
+        router.push("/profile");
+      }
     } catch (error) {
       console.error("Error:", error);
       setError(error.message);
@@ -77,56 +92,111 @@ export default function UpdateProjects({ onClose }) {
     }
   };
 
+  const handleCancel = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      router.push("/profile");
+    }
+  };
+
   return (
-    <div className={styles.pageContainer}>
-      <h2 className={styles.heading}>Update Projects</h2>
-      {error && <div className={styles.error}>{error}</div>}
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>Your Projects</h2>
+          <p className={styles.subtitle}>Showcase your work and skills</p>
+        </div>
 
-      <form onSubmit={handleSubmit} className={styles.form}>
-        {projects.map((proj, index) => (
-          <div key={index} className={styles.projectEntry}>
-            <InputField
-              name="title"
-              type="text"
-              placeholder="Project title"
-              value={proj.title}
-              onChange={(e) => handleProjectChange(e, index)}
-            />
-            <InputField
-              name="skillused"
-              type="text"
-              placeholder="Skills Used"
-              value={proj.skillused}
-              onChange={(e) => handleProjectChange(e, index)}
-            />
-            <InputField
-              name="date"
-              type="text"
-              placeholder="Start-End Date"
-              value={proj.date}
-              onChange={(e) => handleProjectChange(e, index)}
-            />
-            <InputField
-              name="description"
-              type="text"
-              placeholder="Description"
-              value={proj.description}
-              onChange={(e) => handleProjectChange(e, index)}
-            />
+        {error && <div className={styles.errorMessage}>{error}</div>}
 
-            <button type="button" onClick={() => handleDelete(index)} className={styles.deleteButton}>
-              Delete
+        <form onSubmit={handleSubmit} className={styles.form}>
+          {projects.map((proj, index) => (
+            <div key={index} className={styles.projectCard}>
+              <div className={styles.cardHeader}>
+                <h3 className={styles.projectTitle}>Project #{index + 1}</h3>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(index)}
+                  className={styles.deleteButton}
+                  aria-label="Delete project"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 13H5v-2h14v2z" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <InputField
+                  name="title"
+                  type="text"
+                  placeholder="Project Title"
+                  value={proj.title}
+                  onChange={(e) => handleProjectChange(e, index)}
+                />
+                <InputField
+                  name="skillused"
+                  type="text"
+                  placeholder="Skills Used (comma separated)"
+                  value={proj.skillused}
+                  onChange={(e) => handleProjectChange(e, index)}
+                />
+                <InputField
+                  name="date"
+                  type="text"
+                  placeholder="Duration (e.g., Jan 2023 - Present)"
+                  value={proj.date}
+                  onChange={(e) => handleProjectChange(e, index)}
+                />
+                <TextAreaField
+                  name="description"
+                  placeholder="Project description, your contributions, and achievements..."
+                  value={proj.description}
+                  onChange={(e) => handleProjectChange(e, index)}
+                />
+              </div>
+            </div>
+          ))}
+
+          <div className={styles.buttonGroup}>
+            <button
+              type="button"
+              onClick={addProject}
+              className={styles.addButton}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+              </svg>
+              Add Project
             </button>
-          </div>
-        ))}
 
-        <button type="button" onClick={addProject} className={styles.addProjectButton}>
-          Add New Project
-        </button>
-        <button type="submit" disabled={loading} className={styles.submitButton}>
-          {loading ? "Updating..." : "Submit"}
-        </button>
-      </form>
+            <div className={styles.actionButtons}>
+              <button
+                type="button"
+                onClick={handleCancel}
+                className={styles.cancelButton}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className={styles.submitButton}
+              >
+                {loading ? (
+                  <>
+                    <span className={styles.spinner}></span>
+                    Saving...
+                  </>
+                ) : (
+                  "Save Projects"
+                )}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
