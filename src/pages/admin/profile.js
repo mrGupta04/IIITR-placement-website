@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Signinsignup from "./signinsignup";
 import AdminProfileCard from "./profilecard";
+import styles from '../../styles/profile.module.css';
 
-const AdminProfile = ({ onLogout }) => {
+const AdminProfile = ({ onLogout, goBackToProfile }) => {
   const [admin, setAdmin] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -44,7 +45,15 @@ const AdminProfile = ({ onLogout }) => {
       {isLoggedIn ? (
         <AdminProfileCard handleLogout={handleLogout} />
       ) : (
-        <Signinsignup setAdmin={handleLogin} />
+        <div className={styles.authContainer}>
+          <button 
+            className={styles.backButton} 
+            onClick={goBackToProfile}
+          >
+            Back to Profile
+          </button>
+          <Signinsignup setAdmin={handleLogin} />
+        </div>
       )}
     </div>
   );

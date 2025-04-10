@@ -1,225 +1,118 @@
 /* profile.module.css */
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: radial-gradient(circle at 10% 20%, #0f172a, #1e293b);
-  font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-  /* padding: 2rem; */
-  color: #f8fafc;
-  perspective: 1000px;
-}
-
-.title {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  font-weight: 800;
-  background: linear-gradient(90deg, #f472b6, #60a5fa);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  position: relative;
-  text-shadow: 0 0 10px rgba(244, 114, 182, 0.3);
-}
-
-.title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 4px;
-  background: linear-gradient(90deg, #f472b6, #60a5fa);
-  border-radius: 2px;
-}
-
-.subtitle {
-  font-size: 1.1rem;
-  color: #94a3b8;
-  margin-bottom: 3rem;
-  max-width: 500px;
-  text-align: center;
-  line-height: 1.7;
-  font-weight: 300;
-}
-
-.buttons {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-
-.button {
-  background: rgba(255, 255, 255, 0.05);
-  color: #f8fafc;
-  padding: 1.25rem 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  min-width: 200px;
-  text-align: center;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-}
-
-.button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: 0.5s;
-  z-index: -1;
-}
-
-.button:hover {
-  transform: translateY(-5px) scale(1.03);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.3);
-}
-
-.button:hover::before {
-  left: 100%;
-}
-
-.profileContainer {
-  padding: 3rem;
-  background: rgba(15, 23, 42, 0.7);
-  border-radius: 24px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  margin-top: 2rem;
-  width: 100%;
-  max-width: 900px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease;
-}
-
-/* .profileContainer:hover {
-  transform: rotateY(5deg) rotateX(2deg);
-} */
-
-.profileContainer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.15), transparent 70%);
-  pointer-events: none;
-}
-
-.profileContainer::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.2), transparent 70%);
-  filter: blur(30px);
-}
-
-.logoutButton {
-  background: rgba(239, 68, 68, 0.2);
-  color: #fecaca;
-  padding: 1rem 2rem;
-  border: 1px solid rgba(254, 202, 202, 0.2);
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 3rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.logoutButton::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: rgba(239, 68, 68, 0.4);
-  transition: width 0.3s ease;
-  z-index: -1;
-}
-
-.logoutButton:hover {
-  background: rgba(239, 68, 68, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.2);
-}
-
-.logoutButton:hover::before {
-  width: 100%;
-}
-
-/* Floating particles background effect */
-.particle {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .title {
-      font-size: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #5287dd, #474a4c);
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding: 20px;
   }
-
-  .container{
-    padding: 0rem;
+  
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
   
   .buttons {
-      flex-direction: column;
-      gap: 1rem;
+    display: flex;
+    gap: 1rem;
+    margin-top: 20px;
+  }
+  
+  .button {
+    background: linear-gradient(135deg, #2563eb, #7490eb);
+    color: #ffffff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
   
   .profileContainer {
-      padding: 2rem;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    width: 100%;
+    max-width: 750px;
   }
+  
+  .logoutButton {
+    background: #ef4444;
+    color: #ffffff;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .logoutButton:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  /* Enhanced Back to Profile Button */
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px 8px 12px;
+  margin: 15px 0;
+  background-color: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-/* Animation for the container */
-@keyframes float {
-  0%, 100% {
-      transform: translateY(0);
-  }
-  50% {
-      transform: translateY(-10px);
-  }
+.backButton:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.floating {
-  animation: float 6s ease-in-out infinite;
+.backButton:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
+
+.backButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+}
+
+/* Optional: Add an arrow icon using pseudo-element */
+.backButton::before {
+  content: "←";
+  margin-right: 6px;
+  font-size: 12px;
+}
+  
