@@ -50,6 +50,14 @@ const Profile = () => {
     setShowAdmin(false);
   };
 
+  // Go back to profile selection
+  const goBackToProfile = () => {
+    localStorage.removeItem('userData');
+    localStorage.removeItem('adminData');
+    setShowUser(false);
+    setShowAdmin(false);
+  };
+
   return (
     <div className={styles.container}>
       {!showUser && !showAdmin ? (
