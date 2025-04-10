@@ -1,98 +1,260 @@
-.pageContainer {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #1e1e2e;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    font-family: "Montserrat", sans-serif;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background-color: #f8fafc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.header {
+  padding: 2rem;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color: white;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.errorMessage {
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-radius: 6px;
+  border-left: 3px solid #e53e3e;
+}
+
+.form {
+  padding: 1.5rem;
+}
+
+.projectCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.projectCard:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.projectTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0;
+}
+
+.inputGroup {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.inputField,
+.textareaField {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
+}
+
+.inputField:focus,
+.textareaField:focus {
+  outline: none;
+  border-color: #818cf8;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background-color: white;
+}
+
+.textareaField {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #f1f5f9;
+  color: #4a5568;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #e2e8f0;
+}
+
+.addButton svg {
+  width: 18px;
+  height: 18px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.submitButton,
+.cancelButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submitButton {
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color: white;
+  border: none;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background-color: white;
+  color: #4f46e5;
+  border: 1px solid #e2e8f0;
+}
+
+.cancelButton:hover {
+  background-color: #f8fafc;
+  border-color: #c7d2fe;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #e53e3e;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #fff5f5;
+}
+
+.deleteButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
   }
   
-  .heading {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  .header {
+    padding: 1.5rem;
   }
   
-  .error {
-    color: #ff4d4d;
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 14px;
+  .title {
+    font-size: 1.5rem;
   }
   
   .form {
-    display: flex;
+    padding: 1rem;
+  }
+  
+  .projectCard {
+    padding: 1.25rem;
+  }
+  
+  .actionButtons {
     flex-direction: column;
-    gap: 15px;
+    gap: 0.75rem;
   }
   
-  .projectEntry {
-    background: #2a2a3c;
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-  }
-  
-  .inputField {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #444;
-    background: #2e2e42;
-    color: #ffffff;
-    font-size: 14px;
-    transition: 0.3s ease;
-  }
-  
-  .inputField:focus {
-    border-color: #8a2be2;
-    outline: none;
-    box-shadow: 0 0 5px #8a2be2;
-  }
-  
-  .addProjectButton,
   .submitButton,
-  .deleteButton {
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s ease;
+  .cancelButton {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .inputGroup {
+    grid-template-columns: 1fr 1fr;
   }
   
-  .addProjectButton {
-    background: #4caf50;
-    color: white;
+  .textareaField {
+    grid-column: span 2;
   }
-  
-  .addProjectButton:hover {
-    background: #45a049;
-  }
-  
-  .submitButton {
-    background: #007bff;
-    color: white;
-  }
-  
-  .submitButton:hover {
-    background: #0056b3;
-  }
-  
-  .deleteButton {
-    background: #ff4d4d;
-    color: white;
-    align-self: flex-start;
-  }
-  
-  .deleteButton:hover {
-    background: #e60000;
-  }
-  
+}

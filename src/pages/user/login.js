@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ForgotPassword from "./forget-password";
-import styles from "../../styles/User-Login.module.css"; // Import CSS module
+import styles from "../../styles/User-Login.module.css";
 
 const Login = ({ setLoginsign, setUser }) => {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const Login = ({ setLoginsign, setUser }) => {
     }
 
     setLoading(true);
-    setError(""); // Clear any previous errors
+    setError("");
 
     try {
       const response = await fetch("/api/auth/user/login", {
@@ -28,12 +28,10 @@ const Login = ({ setLoginsign, setUser }) => {
       const userData = await response.json();
       if (!response.ok) throw new Error(userData.message || "Login failed");
 
-      console.log("Login successful, user data:", userData);
       localStorage.setItem("User", JSON.stringify(userData.user));
-      setUser(userData.user);
-      setLoginsign(true);
+      setUser(userData.user); // Update user state in parent
+      setLoginsign(true); // Set login status to true
     } catch (error) {
-      console.error("Error during login:", error.message);
       setError(error.message || "An error occurred. Please try again.");
     } finally {
       setLoading(false);

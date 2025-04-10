@@ -27,103 +27,180 @@ const ProfileCard = ({ user, handleLogout }) => {
   };
 
   return (
-    <div className={styles.profilecard}>
+    <div className={styles.profileContainer}>
       {userData && Object.keys(userData).length > 0 ? (
-        <>
-
-          <div className={styles.profilepicsection}> <div>
-            {userData.profilepic ? (
-              <img src={userData.profilepic} alt="Profile" className="profile-img" />
-            ) : (
-              <p>No profile picture available</p>
-            )}
-          </div>
-            <p><strong>Name:</strong> {userData.name || "Not Provided"}</p>
-
-            <div>
-              {userData.resume ? (
-                <a href={userData.resume} target="_blank" rel="noopener noreferrer">
-                  <button>View Resume</button>
-                </a>
+        <div className={styles.profileGrid}>
+          {/* Profile Header Section */}
+          <div className={styles.profileHeader}>
+            <div className={styles.avatarContainer}>
+              {userData.profilepic ? (
+                <img 
+                  src={userData.profilepic} 
+                  alt="Profile" 
+                  className={styles.profileImage}
+                  onError={(e) => {
+                    e.target.onerror = null; 
+                    e.target.src = '/default-avatar.png'
+                  }}
+                />
               ) : (
-                <p>No resume uploaded</p>
+                <div className={styles.profileInitials}>
+                  {userData.name ? userData.name.charAt(0).toUpperCase() : '?'}
+                </div>
               )}
-            </div></div>
-          <div className={styles.linksection}> <p><strong>LeetCode:</strong> {userData.leetcode ? <a href={userData.leetcode} target="_blank" rel="noopener noreferrer">{userData.leetcode}</a> : "Not Provided"}</p>
-            <p><strong>GitHub:</strong> {userData.github ? <a href={userData.github} target="_blank" rel="noopener noreferrer">{userData.github}</a> : "Not Provided"}</p>
-            <p><strong>LinkedIn:</strong> {userData.linkedin ? <a href={userData.linkedin} target="_blank" rel="noopener noreferrer">{userData.linkedin}</a> : "Not Provided"}</p></div>
-          <div className={styles.personaldetail}>
-
-            <p><strong>Mobile No:</strong> {userData.mobileno || "Not Provided"}</p>
-            <p><strong>Batch:</strong> {userData.batch || "Not Provided"}</p>
-            <p><strong>Roll No:</strong> {userData.rollno || "Not Provided"}</p>
-            <p><strong>Department:</strong> {userData.department || "Not Provided"}</p>
-            <p><strong>CGPA:</strong> {userData.cgpa || "Not Provided"}</p>
-            <p><strong>Gender:</strong> {userData.gender || "Not Provided"}</p>
-            <p><strong>Skills:</strong> {userData.skills?.length ? userData.skills.join(", ") : "Not Provided"}</p>
+            </div>
+            
+            <div className={styles.profileInfo}>
+              <h1 className={styles.profileName}>{userData.name || "Not Provided"}</h1>
+              <div className={styles.profileMeta}>
+                {userData.department && <span className={styles.metaItem}>{userData.department}</span>}
+                {userData.batch && <span className={styles.metaItem}>Batch: {userData.batch}</span>}
+                {userData.cgpa && <span className={styles.metaItem}>CGPA: {userData.cgpa}</span>}
+              </div>
+            </div>
+            
+            <div className={styles.actionButtons}>
+              <button className={styles.updateButton} onClick={handleUpdate}>
+                <i className="fas fa-edit"></i> Edit Profile
+              </button>
+              <button className={styles.logoutButton} onClick={handleLogout}>
+                <i className="fas fa-sign-out-alt"></i> Logout
+              </button>
+            </div>
           </div>
 
-          <div className={styles.project}> <p><strong>Projects:</strong></p>
-            {userData.project?.length ? (
-              <ul>
+          {/* Main Content Sections */}
+          <div className={styles.profileSection}>
+            <h2 className={styles.sectionTitle}>Personal Details</h2>
+            <div className={styles.detailsGrid}>
+              <div className={styles.detailItem}>
+                <span className={styles.detailLabel}>Mobile:</span>
+                <span>{userData.mobileno || "Not Provided"}</span>
+              </div>
+              <div className={styles.detailItem}>
+                <span className={styles.detailLabel}>Roll No:</span>
+                <span>{userData.rollno || "Not Provided"}</span>
+              </div>
+              <div className={styles.detailItem}>
+                <span className={styles.detailLabel}>Gender:</span>
+                <span>{userData.gender || "Not Provided"}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Skills Section */}
+          {userData.skills?.length > 0 && (
+            <div className={styles.profileSection}>
+              <h2 className={styles.sectionTitle}>Skills</h2>
+              <div className={styles.skillsContainer}>
+                {userData.skills.map((skill, index) => (
+                  <span key={index} className={styles.skillPill}>{skill}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Resume Section */}
+          <div className={styles.profileSection}>
+            <h2 className={styles.sectionTitle}>Resume</h2>
+            {userData.resume ? (
+              <a href={userData.resume} target="_blank" rel="noopener noreferrer" className={styles.resumeLink}>
+                <i className="fas fa-file-pdf"></i> View Resume
+              </a>
+            ) : (
+              <p className={styles.noContent}>No resume uploaded</p>
+            )}
+          </div>
+
+          {/* Social Links */}
+          {(userData.leetcode || userData.github || userData.linkedin) && (
+            <div className={styles.profileSection}>
+              <h2 className={styles.sectionTitle}>Social Profiles</h2>
+              <div className={styles.socialLinks}>
+                {userData.github && (
+                  <a href={userData.github} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                    <i className="fab fa-github"></i> GitHub
+                  </a>
+                )}
+                {userData.linkedin && (
+                  <a href={userData.linkedin} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                    <i className="fab fa-linkedin"></i> LinkedIn
+                  </a>
+                )}
+                {userData.leetcode && (
+                  <a href={userData.leetcode} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                    <i className="fas fa-code"></i> LeetCode
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Projects Section */}
+          {userData.project?.length > 0 && (
+            <div className={styles.profileSection}>
+              <h2 className={styles.sectionTitle}>Projects</h2>
+              <div className={styles.cardContainer}>
                 {userData.project.map((proj, index) => (
-                  <li key={index}>
-                    <p><strong>Title:</strong> {proj.Title || "N/A"}</p>
-                    <p><strong>Skills Used:</strong> {proj.skillused || "N/A"}</p>
-                    <p><strong>Description:</strong> {proj.description || "N/A"}</p>
-                    <p><strong>Date:</strong> {proj.date || "N/A"}</p>
-                  </li>
+                  <div key={index} className={styles.card}>
+                    <h3 className={styles.cardTitle}>{proj.Title || "Untitled Project"}</h3>
+                    {proj.skillused && (
+                      <div className={styles.cardSkills}>
+                        {proj.skillused.split(',').map((skill, i) => (
+                          <span key={i} className={styles.cardSkillPill}>{skill.trim()}</span>
+                        ))}
+                      </div>
+                    )}
+                    {proj.description && <p className={styles.cardText}>{proj.description}</p>}
+                    {proj.date && <p className={styles.cardDate}>{proj.date}</p>}
+                  </div>
                 ))}
-              </ul>
-            ) : (
-              <p>Not Provided</p>
-            )}
-          </div>
-          {/* Work Experience */}
-          <div className={styles.workexperience}> <p><strong>Work Experience:</strong></p>
-            {userData.workExperience?.length ? (
-              <ul>
+              </div>
+            </div>
+          )}
+
+          {/* Work Experience Section */}
+          {userData.workExperience?.length > 0 && (
+            <div className={styles.profileSection}>
+              <h2 className={styles.sectionTitle}>Work Experience</h2>
+              <div className={styles.timeline}>
                 {userData.workExperience.map((exp, index) => (
-                  <li key={index}>
-                    <p><strong>Company:</strong> {exp.company || "N/A"}</p>
-                    <p><strong>Job Title:</strong> {exp.jobTitle || "N/A"}</p>
-                    <p><strong>Duration:</strong> {exp.duration || "N/A"}</p>
-                    <p><strong>Description:</strong> {exp.description || "N/A"}</p>
-                  </li>
+                  <div key={index} className={styles.timelineItem}>
+                    <div className={styles.timelineDot}></div>
+                    <div className={styles.timelineContent}>
+                      <h3 className={styles.timelineTitle}>{exp.jobTitle || "Untitled Position"}</h3>
+                      <p className={styles.timelineCompany}>{exp.company || "Unknown Company"}</p>
+                      {exp.duration && <p className={styles.timelineDuration}>{exp.duration}</p>}
+                      {exp.description && <p className={styles.timelineDescription}>{exp.description}</p>}
+                    </div>
+                  </div>
                 ))}
-              </ul>
-            ) : (
-              <p>Not Provided</p>
-            )}</div>
+              </div>
+            </div>
+          )}
 
-          {/* Leadership */}
-          <div className={styles.leadership}> <p><strong>Leadership:</strong></p>
-            {userData.leadership?.length ? (
-              <ul>
+          {/* Leadership Section */}
+          {userData.leadership?.length > 0 && (
+            <div className={styles.profileSection}>
+              <h2 className={styles.sectionTitle}>Leadership</h2>
+              <div className={styles.cardContainer}>
                 {userData.leadership.map((lead, index) => (
-                  <li key={index}>
-                    <p><strong>Activity:</strong> {lead.activity || "N/A"}</p>
-                    <p><strong>Role:</strong> {lead.role || "N/A"}</p>
-                    <p><strong>Duration:</strong> {lead.duration || "N/A"}</p>
-                    <p><strong>Description:</strong> {lead.description || "N/A"}</p>
-                  </li>
+                  <div key={index} className={styles.card}>
+                    <h3 className={styles.cardTitle}>{lead.activity || "Leadership Activity"}</h3>
+                    <p className={styles.cardSubtitle}>{lead.role || "Role not specified"}</p>
+                    {lead.duration && <p className={styles.cardDate}>{lead.duration}</p>}
+                    {lead.description && <p className={styles.cardText}>{lead.description}</p>}
+                  </div>
                 ))}
-              </ul>
-            ) : (
-              <p>Not Provided</p>
-            )}
-          </div>
-          {/* Links */}
-
-
-          {/* Buttons */}
-          <button className={styles.button} onClick={handleUpdate}>Update</button>
-          <button className={`${styles.button} ${styles["logout-btn"]}`} onClick={handleLogout}>Logout</button>
-
-          {/* Update Form */}
-        </>
+              </div>
+            </div>
+          )}
+        </div>
       ) : (
-        <p>Loading user profile...</p>
+        <div className={styles.loadingContainer}>
+          <div className={styles.spinner}></div>
+          <p>Loading profile...</p>
+        </div>
       )}
     </div>
   );

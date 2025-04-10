@@ -6,8 +6,8 @@ import styles from '../../styles/profile.module.css';
 
 const Userprofile = ({ onLogout, goBackToProfile }) => {
   const [user, setUser] = useState(null);
-  const [loginsign, setLoginsign] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("User");
@@ -16,7 +16,7 @@ const Userprofile = ({ onLogout, goBackToProfile }) => {
         const parsedUser = JSON.parse(storedUser);
         console.log("Retrieved User:", parsedUser);
         setUser(parsedUser);
-        setLoginsign(true);
+        setIsLoggedIn(true);
       } catch (error) {
         console.error("Error parsing User data:", error);
         localStorage.removeItem("User"); 
@@ -24,13 +24,12 @@ const Userprofile = ({ onLogout, goBackToProfile }) => {
     }
   }, []);
 
-  const handleLogin = (userData) => {
+  const handleLoginSuccess = (userData) => {
     console.log("Login successful, User data:", userData);
     if (userData) {
       localStorage.setItem("User", JSON.stringify(userData));
       setUser(userData);
-      setLoginsign(true);
-      alert("Login successful!");
+      setIsLoggedIn(true);
     } else {
       console.error("Invalid User data received:", userData);
     }
@@ -40,16 +39,32 @@ const Userprofile = ({ onLogout, goBackToProfile }) => {
     console.log("User logged out");
     localStorage.removeItem("User");
     setUser(null);
-    setLoginsign(false);
-    onLogout();
+    setIsLoggedIn(false);
+    if (onLogout) onLogout();
+  };
+
+  const handleUpdateSuccess = (updatedUser) => {
+    localStorage.setItem("User", JSON.stringify(updatedUser));
+    setUser(updatedUser);
+    setShowUpdate(false);
   };
 
   return (
-    <div>
-      {showSignup ? (
-        <Signup setUser={setUser} setLoginsign={setLoginsign} />
-      ) : loginsign ? (
-        <ProfileCard user={user} handleLogout={handleLogout} />
+    <div className={styles.profileContainer}>
+      {isLoggedIn ? (
+        showUpdate ? (
+          <Update 
+            user={user} 
+            onUpdateSuccess={handleUpdateSuccess} 
+            onCancel={() => setShowUpdate(false)}
+          />
+        ) : (
+          <ProfileCard 
+            user={user} 
+            handleLogout={handleLogout}
+            onUpdate={() => setShowUpdate(true)}
+          />
+        )
       ) : (
         <div className={styles.authContainer}>
           <button 
@@ -58,7 +73,10 @@ const Userprofile = ({ onLogout, goBackToProfile }) => {
           >
             Back to Profile
           </button>
-          <Signinsignup setUser={handleLogin} setLoginsign={setLoginsign} />
+          <Signinsignup 
+            setUser={handleLoginSuccess} 
+            setLoginsign={setIsLoggedIn} 
+          />
         </div>
       )}
     </div>
