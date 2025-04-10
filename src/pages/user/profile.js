@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Signinsignup from "./signinsignup";
 import ProfileCard from "./profilecard";
 import Update from './update';
+import styles from '../../styles/profile.module.css';
 
-const Userprofile = ({ onLogout }) => {
+const Userprofile = ({ onLogout, goBackToProfile }) => {
   const [user, setUser] = useState(null);
   const [loginsign, setLoginsign] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
@@ -50,7 +51,15 @@ const Userprofile = ({ onLogout }) => {
       ) : loginsign ? (
         <ProfileCard user={user} handleLogout={handleLogout} />
       ) : (
-        <Signinsignup setUser={setUser} setLoginsign={setLoginsign} />
+        <div className={styles.authContainer}>
+          <button 
+            className={styles.backButton} 
+            onClick={goBackToProfile}
+          >
+            Back to Profile
+          </button>
+          <Signinsignup setUser={handleLogin} setLoginsign={setLoginsign} />
+        </div>
       )}
     </div>
   );

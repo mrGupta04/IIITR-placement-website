@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Userprofile from './user/profile';
 import Adminprofile from './admin/profile';
-import styles from '../styles/profile.module.css'
+import styles from '../styles/profile.module.css';
 
 const Profile = () => {
   const [showUser, setShowUser] = useState(false);
@@ -50,29 +50,34 @@ const Profile = () => {
     setShowAdmin(false);
   };
 
+  // Go back to profile selection
+  const goBackToProfile = () => {
+    localStorage.removeItem('userData');
+    localStorage.removeItem('adminData');
+    setShowUser(false);
+    setShowAdmin(false);
+  };
+
   return (
     <div className={styles.container}>
-  {!showUser && !showAdmin ? (
-    <>
-      <h2 className={styles.title}>Please select your role</h2>
-      <div className={styles.buttons}>
-        <button className={styles.button} onClick={() => handleLogin('user')}>Student</button>
-        <button className={styles.button} onClick={() => handleLogin('admin')}>Recruiter</button>
-      </div>
-    </>
-  ) : showUser ? (
-    <div className={styles.profileContainer}>
-      <Userprofile onLogout={handleLogout} />
-      <button className={styles.logoutButton} onClick={handleLogout}>Logout</button>
+      {!showUser && !showAdmin ? (
+        <>
+          <h2 className={styles.title}>Please select your role</h2>
+          <div className={styles.buttons}>
+            <button className={styles.button} onClick={() => handleLogin('user')}>Student</button>
+            <button className={styles.button} onClick={() => handleLogin('admin')}>Recruiter</button>
+          </div>
+        </>
+      ) : showUser ? (
+        <div className={styles.profileContainer}>
+          <Userprofile onLogout={handleLogout} goBackToProfile={goBackToProfile} />
+        </div>
+      ) : (
+        <div className={styles.profileContainer}>
+          <Adminprofile onLogout={handleLogout} goBackToProfile={goBackToProfile} />
+        </div>
+      )}
     </div>
-  ) : (
-    <div className={styles.profileContainer}>
-      <Adminprofile onLogout={handleLogout} />
-      <button className={styles.logoutButton} onClick={handleLogout}>Logout</button>
-    </div>
-  )}
-</div>
-
   );
 };
 
