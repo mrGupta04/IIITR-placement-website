@@ -23,7 +23,6 @@ const About = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Student coordinators data
   const studentCoordinators = [
     {
       id: 1,
@@ -181,7 +180,7 @@ const About = () => {
             </div>
           </div>
 
-          {/* Placement Officer */}
+          {/* Placement Officer - Rajesh */}
           <div className={styles.leadershipCard}>
             <div className={styles.leadershipContent}>
               <h3>Placement Officer</h3>
@@ -204,15 +203,15 @@ const About = () => {
             </div>
           </div>
 
-          {/* Second Placement Officer */}
+          {/* Placement Officer - Anjali */}
           <div className={styles.leadershipCard}>
             <div className={styles.leadershipContent}>
-              <h3>Placement Officer</h3>
+              <h3 className={styles.leadershipTitle}>Placement Officer</h3>
               <p className={styles.leadershipQuote}>
                 "Ensuring smooth coordination between students and recruiters."
               </p>
               <div className={styles.leaderInfo}>
-                <h4>Ms. Anjali Mehta</h4>
+                <h3 className={styles.leaderName}>Ms. Anjali Mehta</h3>
                 <p className={styles.leaderPosition}>Training & Placement Officer</p>
               </div>
             </div>
@@ -229,7 +228,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Student Coordinators */}
+      {/* Student Coordinators Section */}
       <section className={`${styles.missionSection} ${styles.coordinatorsSection} ${styles.fadeIn}`}>
         <div className={`${styles.sectionContainer} ${styles.missionContent}`}>
           <h2>Student Placement Team</h2>

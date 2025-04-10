@@ -176,7 +176,6 @@
   .inner {
     transform-style: flat;
   }
-
   .flipped .back {
     transform: rotateY(0);
     position: relative;
