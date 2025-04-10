@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ForgotPassword from "./forget-password";
-import styles from "../../styles/User-Login.module.css"; // Import CSS module
+import styles from "../../styles/User-Login.module.css";
 
 const Login = ({ setLoginsign, setUser }) => {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const Login = ({ setLoginsign, setUser }) => {
     }
 
     setLoading(true);
-    setError(""); // Clear any previous errors
+    setError("");
 
     try {
       const response = await fetch("/api/auth/user/login", {
@@ -28,66 +28,58 @@ const Login = ({ setLoginsign, setUser }) => {
       const userData = await response.json();
       if (!response.ok) throw new Error(userData.message || "Login failed");
 
-      console.log("Login successful, user data:", userData);
       localStorage.setItem("User", JSON.stringify(userData.user));
       setUser(userData.user);
       setLoginsign(true);
     } catch (error) {
-      console.error("Error during login:", error.message);
       setError(error.message || "An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleResetSuccess = () => {
-    setShowForgotPassword(false);
-  };
-
   return (
-    <div className={styles.pageWrapper}>
-      <div className={styles.userloginContainer}>
-        {!showForgotPassword ? (
-          <>
-            <h2 className={styles.loginheading}>User Login</h2>
-            {error && <p className={styles.errorMessage}>{error}</p>}
+    <div className={styles.userloginContainer}>
+      {!showForgotPassword ? (
+        <>
+          <h2 className={styles.loginheading}>Welcome Back</h2>
+          {error && <p className={styles.errorMessage}>{error}</p>}
 
-            <div className={styles.inputWrapper}>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.inputField}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={styles.inputField}
-              />
-            </div>
+          <div className={styles.inputWrapper}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.userlogininput}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.userlogininput}
+            />
+          </div>
 
-            <button
-              onClick={handleLogin}
-              disabled={loading}
-              className={styles.userloginbutton}
-            >
-              {loading ? "Logging in..." : "Login"}
-            </button>
+          <button
+            onClick={handleLogin}
+            disabled={loading}
+            className={styles.userloginbutton}
+          >
+            {loading ? "Loading..." : "Login"}
+          </button>
 
-            <button
-              onClick={() => setShowForgotPassword(true)}
-              className={styles.forgotPasswordButton}
-            >
-              Forgot Password?
-            </button>
-          </>
-        ) : (
-          <ForgotPassword onResetSuccess={handleResetSuccess} />
-        )}
-      </div>
+          <a
+            onClick={() => setShowForgotPassword(true)}
+            className={styles.userforgetpasswordlink}
+          >
+            Forgot Password?
+          </a>
+        </>
+      ) : (
+        <ForgotPassword onResetSuccess={() => setShowForgotPassword(false)} />
+      )}
     </div>
   );
 };

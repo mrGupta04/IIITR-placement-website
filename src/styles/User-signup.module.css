@@ -1,297 +1,480 @@
 .signupPageContainer {
-  display: grid;
-  grid-template-columns: 1fr minmax(350px, 40vw) 1fr; 
-  min-height: 100vh;
-  background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
-  overflow: hidden;
-  position: relative;
-}
-
-/* Left Side - Animated Art Component */
-.signupArtContainer {
-  position: relative;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  min-width: 70vw;
+  background: rgb(39, 39, 39);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .signupBoxContainer {
-  grid-column: 2;
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
   width: 100%;
+  max-width: 1400px; /* Increased max-width for larger layout */
+  margin: 0 auto;
+  background: rgb(39, 39, 39);
   border-radius: 16px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.02),
+    0 10px 25px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-
 .signupHeading {
-  font-size: 2.8rem;
-  color: #2c3e50;
-  margin-bottom: 2rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 2rem 0 1rem;
+  margin: 0;
+  color: #f7f6f6;
   position: relative;
-  display: inline-block;
-  background: linear-gradient(45deg, #6a11cb, #2575fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.signupHeading::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
 }
 
 .signupForm {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.2rem;
-  position: relative;
+  gap: 1rem;
+  padding: 0 3rem 3rem;
 }
 
-/* Form Elements Styling */
-.signupInput, .signupTextarea {
-  padding: .9rem;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  color: #2c3e50;
+/* Input Fields */
+.signupInput, .signupTextarea, .signupSelect {
+  padding: 0.85rem .8rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #334155;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #f8fafc;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.signupInput:focus, .signupTextarea:focus {
+.signupInput:focus, .signupTextarea:focus, .signupSelect:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #6a11cb, 0 8px 20px rgba(106, 17, 203, 0.2);
-  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+  background-color: white;
+}
+
+.signupInput::placeholder {
+  color: #94a3b8;
+  opacity: 1;
 }
 
 .signupTextarea {
   grid-column: span 2;
   min-height: 120px;
   resize: vertical;
+  line-height: 1.5;
 }
 
+/* Select Field Styling */
+.signupSelect {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.1em;
+}
 
+/* File Upload Styling */
 .fileUploadContainer {
   grid-column: span 2;
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .customFileInput {
   flex: 1;
   position: relative;
-  border: 2px dashed #6a11cb;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(106, 17, 203, 0.04), rgba(37, 117, 252, 0.04));
-  cursor: pointer;
-  transition: all 0.3s ease;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 1.75rem 1rem;
   text-align: center;
-  padding: 0.8rem; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100px; 
+  transition: all 0.25s ease;
+  background-color: #f8fafc;
+  cursor: pointer;
 }
 
 .customFileInput:hover {
-  background: rgba(106, 17, 203, 0.08);
-  transform: translateY(-2px); 
-  border-color: #2575fc;
+  border-color: #93c5fd;
+  background-color: #f0f9ff;
 }
 
-
 .fileLabel {
-  font-size: 1rem;
-  color: #6a11cb;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
+  color: #3b82f6;
+  font-weight: 500;
+  cursor: pointer;
+  gap: 0.5rem;
 }
 
+.fileLabel svg {
+  font-size: 1.5rem;
+}
 
 .fileName {
-  margin-top: 0.5rem; 
-  font-size: 0.85rem; 
-  color: #2c3e50;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: #64748b;
   word-break: break-word;
-  text-align: center;
-  font-weight: 500;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .fileInput {
   display: none;
 }
 
-.customFileInput::before {
-  display: block;
-  font-size: 0.95rem; 
-  color: #6a11cb;
-  font-weight: 600;
+.signupButtonContainer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
-
-
-@media (max-width: 768px) {
-  .fileUploadContainer {
-    flex-direction: column;
-  }
-
-  .customFileInput {
-    width: 100%;
-    min-height: 90px; 
-  }
-}
-
-
-
+/* Button Styling */
 .signupButton {
-  grid-column: span 2;
-  padding: 1.2rem;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  padding: 1.1rem;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: 10px;
+  font-size: 1rem;
   font-weight: 600;
+  width: 200px; /* Fixed width for both buttons */
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.15);
+  margin: 0; /* Remove existing margins */
 }
 
 .signupButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(106, 17, 203, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(59, 130, 246, 0.2);
+  background: linear-gradient(90deg, #2563eb, #4f46e5);
 }
 
+.signupButton:active {
+  transform: translateY(0);
+}
+
+.signupButton:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Error Message Styling */
 .signupErrorMessage {
   grid-column: span 2;
-  color: #ff4757;
-  text-align: center;
+  color: #dc2626;
+  background-color: #fee2e2;
   padding: 1rem;
   border-radius: 8px;
-  background: rgba(255, 71, 87, 0.1);
-  animation: errorShake 0.4s ease;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  border-left: 4px solid #dc2626;
 }
 
-@keyframes errorShake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .signupPageContainer {
-    grid-template-columns: 1fr;
-  }
-
-  .signupBoxContainer {
-    margin: 2rem;
-    padding: 2rem;
-  }
-
-  .signupArtContainer {
-    display: none;
-  }
-}
-
-/* Dynamic Sections Styling */
+/* Dynamic Sections */
 .dynamicSection {
   grid-column: span 2;
   margin-bottom: 1.5rem;
+  border: 1px solid #e2e8f0;
+  padding: 1.75rem;
+  border-radius: 12px;
+  background-color: #f8fafc;
 }
 
 .dynamicSectionLabel {
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  color: #1e293b;
+  margin-bottom: 1.25rem;
   display: block;
+  font-weight: 600;
 }
 
 .dynamicField {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  /* grid-template-columns: repeat(2, 1fr); */
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dynamicFieldColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
-  margin-bottom: 1rem;
+}
+
+.dynamicField:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .addButton {
-  padding: 0.8rem 1.5rem;
-  background: #6a11cb;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);;
   color: white;
   border: none;
   border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
 }
 
 .addButton:hover {
-  background: #2575fc;
-  transform: translateY(-2px);
+  background-color: #2563eb;
+  transform: translateY(-1px);
 }
 
-/* Skills Container Styling */
+/* Skills Container */
 .skillsContainer {
   grid-column: span 2;
   margin-bottom: 1.5rem;
 }
 
 .skillsLabel {
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  color: #f7f7f8;
+  margin-bottom: 1rem;
   display: block;
+  font-weight: 600;
 }
 
 .addSkillsBox {
-  padding: 1rem;
-  border: 2px dashed #6a11cb;
-  border-radius: 8px;
-  background: rgba(106, 17, 203, 0.05);
+  padding: 0.9rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: #f8fafc;
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  color:#0f0c29;
+  transition: all 0.2s ease;
+  color: #3b82f6;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: auto;
 }
 
 .addSkillsBox:hover {
-  background: rgba(106, 17, 203, 0.1);
-  transform: translateY(-2px);
+  background-color: #eff6ff;
+  border-color: #93c5fd;
 }
 
 .selectedSkillsBox {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
 }
 
 .selectedSkill {
   padding: 0.5rem 1rem;
-  background: #6a11cb;
-  color: white;
-  border-radius: 8px;
-  display: flex;
+  background-color: #e0e7ff;
+  color: #3730a3;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .removeSkill {
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  color: #4f46e5;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+}
+
+.removeSkill:hover {
+  color: #dc2626;
+  transform: scale(1.1);
 }
 
 .dropdown {
   margin-top: 1rem;
-  color:#0f0c29;
+  z-index: 10;
+  color:#1a1a1a;
+}
+
+/* Responsive Design - Mobile First Approach */
+@media (max-width: 768px) {
+  .signupPageContainer {
+    padding: 1rem;
+    align-items: flex-start;
+  }
+
+  .signupBoxContainer {
+    border-radius: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .signupForm {
+    grid-template-columns: 1fr;
+    padding: 0 1rem 1.5rem;
+    gap: 1rem;
+  }
+
+  .signupInput,
+  .signupTextarea,
+  .signupSelect,
+  .fileUploadContainer,
+  .signupButton,
+  .signupErrorMessage,
+  .skillsContainer,
+  .dynamicSection,
+  .dynamicField {
+    grid-column: 1 !important;
+    width: 100%;
+  }
+
+  .dynamicField {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .fileUploadContainer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .signupHeading {
+    font-size: 1.8rem;
+    padding: 1rem 0 0.5rem;
+  }
+
+  .signupButton,
+  .addButton {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+  .signupButtonContainer {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .signupButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .signupPageContainer {
+    padding: 0;
+  }
+
+  .signupHeading {
+    font-size: 1.6rem;
+    padding: 1rem 0 0.25rem;
+  }
+
+  .signupForm {
+    padding: 0 0.75rem 1rem;
+  }
+
+  .signupInput,
+  .signupTextarea,
+  .signupSelect {
+    padding: 0.75rem;
+  }
+}
+
+/* Desktop styles (1200px and up) - New 4-column layout */
+@media (min-width: 1200px) {
+  .signupForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 0 2rem 1rem;
+  }
+
+  .leftContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two sub-columns */
+    gap: 1.5rem;
+  }
+  .rightContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .formColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Column 1: Basic info */
+  .formColumn:nth-child(1) {
+    grid-column: 1;
+  }
+
+  /* Column 2: Social links + file uploads */
+  .formColumn:nth-child(2) {
+    grid-column: 2;
+  }
+
+  .formColumn:nth-child(3),
+  .formColumn:nth-child(4) {
+    width: 100%;
+  }
+
+  /* Make the signup button span all columns */
+  .signupButtonContainer {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+  }
+
+  .signupInput, .signupTextarea, .signupSelect {
+    margin-bottom: 0px;
+  }
+
+  /* Adjust specific elements to fit the new layout */
+  .fileUploadContainer {
+    flex-direction: column;
+  }
+
+  .dynamicSection, 
+  .skillsContainer {
+    margin-bottom: 0;
+  }
+
+  .dynamicField {
+    grid-template-columns: 1fr;
+  }
 }
