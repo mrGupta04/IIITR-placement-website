@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
   min-height: 100vh;
   background: radial-gradient(circle at 10% 20%, #0f172a, #1e293b);
   font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
@@ -47,10 +48,23 @@
   text-align: center;
   line-height: 1.7;
   font-weight: 300;
+=======
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+>>>>>>> 724a06765d4068411205300c7ab157599a114d58
 }
 
 .buttons {
   display: flex;
+<<<<<<< HEAD
   gap: 1.5rem;
   margin-top: 3rem;
 }
@@ -223,3 +237,90 @@
 .floating {
   animation: float 6s ease-in-out infinite;
 }
+=======
+  gap: 1rem;
+  margin-top: 20px;
+}
+
+.button {
+  background: linear-gradient(135deg, #2563eb, #7490eb);
+  color: #ffffff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.logoutButton {
+  background: #ef4444;
+  color: #ffffff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logoutButton:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px 8px 12px;
+  margin: 15px 0;
+  background-color: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.backButton:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.backButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.backButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Optional: Add an arrow icon using pseudo-element */
+.backButton::before {
+  content: "←";
+  margin-right: 6px;
+  font-size: 12px;
+}
+>>>>>>> 724a06765d4068411205300c7ab157599a114d58

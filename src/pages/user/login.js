@@ -29,8 +29,8 @@ const Login = ({ setLoginsign, setUser }) => {
       if (!response.ok) throw new Error(userData.message || "Login failed");
 
       localStorage.setItem("User", JSON.stringify(userData.user));
-      setUser(userData.user);
-      setLoginsign(true);
+      setUser(userData.user); // Update user state in parent
+      setLoginsign(true); // Set login status to true
     } catch (error) {
       setError(error.message || "An error occurred. Please try again.");
     } finally {

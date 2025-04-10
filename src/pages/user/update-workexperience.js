@@ -1,168 +1,189 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
-import styles from "../../styles/UpdateWorkExperience.module.css"; // Import CSS module
+import styles from "../../styles/UpdateWorkExperience.module.css";
 
-// InputField component (Reusable Input)
-const InputField = ({ name, type, placeholder, value, onChange }) => (
-  <input
-    type={type}
-    name={name}
-    placeholder={placeholder}
-    value={value}
-    onChange={onChange}
-    className={styles.inputField}
-  />
-);
-
-export default function UpdateWorkExperience() {
+export default function UpdateProjects() {
   const router = useRouter();
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Initialize work experience state
-  const [workExperience, setWorkExperience] = useState([]);
-  const [loading, setLoading] = useState(false); // For handling loading state
-
-  // Load user data from localStorage or from API
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("User"));
-    if (userData?.workExperience) {
-      setWorkExperience(userData.workExperience);
+    const user = JSON.parse(localStorage.getItem("User"));
+    if (user?.projects) {
+      setProjects(user.projects);
     } else {
-      loadWorkExperienceData();
+      setProjects([{ 
+        title: "", 
+        skills: "", 
+        date: "", 
+        description: "",
+        link: "" 
+      }]);
     }
   }, []);
 
-  // Function to load work experience data from API
-  const loadWorkExperienceData = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get("/api/user/work-experience");
-      setWorkExperience(response.data || []);
-    } catch (error) {
-      console.error("Error loading work experience data", error);
-    } finally {
-      setLoading(false);
-    }
+  const addProject = () => {
+    setProjects([...projects, { 
+      title: "", 
+      skills: "", 
+      date: "", 
+      description: "",
+      link: ""
+    }]);
   };
 
-  // Add new work experience
-  const addWorkExperience = () => {
-    setWorkExperience([
-      ...workExperience,
-      { company: "", jobTitle: "", duration: "", description: "" },
-    ]);
+  const handleChange = (e, index) => {
+    const updatedProjects = [...projects];
+    updatedProjects[index][e.target.name] = e.target.value;
+    setProjects(updatedProjects);
   };
 
-  // Handle change in any work experience field
-  const handleWorkExperienceChange = (e, index) => {
-    const updatedExperience = [...workExperience];
-    updatedExperience[index][e.target.name] = e.target.value;
-    setWorkExperience(updatedExperience);
+  const removeProject = (index) => {
+    setProjects(projects.filter((_, i) => i !== index));
   };
 
-  // Delete work experience entry
-  const handleDelete = (index) => {
-    setWorkExperience(workExperience.filter((_, i) => i !== index));
-  };
-
-  // Cancel and go back
-  const handleCancel = () => {
-    router.back();
-  };
-
-  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
+    
     try {
-      setLoading(true);
-      const email = JSON.parse(localStorage.getItem("User"))?.email;
-      if (!email) throw new Error("User not found");
-
-      const response = await axios.post("/api/auth/user/updateworkexperience", {
-        email,
-        workExperience,
+      const user = JSON.parse(localStorage.getItem("User"));
+      const response = await fetch("/api/user/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          email: user.email, 
+          projects 
+        }),
       });
 
-      if (response.status === 200) {
-        const userData = JSON.parse(localStorage.getItem("User"));
-        userData.workExperience = workExperience;
-        localStorage.setItem("User", JSON.stringify(userData));
-        router.push("/update");
-      }
-    } catch (error) {
-      console.error("Error updating work experience", error);
+      if (!response.ok) throw new Error("Update failed");
+      
+      const data = await response.json();
+      localStorage.setItem("User", JSON.stringify(data.user));
+      router.push("/profile");
+    } catch (err) {
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className={styles.pageContainer}>
-      <h2 className={styles.heading}>Update Work Experience</h2>
-      {loading ? (
-        <p className={styles.loadingText}>Loading...</p>
-      ) : (
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {workExperience.map((exp, index) => (
-            <div key={index} className={styles.workExperienceEntry}>
-              <InputField
-                name="company"
-                type="text"
-                placeholder="Company Name"
-                value={exp.company}
-                onChange={(e) => handleWorkExperienceChange(e, index)}
-              />
-              <InputField
-                name="jobTitle"
-                type="text"
-                placeholder="Job Title"
-                value={exp.jobTitle}
-                onChange={(e) => handleWorkExperienceChange(e, index)}
-              />
-              <InputField
-                name="duration"
-                type="text"
-                placeholder="Duration"
-                value={exp.duration}
-                onChange={(e) => handleWorkExperienceChange(e, index)}
-              />
-              <InputField
-                name="description"
-                type="text"
-                placeholder="Job Description"
-                value={exp.description}
-                onChange={(e) => handleWorkExperienceChange(e, index)}
-              />
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <header className={styles.header}>
+          <h1>Update Your Projects</h1>
+          <p>Showcase your best work to potential employers</p>
+        </header>
 
-              <button
-                type="button"
-                onClick={() => handleDelete(index)}
-                className={styles.deleteButton}
-              >
-                Delete
-              </button>
+        {error && <div className={styles.error}>{error}</div>}
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+          {projects.map((project, index) => (
+            <div key={index} className={styles.projectCard}>
+              <div className={styles.cardHeader}>
+                <h3>Project {index + 1}</h3>
+                <button 
+                  type="button" 
+                  onClick={() => removeProject(index)}
+                  className={styles.deleteBtn}
+                  aria-label="Remove project"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className={styles.formGroup}>
+                <label>Project Title</label>
+                <input
+                  type="text"
+                  name="title"
+                  value={project.title}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="My Awesome Project"
+                  required
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label>Skills Used</label>
+                <input
+                  type="text"
+                  name="skills"
+                  value={project.skills}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="React, Node.js, MongoDB"
+                  required
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label>Project Date</label>
+                <input
+                  type="text"
+                  name="date"
+                  value={project.date}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Jan 2023 - Present"
+                  required
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label>Project Link</label>
+                <input
+                  type="url"
+                  name="link"
+                  value={project.link}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="https://myproject.com"
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label>Description</label>
+                <textarea
+                  name="description"
+                  value={project.description}
+                  onChange={(e) => handleChange(e, index)}
+                  placeholder="Describe what you built and your contributions..."
+                  rows={4}
+                  required
+                />
+              </div>
             </div>
           ))}
 
-          <button
-            type="button"
-            onClick={addWorkExperience}
-            className={styles.addButton}
-          >
-            Add New Work Experience
-          </button>
-
-          <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.submitButton}>
-              Submit
+          <div className={styles.actions}>
+            <button 
+              type="button" 
+              onClick={addProject}
+              className={styles.secondaryBtn}
+            >
+              + Add Another Project
             </button>
-            <button type="button" onClick={handleCancel} className={styles.cancelButton}>
-              Cancel
-            </button>
+            
+            <div className={styles.mainActions}>
+              <button 
+                type="button" 
+                onClick={() => router.back()}
+                className={styles.outlineBtn}
+              >
+                Cancel
+              </button>
+              <button 
+                type="submit" 
+                disabled={loading}
+                className={styles.primaryBtn}
+              >
+                {loading ? "Saving..." : "Save Projects"}
+              </button>
+            </div>
           </div>
         </form>
-      )}
+      </div>
     </div>
   );
 }

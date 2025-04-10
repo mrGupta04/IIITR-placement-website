@@ -28,7 +28,6 @@ export const config = {
   },
 };
 
-// API route handler
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
@@ -42,7 +41,22 @@ export default async function handler(req, res) {
 
     try {
       // Manually parse form data after file upload
-      const { email, name, mobileno, batch, rollno, department, cgpa, password } = req.body;
+      const { 
+        email,
+        name,
+        mobileno,
+        batch,
+        rollno,
+        department,
+        cgpa,
+        password,
+        linkedin,
+        github,
+        leetcode,
+        preferredLocation,
+        jobType,
+        leadership
+      } = req.body;
 
       // Validate required fields
       if (!email) {
@@ -59,14 +73,20 @@ export default async function handler(req, res) {
         return res.status(404).json({ message: "User not found." });
       }
 
-      // Prepare updated data
+      // Prepare updated data with all possible fields
       const updateData = {
-        name,
-        mobileno,
-        batch,
-        rollno,
-        department,
-        cgpa: parseFloat(cgpa),
+        ...(name && { name }),
+        ...(mobileno && { mobileno }),
+        ...(batch && { batch }),
+        ...(rollno && { rollno }),
+        ...(department && { department }),
+        ...(cgpa && { cgpa: parseFloat(cgpa) }),
+        ...(linkedin && { linkedin }),
+        ...(github && { github }),
+        ...(leetcode && { leetcode }),
+        ...(preferredLocation && { preferredLocation }),
+        ...(jobType && { jobType }),
+        ...(leadership && { leadership }),
       };
 
       // If a new password is provided, hash it
@@ -75,13 +95,13 @@ export default async function handler(req, res) {
       }
 
       // If a new profilepic is provided, update the user's profile picture
-      if (req.files.profilepic) {
+      if (req.files?.profilepic) {
         const profilePicPath = `/uploads/${req.files.profilepic[0].filename}`;
         updateData.profilepic = profilePicPath;
       }
 
       // If a new resume is provided, update the user's resume
-      if (req.files.resume) {
+      if (req.files?.resume) {
         const resumePath = `/uploads/${req.files.resume[0].filename}`;
         updateData.resume = resumePath;
       }
@@ -104,12 +124,15 @@ export default async function handler(req, res) {
 
       const token = jwt.sign({ id: user._id, email }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
+      // Get the updated user data
+      const updatedUser = await db.collection("users").findOne({ email });
+
       // Respond with success message and updated user data
       return res.status(200).json({
         message: "User updated successfully.",
         token,
-        user: { ...user, ...updateData },
-        redirectUrl: "/dashboard",  // Add the redirect URL here
+        user: updatedUser,
+        redirectUrl: "/dashboard",
       });
     } catch (error) {
       console.error("Update error:", error);

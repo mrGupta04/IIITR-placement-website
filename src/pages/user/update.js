@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import UpdateProjects from "./update-project";
 import UpdateLeadership from "./update-leadership";
 import UpdateWorkExperience from "./update-workexperience";
+import styles from "../../styles/Userprofileupdate.module.css";
 
 export default function Update({ onUpdateSuccess }) {
   const router = useRouter();
@@ -30,10 +31,7 @@ export default function Update({ onUpdateSuccess }) {
   const [resume, setResume] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const [showProjects, setShowProjects] = useState(false);
-  const [showLeadership, setShowLeadership] = useState(false);
-  const [showWorkExperience, setShowWorkExperience] = useState(false);
+  const [activeSection, setActiveSection] = useState("personal");
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("User"));
@@ -84,6 +82,7 @@ export default function Update({ onUpdateSuccess }) {
       if (!res.ok) throw new Error(data.message || "Update failed.");
 
       localStorage.setItem("User", JSON.stringify(data.user));
+      
 
       if (onUpdateSuccess) {
         onUpdateSuccess(data.user);
@@ -97,78 +96,129 @@ export default function Update({ onUpdateSuccess }) {
     }
   };
 
+  const renderSection = () => {
+    switch (activeSection) {
+      case "projects":
+        return <UpdateProjects onCancel={() => setActiveSection("personal")} />;
+      case "leadership":
+        return <UpdateLeadership onCancel={() => setActiveSection("personal")} />;
+      case "work":
+        return <UpdateWorkExperience onCancel={() => setActiveSection("personal")} />;
+      default:
+        return (
+          <>
+            <h2 className={styles.sectionTitle}>Personal Information</h2>
+            {error && <div className={styles.errorMessage}>{error}</div>}
+            <form onSubmit={handleSubmit} className={styles.personalForm}>
+              <div className={styles.formGrid}>
+                {[
+                  { label: "Name", name: "name" },
+                  { label: "Mobile No", name: "mobileno" },
+                  { label: "Batch", name: "batch" },
+                  { label: "Roll No", name: "rollno" },
+                  { label: "Department", name: "department" },
+                  { label: "CGPA", name: "cgpa" },
+                  { label: "LinkedIn", name: "linkedin" },
+                  { label: "GitHub", name: "github" },
+                  { label: "LeetCode", name: "leetcode" },
+                  { label: "Preferred Location", name: "preferredLocation" },
+                  { label: "Job Type", name: "jobType" },
+                ].map(({ label, name, type = "text" }) => (
+                  <div className={styles.formGroup} key={name}>
+                    <label className={styles.inputLabel}>{label}</label>
+                    <input
+                      type={type}
+                      name={name}
+                      value={formData[name]}
+                      onChange={handleChange}
+                      className={styles.formInput}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.fileUploadGroup}>
+                <div className={styles.fileUpload}>
+                  <label className={styles.fileUploadLabel}>
+                    <span>Profile Picture</span>
+                    <input
+                      type="file"
+                      name="profilepic"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className={styles.fileInput}
+                    />
+                    <span className={styles.fileUploadButton}>Choose File</span>
+                    {profilepic && <span className={styles.fileName}>{profilepic.name}</span>}
+                  </label>
+                </div>
+
+                <div className={styles.fileUpload}>
+                  <label className={styles.fileUploadLabel}>
+                    <span>Resume (PDF)</span>
+                    <input
+                      type="file"
+                      name="resume"
+                      accept="application/pdf"
+                      onChange={handleFileChange}
+                      className={styles.fileInput}
+                    />
+                    <span className={styles.fileUploadButton}>Choose File</span>
+                    {resume && <span className={styles.fileName}>{resume.name}</span>}
+                  </label>
+                </div>
+              </div>
+
+              <button type="submit" disabled={loading} className={styles.submitButton}>
+                {loading ? (
+                  <>
+                    <span className={styles.spinner}></span> Updating...
+                  </>
+                ) : (
+                  "Save Changes"
+                )}
+              </button>
+            </form>
+          </>
+        );
+    }
+  };
+
   return (
-    <div className="update-page-container">
-      <div className="update-box-container">
-        <h2 className="update-heading">Update Account</h2>
-        {error && <p className="update-error-message">{error}</p>}
-        <form onSubmit={handleSubmit} className="update-form">
-          {[ 
-            { label: "Name", name: "name" },
-            { label: "Email", name: "email", type: "email" },
-            { label: "Mobile No", name: "mobileno" },
-            { label: "Batch", name: "batch" },
-            { label: "Roll No", name: "rollno" },
-            { label: "Department", name: "department" },
-            { label: "CGPA", name: "cgpa" },
-            { label: "LinkedIn", name: "linkedin" },
-            { label: "GitHub", name: "github" },
-            { label: "LeetCode", name: "leetcode" },
-            { label: "Preferred Location", name: "preferredLocation" },
-            { label: "Job Type", name: "jobType" },
-          ].map(({ label, name, type = "text" }) => (
-            <div key={name}>
-              <label>{label}:</label>
-              <input type={type} name={name} value={formData[name]} onChange={handleChange} />
-            </div>
-          ))}
-          
-          <div>
-            <label>Profile Picture:</label>
-            <input type="file" name="profilepic" accept="image/*" onChange={handleFileChange} />
-          </div>
-          
-          <div>
-            <label>Resume:</label>
-            <input type="file" name="resume" accept="application/pdf" onChange={handleFileChange} />
-          </div>
-          
-          <button type="submit" disabled={loading} className="update-button">
-            {loading ? "Updating..." : "Submit Personal Detail"}
-          </button>
-        </form>
-
-        <div className="additional-sections">
-          <button onClick={() => setShowProjects(!showProjects)} className="update-button">
-            Update Projects
-          </button>
-          {showProjects && (
-            <>
-              <UpdateProjects />
-              <button onClick={() => setShowProjects(false)} className="update-button">Cancel</button>
-            </>
-          )}
-
-          <button onClick={() => setShowLeadership(!showLeadership)} className="update-button">
-            Update Leadership
-          </button>
-          {showLeadership && (
-            <>
-              <UpdateLeadership />
-              <button onClick={() => setShowLeadership(false)} className="update-button">Cancel</button>
-            </>
-          )}
-
-          <button onClick={() => setShowWorkExperience(!showWorkExperience)} className="update-button">
-            Add Work Experience
-          </button>
-          {showWorkExperience && (
-            <>
-              <UpdateWorkExperience />
-              <button onClick={() => setShowWorkExperience(false)} className="update-button">Cancel</button>
-            </>
-          )}
+    <div className={styles.container}>
+      <div className={styles.sidebar}>
+        <div 
+          className={`${styles.sidebarItem} ${activeSection === "personal" ? styles.active : ""}`}
+          onClick={() => setActiveSection("personal")}
+        >
+          <span className={styles.icon}>👤</span>
+          <span>Personal Info</span>
         </div>
+        <div 
+          className={`${styles.sidebarItem} ${activeSection === "projects" ? styles.active : ""}`}
+          onClick={() => setActiveSection("projects")}
+        >
+          <span className={styles.icon}>📁</span>
+          <span>Projects</span>
+        </div>
+        <div 
+          className={`${styles.sidebarItem} ${activeSection === "leadership" ? styles.active : ""}`}
+          onClick={() => setActiveSection("leadership")}
+        >
+          <span className={styles.icon}>🌟</span>
+          <span>Leadership</span>
+        </div>
+        <div 
+          className={`${styles.sidebarItem} ${activeSection === "work" ? styles.active : ""}`}
+          onClick={() => setActiveSection("work")}
+        >
+          <span className={styles.icon}>💼</span>
+          <span>Work Experience</span>
+        </div>
+      </div>
+
+      <div className={styles.mainContent}>
+        {renderSection()}
       </div>
     </div>
   );

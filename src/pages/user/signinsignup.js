@@ -82,6 +82,7 @@ const Signinsignup = ({ setUser, setLoginsign }) => {
   }
 
   return (
+<<<<<<< HEAD
     <div className={styles.container}>
       {isLogin ? (
         <>
@@ -113,6 +114,27 @@ const Signinsignup = ({ setUser, setLoginsign }) => {
             </button>
           </div>
         </>
+=======
+    <div className={styles.signupsignincontainer}>
+      <div className={styles.signupsignbuttonContainer}>
+        <button
+          className={`${styles.signupButton} ${!isLogin ? styles.active : ""}`}
+          onClick={() => setIsLogin(false)}
+        >
+          Signup
+        </button>
+        <button
+          className={`${styles.loginButton} ${isLogin ? styles.active : ""}`}
+          onClick={() => setIsLogin(true)}
+        >
+          Login
+        </button>
+      </div>
+      {isLogin ? (
+        <Login setUser={setUser} setLoginsign={setLoginsign} />
+      ) : (
+        <Signup setUser={setUser} setLoginsign={setLoginsign} />
+>>>>>>> 724a06765d4068411205300c7ab157599a114d58
       )}
     </div>
   );

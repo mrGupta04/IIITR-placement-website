@@ -143,12 +143,10 @@ export default function Signup({ setUser, setLoginsign }) {
 
     if (profilepic instanceof File) data.append("profilepic", profilepic);
     if (resume instanceof File) data.append("resume", resume);
-
-    data.append("skills", JSON.stringify(selectedSkills.filter(skill => skill.trim() !== "")));
+    data.append("skills", JSON.stringify(selectedSkills.map(skill => skill.value)));
     data.append("project", JSON.stringify(project || []));
     data.append("workExperience", JSON.stringify(workExperience || []));
     data.append("leadership", JSON.stringify(leadership || []));
-
     try {
       const res = await fetch("/api/auth/user/signup", {
         method: "POST",
