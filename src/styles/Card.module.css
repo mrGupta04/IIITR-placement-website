@@ -28,12 +28,7 @@
 }
 
 /* Front and Back Common Styles */
-<<<<<<< HEAD
-.front,
-.back {
-=======
 .front, .back {
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
   position: absolute;
   width: 100%;
   height: 100%;
@@ -45,11 +40,7 @@
 
 /* Front Side */
 .front {
-<<<<<<< HEAD
-  background: linear-gradient(135deg,#00274d 0%,#0251a0 40%,#036fdc 70%,#1a4b8c 90%,#266ecd 100%);
-=======
   background: linear-gradient(135deg, var(--secondary), #6e8efb);
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
   color: white;
   flex-direction: column;
   align-items: center;
@@ -98,7 +89,6 @@
   text-align: center;
 }
 
-<<<<<<< HEAD
 /* If inheritance isn't working, set colors directly */
 .back h5,
 .back .info,
@@ -111,8 +101,6 @@
   color: white;
 }
 
-=======
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
 .back h5 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
@@ -156,34 +144,24 @@
   filter: brightness(0) invert(1);
 }
 
-<<<<<<< HEAD
 .details {
   color: rgba(255, 255, 255, 0.9);
   /* Test with !important */
 }
 
 
-=======
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .small {
     height: 260px;
   }
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
   .image {
     width: 100px;
     height: 100px;
   }
-<<<<<<< HEAD
 
-=======
   
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
   .name {
     font-size: 1.2rem;
   }
@@ -196,25 +174,16 @@
   .card {
     perspective: none;
   }
-<<<<<<< HEAD
+
 
   .inner {
     transform-style: flat;
   }
-
-=======
-  .inner {
-    transform-style: flat;
-  }
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
   .flipped .back {
     transform: rotateY(0);
     position: relative;
   }
-<<<<<<< HEAD
 
-=======
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
   .flipped .front {
     display: none;
   }

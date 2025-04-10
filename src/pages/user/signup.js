@@ -285,35 +285,35 @@ export default function Signup({ setUser, setLoginsign }) {
             )}
           />
 
-<div className={styles.fileUploadContainer}>
-  <div className={styles.customFileInput}>
-    <label htmlFor="profilePic" className={styles.fileLabel}>
-      📸 Choose Profile Pic
-      <input
-        id="profilePic"
-        type="file"
-        accept="image/*"
-        onChange={(e) => setProfilepic(e.target.files[0])}
-        className={styles.fileInput}
-      />
-    </label>
-    {/* {profilePic && <p className={styles.fileName}>{profilePic.name}</p>} */}
-  </div>
+          <div className={styles.fileUploadContainer}>
+            <div className={styles.customFileInput}>
+              <label htmlFor="profilePic" className={styles.fileLabel}>
+                📸 Choose Profile Pic
+                <input
+                  id="profilePic"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setProfilepic(e.target.files[0])}
+                  className={styles.fileInput}
+                />
+              </label>
+              {/* {profilePic && <p className={styles.fileName}>{profilePic.name}</p>} */}
+            </div>
 
-  <div className={styles.customFileInput}>
-    <label htmlFor="resume" className={styles.fileLabel}>
-      📄 Upload Resume
-      <input
-        id="resume"
-        type="file"
-        accept=".pdf,.doc,.docx"
-        onChange={(e) => setResume(e.target.files[0])}
-        className={styles.fileInput}
-      />
-    </label>
-    {resume && <p className={styles.fileName}>{resume.name}</p>}
-  </div>
-</div>
+            <div className={styles.customFileInput}>
+              <label htmlFor="resume" className={styles.fileLabel}>
+                📄 Upload Resume
+                <input
+                  id="resume"
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={(e) => setResume(e.target.files[0])}
+                  className={styles.fileInput}
+                />
+              </label>
+              {resume && <p className={styles.fileName}>{resume.name}</p>}
+            </div>
+          </div>
 
 
           <InputField name="preferredLocation" type="text" placeholder="Preferred Location" value={formData.preferredLocation} onChange={handleChange} />

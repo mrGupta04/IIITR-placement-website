@@ -6,7 +6,7 @@ export const config = {
   },
 };
 
-// Function to parse JSON body manually
+
 async function parseJsonBody(req) {
   return new Promise((resolve, reject) => {
     let body = "";
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     const { db } = await connectDB();
 
     if (req.method === "GET") {
-      // ✅ Handle GET Request (Fetch Jobs by Email)
+
       const { email } = req.query;
 
       if (!email) {
@@ -44,10 +44,10 @@ export default async function handler(req, res) {
       }
 
       return res.status(200).json({ jobs });
-    } 
-    
+    }
+
     else if (req.method === "POST") {
-      // ✅ Handle POST Request (Add a Job)
+
       const body = await parseJsonBody(req);
       const { jobType, title, email, location, salary, description, duration, status, skills, eligibleBatch, eligibleBranch } = body;
 
@@ -72,8 +72,8 @@ export default async function handler(req, res) {
 
       const result = await db.collection("Job").insertOne(JobData);
       return res.status(201).json({ message: "Job added successfully.", jobId: result.insertedId });
-    } 
-    
+    }
+
     else {
       return res.status(405).json({ message: "Method Not Allowed" });
     }

@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import Image from 'next/image'; // Add this import
-<<<<<<< HEAD
-import styles from "../styles/card.module.css";
-=======
 import styles from "../styles/Card.module.css";
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
 import { FaLinkedin, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 const Card = ({ image, name, position, idno, branch, info, small }) => {
@@ -21,15 +17,10 @@ const Card = ({ image, name, position, idno, branch, info, small }) => {
                 {/* Front Side */}
                 <div className={styles.front}>
                     <div className={styles.imageContainer}>
-<<<<<<< HEAD
-                        <Image
-                            src={image}
-                            alt={name}
-=======
+                       
                         <Image 
                             src={image} 
                             alt={name} 
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
                             width={150}
                             height={150}
                             className={styles.image}
