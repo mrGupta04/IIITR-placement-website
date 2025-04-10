@@ -1,73 +1,422 @@
 /* Scard.module.css */
 
 .card {
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 25px;
-  font-family: 'Helvetica Neue', sans-serif;
-  color: #333;
-  transition: transform 0.3s, box-shadow 0.3s;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 2rem;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
-.profilePicContainer {
+.cardHeader {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color: white;
 }
 
 .profilePic {
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #0073e6;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  margin-right: 1.5rem;
 }
 
-.studentName {
-  font-size: 1.8em;
-  margin-bottom: 15px;
-  color: #0073e6;
-  text-align: center;
-}
-
-.info {
-  margin: 8px 0;
-  line-height: 1.6;
-}
-
-.link {
-  color: #0073e6;
-  text-decoration: none;
+.profilePlaceholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.5rem;
+  color: white;
+  font-size: 2rem;
   font-weight: bold;
 }
 
+.headerText {
+  flex: 1;
+}
+
+.studentName {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.studentTitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.9375rem;
+  opacity: 0.9;
+}
+
+.ratingBadge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ratingBadge svg {
+  margin-right: 0.25rem;
+}
+
+.cardBody {
+  padding: 1.5rem;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  font-size: 0.9375rem;
+}
+
+.infoItem svg {
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.link {
+  color: #4f8ef7;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+
 .link:hover {
+  color: #1c2b49;
   text-decoration: underline;
 }
 
-.section {
-  margin-top: 25px;
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.125rem;
+  color: #1c2b49;
 }
 
-.sectionTitle {
-  font-size: 1.4em;
-  margin-bottom: 10px;
-  color: #0073e6;
+.sectionTitle svg {
+  margin-right: 0.5rem;
+}
+
+.skillsSection {
+  margin-bottom: 1.5rem;
+}
+
+.skillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.skillPill {
+  background: #e0e7ff;
+  color: #4f8ef7;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.socialLinks {
+  margin-bottom: 1.5rem;
+}
+
+.linkContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.875rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #1c2b49;
+  transition: all 0.2s ease;
+}
+
+.socialLink:hover {
+  background: #e0e7ff;
+  transform: translateY(-2px);
+}
+
+.socialLink svg {
+  margin-right: 0.5rem;
+}
+
+.resumeSection {
+  margin-bottom: 1.5rem;
+}
+
+.resumeButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: #f0f4ff;
+  color: #4f8ef7;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.resumeButton:hover {
+  background: #e0e7ff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(79, 142, 247, 0.2);
+}
+
+.resumeButton svg {
+  margin-right: 0.5rem;
+}
+
+.cardFooter {
+  border-top: 1px solid #f1f5f9;
+  padding: 1.5rem;
+  background: #f8fafc;
 }
 
 .list {
-  list-style-type: disc;
-  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .listItem {
-  margin-bottom: 15px;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.itemTitle {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  color: #1c2b49;
+}
+
+.itemSubtitle {
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.itemSkill {
+  background: #e0e7ff;
+  color: #4f8ef7;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.itemDate,
+.itemDuration {
+  font-size: 0.8125rem;
+}
+
+.itemDescription {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .cardHeader {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+
+  .profilePic,
+  .profilePlaceholder {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    width: 100px;
+    height: 100px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .linkContainer {
+    flex-direction: column;
+  }
+
+  .socialLink {
+    justify-content: center;
+  }
+}
+@media (max-width: 639px) {
+  .card {
+    border-radius: 10px;
+    margin: 0 auto 1rem;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+
+  .profilePic,
+  .profilePlaceholder {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 0.75rem;
+  }
+
+  .studentName {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  .studentTitle {
+    font-size: 0.875rem;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .infoItem {
+    font-size: 0.875rem;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+    margin: 1rem 0 0.75rem;
+  }
+
+  .skillsContainer {
+    gap: 0.375rem;
+  }
+
+  .skillPill {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .linkContainer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .socialLink {
+    padding: 0.625rem;
+    font-size: 0.8125rem;
+    justify-content: center;
+  }
+
+  .resumeButton {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .cardFooter {
+    padding: 1rem;
+  }
+
+  .listItem {
+    padding: 0.75rem;
+  }
+
+  .itemTitle {
+    font-size: 0.9375rem;
+  }
+
+  .itemSubtitle {
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .itemDescription {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+}
+
+/* Tablet and larger screens (640px and up) */
+@media (min-width: 640px) {
+  .card {
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+  }
+
+  .cardHeader {
+    flex-direction: row;
+    text-align: left;
+    padding: 1.5rem;
+  }
+
+  .profilePic,
+  .profilePlaceholder {
+    width: 90px;
+    height: 90px;
+    margin: 0 1.25rem 0 0;
+  }
+
+  .infoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop screens (1024px and up) */
+@media (min-width: 1024px) {
+  .card {
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .profilePic,
+  .profilePlaceholder {
+    width: 100px;
+    height: 100px;
+  }
+
+  .infoGrid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .linkContainer {
+    flex-direction: row;
+  }
 }

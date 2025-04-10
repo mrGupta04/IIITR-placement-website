@@ -1,0 +1,60 @@
+.filterContainer {
+    position: relative;
+    width: 200px;
+    margin: 0 auto 2rem;
+  }
+  
+  .selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+  }
+  
+  .selector:hover {
+    border-color: #cbd5e0;
+  }
+  
+  .icon {
+    transition: transform 0.3s ease;
+    margin-left: 0.5rem;
+  }
+  
+  .rotated {
+    transform: rotate(180deg);
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    margin-top: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .option {
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .option:hover {
+    background: #f7fafc;
+  }
+  
+  .option.active {
+    background: #ebf4ff;
+    color: #4c51bf;
+    font-weight: 500;
+  }

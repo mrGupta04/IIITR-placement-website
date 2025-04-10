@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { FaUser, FaBars } from 'react-icons/fa';
+import { FaUser, FaBars, FaTimes } from 'react-icons/fa';
 import styles from '../styles/Header.module.css';
 
 const Header = () => {
@@ -13,43 +13,45 @@ const Header = () => {
           <Link href="/">Placement Portal</Link>
         </div>
 
-        
-
-        {/* Navigation Menu - Show only when menuOpen is true */}
+        {/* Navigation Menu */}
         <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
           <ul>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
             </li>
             <li>
-              <Link href="/jobs">Jobs</Link>
+              <Link href="/jobs" onClick={() => setMenuOpen(false)}>Jobs</Link>
             </li>
             <li>
-              <Link href="/recruiters">Recruiters</Link>
+              <Link href="/recruiters" onClick={() => setMenuOpen(false)}>Recruiters</Link>
             </li>
             <li>
-              <Link href="/Stats">Statistics</Link>
+              <Link href="/stats" onClick={() => setMenuOpen(false)}>Statistics</Link>
             </li>
             <li>
-              <Link href="/events">Events</Link>
+              <Link href="/alumni" onClick={() => setMenuOpen(false)}>Alumni</Link>
             </li>
             <li>
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
             </li>
           </ul>
         </nav>
 
         <div className={styles.actions}>
-          <Link href="/profile" className={styles.loginButton}>
-            <FaUser className={styles.userIcon} /> Profile
+          <Link href="/profile" className={styles.loginButton} onClick={() => setMenuOpen(false)}>
+            <FaUser className={styles.userIcon} /> 
           </Link>
 
-          {/* Hamburger Menu Icon */}
-          <button className={styles.menuToggle} onClick={() => setMenuOpen(!menuOpen)}>
-            <FaBars />
+         
+          <button 
+            className={styles.menuToggle} 
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
       </div>

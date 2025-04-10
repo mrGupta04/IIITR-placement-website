@@ -1,86 +1,244 @@
-/* Main container for the applied jobs */
-.appliedJobsContainer {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(300px, 1fr)); /* 3 jobs per row */
-    gap: 20px;
-    width: 100%; /* Ensures full width */
-    max-width: 100%;
+/* Container and Layout Styles */
+.container {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-}
-
-/* Job Card Styling */
-.jobCardWrapper {
+    padding: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      padding: 2rem 1rem;
+    }
+  }
+  
+  /* Header Styles */
+  .header {
     display: flex;
     flex-direction: column;
-    background: #fff;
-    color: black;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    width: 100%; /* Makes each job card take full width within its column */
-}
-
-.jobCardWrapper:hover {
-    transform: translateY(-5px);
-}
-
-/* Button Group Styling */
-.buttonGroup {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-top: 2px solid #ddd;
-}
-
-/* Buttons Styling */
-.appliedButton,
-.updateButton,
-.stopResponseButton {
-    flex: 1;
-    background-color: #0070f3;
-    color: #fff;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  .h1 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+  }
+  
+  .subtitle {
+    color: #666;
+    margin: 0.5rem 0 0;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+  
+  /* Button Styles */
+  .createButton,
+  .primaryButton,
+  .retryButton {
+    background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+    color: white;
     border: none;
+    padding: 0.75rem 1rem;
     border-radius: 8px;
-    padding: 12px;
-    font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
-}
-
-.appliedButton:hover {
-    background-color: #005bb5;
-}
-
-.updateButton {
-    background-color: #f39c12;
-}
-
-.updateButton:hover {
-    background-color: #d98208;
-}
-
-.stopResponseButton {
-    background-color: #e74c3c;
-}
-
-.stopResponseButton:hover {
-    background-color: #c0392b;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .appliedJobsContainer {
-        grid-template-columns: repeat(2, minmax(300px, 1fr)); /* 2 jobs per row on medium screens */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+  
+  @media (min-width: 768px) {
+    .createButton,
+    .primaryButton,
+    .retryButton {
+      width: auto;
+      padding: 0.75rem 1.5rem;
     }
-}
-
-@media (max-width: 768px) {
-    .appliedJobsContainer {
-        grid-template-columns: 1fr; /* 1 job per row on small screens */
+  }
+  
+  .createButton:hover,
+  .primaryButton:hover,
+  .retryButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 115, 255, 0.3);
+  }
+  
+  /* Jobs Grid Layout */
+  .jobsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .jobsGrid {
+      gap: 1.5rem;
     }
-}
+  }
+  
+  .jobCardWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Loading, Error, and Empty States */
+  .loadingContainer,
+  .errorState,
+  .emptyState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    padding: 1rem;
+  }
+  
+  .loadingSpinner,
+  .errorContent,
+  .emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 5px solid rgba(107, 115, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: #6b73ff;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .errorIcon {
+    width: 48px;
+    height: 48px;
+    background: #feeceb;
+    color: #ef4444;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+  }
+  
+  .errorMessage {
+    color: #666;
+    margin: 0.5rem 0;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+  
+  .retryButton {
+    background: #4a61ff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .retryButton:hover {
+    background: #3a51e0;
+  }
+  
+  .emptyIllustration {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Action Buttons */
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  @media (min-width: 600px) {
+    .actions {
+      gap: 0.75rem;
+    }
+  }
+  
+  .actionButton {
+    flex: 1 1 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    min-width: 0;
+  }
+  
+  @media (min-width: 600px) {
+    .actionButton {
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+  
+  .actionButton svg {
+    flex-shrink: 0;
+  }
+  
+  .viewApplicants {
+    background: #f0f2ff;
+    color: #4a61ff;
+  }
+  
+  .viewApplicants:hover {
+    background: #e0e4ff;
+  }
+  
+  .edit {
+    background: #e6f7ee;
+    color: #10b981;
+  }
+  
+  .edit:hover {
+    background: #d1f3e2;
+  }
+  
+  .delete {
+    background: #feeceb;
+    color: #ef4444;
+  }
+  
+  .delete:hover {
+    background: #fdd7d5;
+  }
