@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import styles from '../../styles/Admin-forgetpassword.module.css';
+
 
 const ForgotPassword = ({ onResetSuccess }) => {
   const [email, setEmail] = useState('');
@@ -24,17 +26,14 @@ const ForgotPassword = ({ onResetSuccess }) => {
       const data = await response.json();
       setLoading(false);
       setMessage(data.message);
-
-      if (data.success) {
-        setOtpSent(true);
-      }
+      if (data.success) setOtpSent(true);
     } catch (error) {
       setLoading(false);
       setMessage('Error occurred. Please try again.');
     }
   };
 
-  const handleVerifyOtpAndResetPassword = async (e) => {
+  const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
@@ -45,14 +44,14 @@ const ForgotPassword = ({ onResetSuccess }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp, newPassword }),
       });
+      
       const data = await response.json();
       setLoading(false);
       setMessage(data.message);
-
+      
       if (data.success) {
-        setSuccess(true); // Password reset was successful
-        setMessage("Your password has been reset successfully. Please login with your new password.");
-        onResetSuccess(); // Switch back to login form
+        setSuccess(true);
+        setTimeout(() => onResetSuccess(), 3000); // Auto-close after 3 seconds
       }
     } catch (error) {
       setLoading(false);
@@ -61,63 +60,62 @@ const ForgotPassword = ({ onResetSuccess }) => {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: 'auto', padding: '20px' }}>
-      <h2>Forgot Password</h2>
-
-      {/* Step 1: Request OTP */}
-      {!otpSent && !success ? (
-        <form onSubmit={handleSendOtp}>
-          <div>
+    <div className={styles.container}>
+      <h2 className={styles.heading}>Reset Password</h2>
+      
+      {!otpSent ? (
+        <form onSubmit={handleSendOtp} className={styles.form}>
+          <div className={styles.inputGroup}>
             <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
-              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} className={styles.button}>
             {loading ? 'Sending OTP...' : 'Send OTP'}
           </button>
         </form>
       ) : success ? (
-        <div>
-          <p>{message}</p>
+        <div className={`${styles.message} ${styles.success}`}>
+          {message}
         </div>
       ) : (
-        <form onSubmit={handleVerifyOtpAndResetPassword}>
-          <div>
-            <label htmlFor="otp">OTP</label>
+        <form onSubmit={handleResetPassword} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="otp">OTP Code</label>
             <input
               type="text"
               id="otp"
-              name="otp"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               required
             />
           </div>
-
-          <div>
+          <div className={styles.inputGroup}>
             <label htmlFor="newPassword">New Password</label>
             <input
               type="password"
               id="newPassword"
-              name="newPassword"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} className={styles.button}>
             {loading ? 'Resetting...' : 'Reset Password'}
           </button>
         </form>
       )}
 
-      {message && <p>{message}</p>}
+      {message && !success && (
+        <div className={`${styles.message} ${styles.error}`}>
+          {message}
+        </div>
+      )}
     </div>
   );
 };

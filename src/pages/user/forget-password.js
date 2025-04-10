@@ -8,7 +8,6 @@ const ForgotPassword = ({ onResetSuccess }) => {
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
@@ -25,17 +24,14 @@ const ForgotPassword = ({ onResetSuccess }) => {
       const data = await response.json();
       setLoading(false);
       setMessage(data.message);
-
-      if (data.success) {
-        setOtpSent(true);
-      }
+      if (data.success) setOtpSent(true);
     } catch (error) {
       setLoading(false);
       setMessage('Error occurred. Please try again.');
     }
   };
 
-  const handleVerifyOtpAndResetPassword = async (e) => {
+  const handleResetPassword = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
@@ -49,12 +45,7 @@ const ForgotPassword = ({ onResetSuccess }) => {
       const data = await response.json();
       setLoading(false);
       setMessage(data.message);
-
-      if (data.success) {
-        setSuccess(true); // Password reset was successful
-        setMessage("Your password has been reset successfully. Please login with your new password.");
-        onResetSuccess(); // Switch back to login form
-      }
+      if (data.success) onResetSuccess();
     } catch (error) {
       setLoading(false);
       setMessage('Error occurred. Please try again.');
@@ -62,66 +53,60 @@ const ForgotPassword = ({ onResetSuccess }) => {
   };
 
   return (
-    <div className={styles.forgotPasswordContainer}>
-      <div className={`${styles.card} ${otpSent ? styles.flipped : ''}`}>
-        {/* Front of the Card: Email Input */}
-        <div className={styles.cardFront}>
-          <h2 className={styles.heading}>Forgot Password</h2>
-          <form onSubmit={handleSendOtp}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="email" className={styles.label}>Email Address</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.input}
-                required
-              />
-            </div>
-            <button type="submit" disabled={loading} className={styles.button}>
-              {loading ? 'Sending OTP...' : 'Send OTP'}
-            </button>
-          </form>
-          {message && <p className={styles.message}>{message}</p>}
+    <div className={styles.container}>
+      <h2 className={styles.heading}>Reset Password</h2>
+      
+      {!otpSent ? (
+        <form onSubmit={handleSendOtp} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.input}
+              required
+            />
           </div>
+          <button type="submit" disabled={loading} className={styles.button}>
+            {loading ? 'Sending...' : 'Send OTP'}
+          </button>
+        </form>
+      ) : (
+        <form onSubmit={handleResetPassword} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <input
+              type="text"
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              className={styles.input}
+              required
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <input
+              type="password"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className={styles.input}
+              required
+            />
+          </div>
+          <button type="submit" disabled={loading} className={styles.button}>
+            {loading ? 'Resetting...' : 'Reset Password'}
+          </button>
+        </form>
+      )}
 
-          <div className={styles.cardBack}>
-          <h2 className={styles.heading}>Reset Password</h2>
-          <form onSubmit={handleVerifyOtpAndResetPassword}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="otp" className={styles.label}>OTP</label>
-              <input
-                type="text"
-                id="otp"
-                name="otp"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                className={styles.input}
-                required
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="newPassword" className={styles.label}>New Password</label>
-              <input
-                type="password"
-                id="newPassword"
-                name="newPassword"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className={styles.input}
-                required
-              />
-            </div>
-            <button type="submit" disabled={loading} className={styles.button}>
-              {loading ? 'Resetting...' : 'Reset Password'}
-            </button>
-          </form>
-          {message && <p className={styles.message}>{message}</p>}
-        </div>
-      </div>
+      {message && (
+        <p className={`${styles.message} ${message.includes('success') ? styles.success : ''}`}>
+          {message}
+        </p>
+      )}
     </div>
   );
 };
+
 export default ForgotPassword;
