@@ -3,11 +3,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import styles from '../styles/about.module.css';
 import { FaLinkedin, FaWhatsapp, FaEnvelope, FaGraduationCap, FaBriefcase, FaUserTie } from 'react-icons/fa';
-<<<<<<< HEAD
-import Card from '../components/Card';
-=======
 import Card from '../components/card';
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
 
 const About = () => {
   useEffect(() => {
@@ -27,15 +23,10 @@ const About = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Student coordinators data
   const studentCoordinators = [
     {
       id: 1,
-<<<<<<< HEAD
       image: "/uploads/faculty.jpg",
-=======
-      image: "/uploads/student1.jpg",
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       name: "Aarav Sharma",
       position: "Placement Coordinator",
       idno: "IIITR2021001",
@@ -44,11 +35,7 @@ const About = () => {
     },
     {
       id: 2,
-<<<<<<< HEAD
-      image: "/uploads/faculty.jpg",
-=======
       image: "/uploads/student2.jpg",
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       name: "Priya Patel",
       position: "Corporate Relations",
       idno: "IIITR2021002",
@@ -57,11 +44,7 @@ const About = () => {
     },
     {
       id: 3,
-<<<<<<< HEAD
-      image: "/uploads/faculty.jpg",
-=======
       image: "/uploads/student3.jpg",
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       name: "Rahul Verma",
       position: "Training Head",
       idno: "IIITR2021003",
@@ -70,11 +53,7 @@ const About = () => {
     },
     {
       id: 4,
-<<<<<<< HEAD
-      image: "/uploads/faculty.jpg",
-=======
       image: "/uploads/student4.jpg",
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       name: "Neha Gupta",
       position: "HR Coordinator",
       idno: "IIITR2021004",
@@ -83,11 +62,7 @@ const About = () => {
     },
     {
       id: 5,
-<<<<<<< HEAD
-      image: "/uploads/faculty.jpg",
-=======
       image: "/uploads/student5.jpg",
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       name: "Vikram Singh",
       position: "Tech Coordinator",
       idno: "IIITR2021005",
@@ -96,11 +71,7 @@ const About = () => {
     },
     {
       id: 6,
-<<<<<<< HEAD
-      image: "/uploads/faculty.jpg",
-=======
       image: "/uploads/student6.jpg",
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       name: "Ananya Joshi",
       position: "Documentation Head",
       idno: "IIITR2021006",
@@ -109,11 +80,7 @@ const About = () => {
     },
     {
       id: 7,
-<<<<<<< HEAD
-      image: "/uploads/faculty.jpg",
-=======
       image: "/uploads/student7.jpg",
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       name: "Karan Malhotra",
       position: "Event Manager",
       idno: "IIITR2021007",
@@ -122,11 +89,7 @@ const About = () => {
     },
     {
       id: 8,
-<<<<<<< HEAD
-      image: "/uploads/faculty.jpg",
-=======
       image: "/uploads/student8.jpg",
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       name: "Divya Reddy",
       position: "Alumni Relations",
       idno: "IIITR2021008",
@@ -137,11 +100,7 @@ const About = () => {
 
   return (
     <div className={styles.aboutContainer}>
-<<<<<<< HEAD
       {/* Hero Section */}
-=======
-      {/* Hero Section with Campus Image */}
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
       <section className={styles.aboutHero}>
         <Image
           src="/uploads/IIIT-Raichur-Transit-Campus.jpg"
@@ -158,11 +117,7 @@ const About = () => {
           className={styles.heroContent}
         >
           <h1>About Our <span className={styles.highlight}>Placement Cell</span></h1>
-<<<<<<< HEAD
-          <p>Bridging academic excellence with industry success since 2019</p>
-=======
           <p>Bridging academic excellence with industry success since 2016</p>
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
         </motion.div>
       </section>
 
@@ -198,7 +153,6 @@ const About = () => {
       </section>
 
       {/* Leadership Team */}
-<<<<<<< HEAD
       <section className={`${styles.missionSection} ${styles.fadeIn} ${styles.leadershipSection}`}>
         <div className={`${styles.sectionContainer} ${styles.missionContent}`}>
           <h2>Leadership Team</h2>
@@ -206,24 +160,12 @@ const About = () => {
           {/* Placement Faculty */}
           <div className={styles.leadershipCard}>
             <div className={styles.leadershipContent}>
-              <h3>Placement Faculty</h3>
-=======
-      <section className={styles.leadershipSection}>
-        <div className={styles.sectionContainer}>
-          {/* Placement Faculty */}
-          <div className={styles.leadershipCard}>
-            <div className={styles.leadershipContent}>
-              <h2 className={styles.leadershipTitle}>Placement Faculty</h2>
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
+              <h3 className={styles.leadershipTitle}>Placement Faculty</h3>
               <p className={styles.leadershipQuote}>
                 "Steering students towards a successful future by bridging the gap between academic learning and industry demands."
               </p>
               <div className={styles.leaderInfo}>
-<<<<<<< HEAD
-                <h4>Dr. Jhanvi Tiwari</h4>
-=======
                 <h3 className={styles.leaderName}>Dr. Jhanvi Tiwari</h3>
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
                 <p className={styles.leaderPosition}>Professor & Placement FIC</p>
               </div>
             </div>
@@ -238,23 +180,15 @@ const About = () => {
             </div>
           </div>
 
-          {/* Placement Officer */}
+          {/* Placement Officer - Rajesh */}
           <div className={styles.leadershipCard}>
             <div className={styles.leadershipContent}>
-<<<<<<< HEAD
-              <h3>Placement Officer</h3>
-=======
-              <h2 className={styles.leadershipTitle}>Placement Officer</h2>
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
+              <h3 className={styles.leadershipTitle}>Placement Officer</h3>
               <p className={styles.leadershipQuote}>
                 "Dedicated to providing students with the best career opportunities."
               </p>
               <div className={styles.leaderInfo}>
-<<<<<<< HEAD
-                <h4>Mr. Rajesh Kumar</h4>
-=======
                 <h3 className={styles.leaderName}>Mr. Rajesh Kumar</h3>
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
                 <p className={styles.leaderPosition}>Training & Placement Officer</p>
               </div>
             </div>
@@ -268,17 +202,16 @@ const About = () => {
               />
             </div>
           </div>
-<<<<<<< HEAD
 
-          {/* Second Placement Officer */}
+          {/* Placement Officer - Anjali */}
           <div className={styles.leadershipCard}>
             <div className={styles.leadershipContent}>
-              <h3>Placement Officer</h3>
+              <h3 className={styles.leadershipTitle}>Placement Officer</h3>
               <p className={styles.leadershipQuote}>
                 "Ensuring smooth coordination between students and recruiters."
               </p>
               <div className={styles.leaderInfo}>
-                <h4>Ms. Anjali Mehta</h4>
+                <h3 className={styles.leaderName}>Ms. Anjali Mehta</h3>
                 <p className={styles.leaderPosition}>Training & Placement Officer</p>
               </div>
             </div>
@@ -295,20 +228,17 @@ const About = () => {
         </div>
       </section>
 
-      {/* Student Coordinators */}
+      {/* Student Coordinators Section */}
       <section className={`${styles.missionSection} ${styles.coordinatorsSection} ${styles.fadeIn}`}>
         <div className={`${styles.sectionContainer} ${styles.missionContent}`}>
           <h2>Student Placement Team</h2>
-=======
         </div>
       </section>
 
-      {/* Student Coordinators - Updated with Card Component */}
       <section className={`${styles.coordinatorsSection} ${styles.fadeIn}`}>
         <div className={styles.sectionContainer}>
           <h2>Student Placement Champions</h2>
           <p className={styles.sectionSubtitle}>Dedicated students facilitating campus recruitment</p>
->>>>>>> f3ff636 (Updated jobs,admin section and backend codes)
 
           <div className={styles.coordinatorsGrid}>
             {studentCoordinators.map((student) => (

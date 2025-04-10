@@ -5,6 +5,8 @@ import Link from "next/link";
 
 const JobPortal = () => {
   const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -12,7 +14,6 @@ const JobPortal = () => {
         const res = await fetch("/api/auth/jobs");
         const data = await res.json();
         if (data.userjobs) {
-          // Remove duplicate jobs based on job ID
           const uniqueJobs = data.userjobs.reduce((acc, job) => {
             if (!acc.find((j) => j._id === job._id)) {
               acc.push(job);
@@ -25,58 +26,39 @@ const JobPortal = () => {
         }
       } catch (error) {
         console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchJobs();
   }, []);
 
-  // Function to handle job application
   const applyForJob = async (jobId) => {
-    console.log("Applying for job with ID:", jobId);
-
-    // Check if the user is logged in
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
       alert("Please log in to apply for this job!");
       return;
     }
 
-    // Parse user data from localStorage
-    let user;
     try {
-      user = JSON.parse(storedUser);
-    } catch (error) {
-      console.error("Error parsing user data:", error);
-      alert("Invalid user data. Please log in again.");
-      return;
-    }
+      const user = JSON.parse(storedUser);
+      if (!user._id) {
+        alert("Please log in first to apply for this job");
+        return;
+      }
 
-    // Ensure user ID exists
-    if (!user._id) {
-      alert(" Please log in first to apply for this job");
-      return;
-    }
-
-    const userId = user._id;
-    console.log("User ID:", userId);
-
-    try {
       const res = await fetch("/api/auth/apply", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json", // Send JSON data
-        },
-        body: JSON.stringify({ user_id: userId, job_id: jobId }), // Convert object to JSON string
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: user._id, job_id: jobId }),
       });
 
-      // Ensure response is OK before parsing
       if (!res.ok) {
         const errorData = await res.json();
         throw new Error(errorData.message || "Failed to apply.");
       }
 
-      const data = await res.json();
       alert("Successfully applied for the job!");
     } catch (error) {
       console.error("Error applying for job:", error);
@@ -84,38 +66,73 @@ const JobPortal = () => {
     }
   };
 
+  const filteredJobs = jobs.filter(job =>
+    job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    job.skills.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className={styles.container}>
-      {/* 🔷 Welcome Section */}
-      <div className={styles.welcomeSection}>
-        <h1>Welcome to IIIT Raicchur Placement website!</h1>
-        <p>
-          Stay connected with <strong>modern opportunities</strong> and{" "}
-          <strong>exciting career paths</strong>. Join us today and get access
-          to <strong>exclusive job listings</strong>!
-        </p>
-        <div className={styles.authButtons}>
-          <Link href="/profile">
-            <button className={styles.signupBtn}>Login</button>
-          </Link>
-         
+      {/* Hero Section */}
+      <div className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h1>Discover Your Dream Career</h1>
+          <p>
+            Connect with <span>top companies</span> and find opportunities that match your skills and aspirations.
+          </p>
+          <div className={styles.ctaButtons}>
+            <Link href="/profile" className={styles.primaryButton}>
+              Student Login
+            </Link>
+            <Link href="/recruiter" className={styles.secondaryButton}>
+              Recruiter Portal
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* 🔷 Job Listings Section */}
-      <div className={styles.jobsSection}>
-        <h2>Latest Job Opportunities</h2>
-        <div className={styles.jobGrid}>
-          {jobs.length > 0 ? (
-            jobs.map((job) => (
-              <div key={job._id} className={styles.jobCardWrapper}>
-                <JobCard job={job} onApply={applyForJob} />
-              </div>
-            ))
-          ) : (
-            <p className={styles.noJobs}>No job postings available right now.</p>
-          )}
+      {/* Job Search Section */}
+      <div className={styles.searchSection}>
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder="Search jobs by title, company or skills..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+          <span className={styles.searchIcon}>🔍</span>
         </div>
+        <div className={styles.filterButtons}>
+          <button className={styles.filterButton}>All Jobs</button>
+          <button className={styles.filterButton}>Internships</button>
+          <button className={styles.filterButton}>Full-time</button>
+        </div>
+      </div>
+
+      {/* Job Listings */}
+      <div className={styles.jobsContainer}>
+        <h2 className={styles.sectionTitle}>Available Opportunities</h2>
+        
+        {loading ? (
+          <div className={styles.loading}>
+            <div className={styles.spinner}></div>
+            <p>Loading opportunities...</p>
+          </div>
+        ) : filteredJobs.length > 0 ? (
+          <div className={styles.jobGrid}>
+            {filteredJobs.map((job) => (
+              <JobCard key={job._id} job={job} onApply={applyForJob} />
+            ))}
+          </div>
+        ) : (
+          <div className={styles.noResults}>
+            <img src="/images/no-jobs.svg" alt="No jobs found" />
+            <h3>No matching jobs found</h3>
+            <p>Try adjusting your search or check back later</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,202 @@
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card.expanded {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+  }
+  
+  .cardHeader h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #1e293b;
+    font-weight: 600;
+    flex: 1;
+  }
+  
+  .jobType {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .companyInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .companyLogo {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .companyName {
+    margin: 0;
+    font-weight: 600;
+    color: #334155;
+  }
+  
+  .location {
+    margin: 0.2rem 0 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .location::before {
+    content: '📍';
+  }
+  
+  .salary {
+    margin: 0.5rem 0 1.2rem;
+    font-weight: 500;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .details {
+    margin-top: 1rem;
+    flex: 1;
+  }
+  
+  .detailRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+  }
+  
+  .detailRow span:first-child {
+    color: #64748b;
+    font-weight: 500;
+  }
+  
+  .detailRow span:last-child {
+    color: #334155;
+    font-weight: 600;
+    text-align: right;
+  }
+  
+  .description {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+  }
+  
+  .description h4 {
+    margin: 0 0 0.5rem;
+    color: #1e293b;
+    font-size: 1.1rem;
+  }
+  
+  .description p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .viewButton, .cancelButton, .applyButton {
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    width: 100%;
+    margin-top: auto;
+  }
+  
+  .viewButton {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    margin-top: auto;
+  }
+  
+  .viewButton:hover {
+    background-color: #bae6fd;
+  }
+  
+  .cancelButton {
+    background-color: #f1f5f9;
+    color: #475569;
+  }
+  
+  .cancelButton:hover {
+    background-color: #e2e8f0;
+  }
+  
+  .applyButton {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+  }
+  
+  .applyButton:hover {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    transform: translateY(-2px);
+  }
+  
+  .applyButton:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card {
+      padding: 1.2rem;
+    }
+    
+    .cardHeader h3 {
+      font-size: 1.1rem;
+    }
+    
+    .actions {
+      flex-direction: column;
+    }
+  }

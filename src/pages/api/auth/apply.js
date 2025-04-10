@@ -7,10 +7,10 @@ export default async function handler(req, res) {
 
   try {
     const { db } = await connectDB();
-    const { job_id, user_id } = req.body; // Extracting from req.body
+    const { job_id, user_id } = req.body; 
 
     console.log(job_id);
-    console.log(job_id);
+    console.log(user_id);
 
     if (!user_id || !job_id) {
       return res.status(400).json({ message: "Missing required fields: user_id and job_id are required." });
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       createdAt: new Date(),
     };
 
-    const result = await db.collection("AppliedJob").insertOne(appliedJobData);
+    const result = await db.collection("Appliedstudent").insertOne(appliedJobData);
 
     return res.status(201).json({ 
       message: "Job added successfully.", 
