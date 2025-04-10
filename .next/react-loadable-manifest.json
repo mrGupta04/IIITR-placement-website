@@ -10,5 +10,17 @@
     "files": [
       "static/chunks/_pages-dir-browser_node_modules_next_dist_pages__error_js.js"
     ]
+  },
+  "components\\directorcorner.js -> ./ElfsightWidget": {
+    "id": "components\\directorcorner.js -> ./ElfsightWidget",
+    "files": [
+      "static/chunks/_pages-dir-browser_src_components_ElfsightWidget_js.js"
+    ]
+  },
+  "components\\footer.js -> @fortawesome/react-fontawesome": {
+    "id": "components\\footer.js -> @fortawesome/react-fontawesome",
+    "files": [
+      "static/chunks/_pages-dir-browser_node_modules_fortawesome_react-fontawesome_index_es_js.js"
+    ]
   }
 }

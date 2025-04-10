@@ -1,85 +1,200 @@
 /* Main container */
-.signupsignincontainer {
-    max-width: 550px; /* Increased form width */
-    margin: 80px auto;
-    padding: 30px;
-    background: #23252b;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-    text-align: center;
-    color: #ffffff;
-    display: flex;
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  min-height: 500px;
+  margin: 30px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Panel styles */
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  transition: all 0.6s ease-in-out;
+}
+
+.leftPanel {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: white;
+  text-align: center;
+}
+
+.rightPanel {
+  background: #1a202c;
+  color: #333;
+}
+
+.contentFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.featureItem:hover {
+  transform: translateX(5px);
+}
+
+.featureIcon {
+  font-size: 1.5rem;
+}
+
+/* Mobile Specific Styles */
+.mobileHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.mobileSubtitle {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Content styles */
+.content {
+  max-width: 80%;
+}
+
+.content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  margin-top: .5rem;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: -10px;
+}
+
+/* Switch button */
+.switchFormButton {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.switchFormButton:hover {
+  background: white;
+  color: #2563eb;
+}
+
+/* Mobile Container Styles */
+.mobileContainer {
+  min-height: 100vh;
+  min-width: 90vw;
+  padding: 1rem;
+  background: #1a202c;
+}
+
+.mobilePanel {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.mobileSwitch {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #f7f7f8;
+}
+
+.switchLink {
+  color: #3b82f6;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.switchLink:hover {
+  color: #2563eb;
+}
+
+/* Responsive design */
+@media only screen and (width: 768px) {
+  .container {
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  /* Button container - Positioned ABOVE the form */
-  .signupsignbuttonContainer {
-    display: flex;
-    justify-content: center;
+    min-height: auto;
     width: 100%;
-    margin-bottom: 15px; /* Reduced spacing between buttons and form */
+    margin: 0;
   }
   
-  /* Buttons - Reduced Size */
-  .signupButton,
-  .loginButton {
-    flex: 1;
-    padding: 8px 10px; /* Smaller buttons */
-    font-size: 14px; /* Reduced text size */
-    font-weight: bold;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    text-align: center;
-    max-width: 30%; /* Smaller width for buttons */
-  }
-  
-  /* Button spacing */
-  .signupButton {
-    background: #5a67d8;
-    color: white;
-    margin-right: 8px;
-  }
-  
-  .loginButton {
-    background:  #5a67d8;
-    color: white;
-    margin-left: 8px;
-  }
-  
-  /* Hover effect */
-  .signupButton:hover {
-    background: #36429b;
-  }
-  
-  .loginButton:hover {
-    background: #36429b;
-  }
-  
-  /* Disabled button style */
-  .disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-  
-  /* Form container - Increased width */
-  .signupsignincontainer > div {
+  .panel {
+    padding: 20px;
     width: 100%;
-    animation: fadeIn 0.5s ease-in-out;
   }
   
-  /* Smooth switch animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+  .leftPanel {
+    order: 2;
+    padding: 30px 20px;
   }
   
+  .rightPanel {
+    order: 1;
+  }
+
+  .content {
+    max-width: 90%;
+    padding: 0 15px;
+  }
+
+  .mobileContainer {
+    min-height: 100vh;
+    padding: 1rem;
+  }
+
+  .mobilePanel {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .container {
+    display: none; /* Hide the desktop version */
+  }
+}
+
+/* For larger screens */
+@media (min-width: 769px) {
+  .mobileContainer {
+    display: none; /* Hide the mobile version */
+  }
+}

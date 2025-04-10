@@ -4,7 +4,6 @@ import Signup from "./signup";
 import { useWindowSize } from "../user/useWindowSize";
 import styles from "../../styles/User-signinsignup.module.css";
 
-// ...existing imports...
 
 const LoginContent = () => (
   <div className={styles.content}>
