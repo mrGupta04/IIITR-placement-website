@@ -413,6 +413,114 @@
   color: #1e40af !important;
 }
 
+/* Add these new styles after your existing CSS */
+
+.otpVerificationContainer {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.otpTitle {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.otpInstructions {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.otpInputContainer {
+  margin-bottom: 2rem;
+}
+
+.otpInputContainer input {
+  text-align: center;
+  letter-spacing: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.otpButtonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.otpButtonGroup button {
+  flex: 1;
+}
+
+.otpResend {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.resendLink {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.resendLink:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.resendLink:disabled {
+  color: #94a3b8;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+/* Media Queries */
+@media (max-width: 767px) {
+  .otpVerificationContainer {
+    padding: 1.5rem 0;
+  }
+
+  .otpTitle {
+    font-size: 1.35rem;
+  }
+
+  .otpInstructions {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .otpVerificationContainer {
+    padding: 1rem 0;
+  }
+
+  .otpButtonGroup {
+    flex-direction: column;
+  }
+
+  .otpTitle {
+    font-size: 1.25rem;
+  }
+
+  .otpInstructions {
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+}
 
 
 @media (min-width: 1200px) {

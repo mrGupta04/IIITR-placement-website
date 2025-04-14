@@ -137,19 +137,17 @@ export default function Signup({ setUser, setLoginsign }) {
     
     setLoading(true);
     try {
-      // In a real app, you would call your backend API to send OTP to the user's email/phone
-      // For demo purposes, we'll generate a random OTP here
-      const demoOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      setGeneratedOtp(demoOtp);
-      
-      // Simulate API call to send OTP
-      // await fetch("/api/auth/send-otp", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ email: formData.email, mobile: formData.mobileno })
-      // });
-      
-      console.log("Demo OTP:", demoOtp); // For testing purposes
+      const response = await fetch("/api/auth/user/signup-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email })
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to send OTP');
+    }
       setOtpStep(true);
       setError("");
     } catch (err) {
@@ -162,43 +160,99 @@ export default function Signup({ setUser, setLoginsign }) {
   // Verify OTP and proceed with signup
   const verifyOtpAndSignup = async (e) => {
     e.preventDefault();
-    
+      
     if (otp.length !== 6) {
       return setOtpError("Please enter a valid 6-digit OTP");
     }
-    
-    if (otp !== generatedOtp) {
-      return setOtpError("Incorrect OTP. Please try again.");
-    }
-    
+      
     setOtpError("");
     setLoading(true);
-    
-    // Proceed with actual signup
-    const data = new FormData();
-    Object.entries(formData).forEach(([key, value]) => data.append(key, value));
-    if (profilepic) data.append("profilepic", profilepic);
-    if (resume) data.append("resume", resume);
-    data.append("skills", JSON.stringify(selectedSkills.map(skill => skill.value)));
-    data.append("project", JSON.stringify(project));
-    data.append("workExperience", JSON.stringify(workExperience));
-    data.append("leadership", JSON.stringify(leadership));
-
-    try {
-      const res = await fetch("/api/auth/user/signup", { method: "POST", body: data });
-      if (!res.ok) throw new Error((await res.json()).message || "Signup failed");
       
-      const result = await res.json();
+    try {
+      // Prepare user data
+      const userData = {
+        name: formData.name,
+        email: formData.email,
+        mobileno: formData.mobileno,
+        batch: formData.batch,
+        rollno: formData.rollno,
+        department: formData.department,
+        cgpa: parseFloat(formData.cgpa),
+        gender: formData.gender,
+        linkedin: formData.linkedin || "",
+        github: formData.github || "",
+        leetcode: formData.leetcode || "",
+        password: formData.password,
+        skills: selectedSkills.map(skill => skill.value),
+        project: project,
+        workExperience: workExperience,
+        leadership: leadership
+      };
+  
+      // Create FormData for file uploads
+      const data = new FormData();
+      if (profilepic) data.append("profilepic", profilepic);
+      if (resume) data.append("resume", resume);
+  
+      // Verify OTP and create user
+      const verifyResponse = await fetch("/api/auth/user/verification-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          email: formData.email,
+          otp: otp,
+          userData: userData
+        })
+      });
+  
+      const result = await verifyResponse.json();
+  
+      if (!verifyResponse.ok) {
+        throw new Error(result.message || 'Verification failed');
+      }
+  
+      // Store token and user data
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.user));
+      
+      // Update app state
       setUser(result.user);
       setLoginsign(true);
+  
+      // Redirect to profile
+      router.push("/profile");
+  
     } catch (err) {
-      setError(err.message);
+      setOtpError(err.message);
     } finally {
       setLoading(false);
     }
   };
+
+const handleResendOtp = async () => {
+  setLoading(true);
+  try {
+    const response = await fetch("/api/auth/user/signup-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email })
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to resend OTP');
+    }
+
+    setError("New OTP sent successfully");
+    setTimeout(() => setError(""), 3000);
+    
+  } catch (err) {
+    setError(err.message || "Failed to resend OTP");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className={styles.signupPageContainer}>

@@ -5,46 +5,20 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-// Configure multer to handle file uploads
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      const uploadDir = "./public/uploads";
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-      }
-      cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname));
-    },
-  }),
-}).fields([
-  { name: "profilepic", maxCount: 1 },
-  { name: "resume", maxCount: 1 },
-]);
+// ...existing multer configuration and export config...
 
-// Disable Next.js bodyParser to handle file uploads
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-// API route handler
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
-  // Wrap multer in a promise to ensure it completes before processing the request
   upload(req, res, async (err) => {
     if (err) {
       return res.status(500).json({ message: `File upload error: ${err.message}` });
     }
 
     try {
-      // Manually parse form data after file upload
+      // Get all form data
       const {
         name,
         email,
@@ -62,23 +36,45 @@ export default async function handler(req, res) {
         project,
         workExperience,
         leadership,
+        otp // Add OTP field
       } = req.body;
 
       // Validate required fields
-      if (!name || !email || !mobileno || !batch || !rollno || !department || !cgpa || !gender || !password) {
+      if (!name || !email || !mobileno || !batch || !rollno || !department || !cgpa || !gender || !password || !otp) {
         return res.status(400).json({ message: "All required fields must be provided." });
       }
 
-      // Connect to the database
       const { db } = await connectDB();
 
-      // Check if user already exists
+      // Verify OTP
+      const storedOtp = await db.collection("signup_otps").findOne({
+        email,
+        expiresAt: { $gt: new Date() }
+      });
+
+      if (!storedOtp) {
+        return res.status(400).json({ message: "OTP has expired. Please request a new one." });
+      }
+
+      if (storedOtp.otp.toString() !== otp.toString()) {
+        return res.status(400).json({ message: "Invalid OTP." });
+      }
+
+      // Delete used OTP
+      await db.collection("signup_otps").deleteOne({ email });
+
+      // Check if user exists
       const existingUser = await db.collection("users").findOne({ email });
       if (existingUser) {
         return res.status(400).json({ message: "User already exists." });
       }
 
-      // Hash the password
+      // Validate email domain
+      if (!email.endsWith('@iiitr.ac.in')) {
+        return res.status(400).json({ message: "Please use your IIIT email address." });
+      }
+
+      // Hash password
       const hashedPassword = await bcrypt.hash(password, 12);
 
       // Prepare user data
@@ -99,31 +95,47 @@ export default async function handler(req, res) {
         project: project ? JSON.parse(project) : [],
         workExperience: workExperience ? JSON.parse(workExperience) : [],
         leadership: leadership ? JSON.parse(leadership) : [],
-        profilepic: req.files.profilepic ? `/uploads/${req.files.profilepic[0].filename}` : null,
-        resume: req.files.resume ? `/uploads/${req.files.resume[0].filename}` : null,
+        profilepic: req.files?.profilepic ? `/uploads/${req.files.profilepic[0].filename}` : null,
+        resume: req.files?.resume ? `/uploads/${req.files.resume[0].filename}` : null,
+        emailVerified: true, // Add this field since email is verified through OTP
         createdAt: new Date(),
+        updatedAt: new Date()
       };
 
-      // Insert the user into the database
+      // Insert user
       const result = await db.collection("users").insertOne(userData);
 
-      // Check for missing JWT_SECRET
       if (!process.env.JWT_SECRET) {
         return res.status(500).json({ message: "JWT secret key is missing." });
       }
 
-      // Generate JWT token
-      const token = jwt.sign({ id: result.insertedId, email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+      // Generate token
+      const token = jwt.sign(
+        { 
+          id: result.insertedId, 
+          email,
+          emailVerified: true 
+        }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: "7d" } // Increased token expiry to 7 days
+      );
 
-      // Respond with success message and user data
       return res.status(201).json({
         message: "User registered successfully.",
         token,
-        user: userData,
+        user: {
+          ...userData,
+          _id: result.insertedId,
+          password: undefined // Remove password from response
+        }
       });
+
     } catch (error) {
       console.error("Signup error:", error);
-      return res.status(500).json({ message: "Internal Server Error." });
+      return res.status(500).json({ 
+        message: "Internal Server Error.",
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
     }
   });
 }
