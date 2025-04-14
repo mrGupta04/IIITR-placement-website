@@ -14,7 +14,7 @@ export default function Update() {
     industryType: "",
     website: ""
   });
-  const [profilepic, setProfilepic] = useState(null);
+  const [logo, setLogo] = useState(null); // Changed from profilepic to logo
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -32,7 +32,7 @@ export default function Update() {
         industryType: admin?.industryType || "",
         website: admin?.website || ""
       });
-      if (admin?.profilePic) setPreviewImage(admin.profilePic);
+      if (admin?.logo) setPreviewImage(admin.logo);
     } catch (error) {
       console.error("Error parsing Admin data:", error);
     }
@@ -43,7 +43,7 @@ export default function Update() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setProfilepic(file);
+      setLogo(file); // Changed from setProfilepic to setLogo
       setPreviewImage(URL.createObjectURL(file));
     }
   };
@@ -58,7 +58,7 @@ export default function Update() {
     Object.entries(formData).forEach(([key, value]) => {
       data.append(key, value);
     });
-    if (profilepic) data.append("profilepic", profilepic);
+    if (logo) data.append("logo", logo); // Changed from profilepic to logo
 
     try {
       const res = await fetch("/api/auth/admin/update", {

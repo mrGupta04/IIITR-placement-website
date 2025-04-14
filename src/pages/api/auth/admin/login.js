@@ -53,7 +53,6 @@ export default async function handler(req, res) {
     const {
       _id,
       name,
-      profilepic,
       mobileno,
       city,
       state,
@@ -70,7 +69,6 @@ export default async function handler(req, res) {
       admin: {
         id: _id.toString(),
         name,
-        profilepic,
         mobileno,
         email,
         city,

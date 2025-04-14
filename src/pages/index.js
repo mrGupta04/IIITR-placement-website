@@ -1,13 +1,11 @@
-'use client'; // This page needs to be client-side due to FontAwesome and interactivity
+'use client';
 
-import Image from 'next/image'; // Single import here
+import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import Header from '../components/header';
-import FAQ from '../components/FAQ';
 import { useRouter } from 'next/router';
-import  DirectorsCorner from '../components/directorcorner';
-import dynamic from 'next/dynamic';
-
+import { motion } from 'framer-motion';
+import DirectorsCorner from '../components/directorcorner';
+import FAQ from '../components/FAQ';
 
 const AnimatedHeader = () => {
   return (
@@ -24,16 +22,34 @@ const AnimatedHeader = () => {
 };
 
 export default function Home() {
+  const router = useRouter();
+
+  const navigateToRecruiters = () => {
+    router.push('/recruiters');
+  };
+
+  // Animation variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
+  const staggerContainer = {
+    visible: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
   return (
     <>
-    
-    
       <div className={styles.container}>
         {/* Hero Section */}
         <header className={styles.hero}>
           <div className={styles.heroImage}>
             <Image
-              src= "/uploads/IIIT-Raichur-Transit-Campus.jpg"
+              src="/uploads/IIIT-Raichur-Transit-Campus.jpg"
               alt="IIITR Campus"
               fill
               style={{ objectFit: 'cover' }}
@@ -53,7 +69,7 @@ export default function Home() {
 
         {/* About Section */}
         <section className={styles.aboutSection}>
-        <AnimatedHeader />
+          <AnimatedHeader />
           <h2 className={styles.sectionTitle}>Why IIIT Raichur?</h2>
           <div className={styles.content}>
             <div className={styles.paragraph}>
@@ -84,25 +100,58 @@ export default function Home() {
         <section className={styles.featuredPrograms}>
           <h2 className={styles.sectionTitle}>Featured Programs</h2>
           <div className={styles.programList}>
-            <div className={styles.programCard}>
+            <motion.div
+              className={styles.programCard}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.2 }}
+            >
               <h3>Computer Science</h3>
               <p>Explore the world of computing and technology with our state-of-the-art facilities and expert faculty.</p>
-            </div>
-            <div className={styles.programCard}>
+            </motion.div>
+            <motion.div
+              className={styles.programCard}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.2 }}
+            >
               <h3>Artificial Intelligence & Data Science</h3>
               <p>Gain the skills and knowledge to lead in the global business environment.</p>
-            </div>
-            <div className={styles.programCard}>
+            </motion.div>
+            <motion.div
+              className={styles.programCard}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.2 }}
+            >
               <h3>Mathematics & Computing</h3>
               <p>Innovate and solve complex problems with our hands-on engineering programs.</p>
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        <DirectorsCorner />
-        <FAQ />
 
-       
+
+
+        <DirectorsCorner />
+
+        <section className={styles.recruitersSection}>
+          <div className={styles.recruitersContent}>
+            <h2 className={styles.sectionTitle}>Invitation to Recruiters</h2>
+            <p className={styles.recruiterMessage}>
+              At IIIT Raichur, we take pride in nurturing some of the brightest minds in the country.
+              Our students have a solid foundation in computer science and hands-on exposure to emerging
+              technologies like AI, Data Science, and Cybersecurity. They are trained to solve real-world
+              problems and adapt quickly to evolving industry needs. Mentored by IIT Hyderabad and backed
+              by a rigorous academic environment, our graduates are driven, innovative, and industry-ready.
+              Partner with us to discover the future leaders of your organization.
+            </p>
+            <button
+              className={styles.recruiterButton}
+              onClick={navigateToRecruiters}
+            >
+              Connect With our team
+            </button>
+          </div>
+        </section>
+        <FAQ />
       </div>
     </>
   );

@@ -19,7 +19,7 @@ const upload = multer({
       cb(null, Date.now() + path.extname(file.originalname));
     },
   }),
-}).fields([{ name: "profilepic", maxCount: 1 }, { name: "logo", maxCount: 1 }]);
+}).fields([{ name: "logo", maxCount: 1 }]);
 
 // Disable Next.js bodyParser for handling file uploads
 export const config = {
@@ -64,7 +64,6 @@ export default async function handler(req, res) {
         name,
         mobileno,
         logo,
-        profilepic,
         city,
         state,
         aboutCompany,
@@ -76,8 +75,8 @@ export default async function handler(req, res) {
     
 
       // Handle profile picture update
-      if (req.files.profilepic) {
-        updateData.profilepic = `/uploads/${req.files.profilepic[0].filename}`;
+      if (req.files.logo) {
+        updateData.logo = `/uploads/${req.files.logo[0].filename}`;
       }
 
       // Handle resume update

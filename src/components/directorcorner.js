@@ -71,16 +71,7 @@ const DirectorsCorner = () => {
             </div>
           </div>
 
-          <div id="social-section" className="container mx-auto px-6 mt-20">
-            <div className="text-center mb-12">
-              <h3 className="text-4xl font-bold text-gray-800 mb-4 animate-fade-in-up">
-                Social Handle
-              </h3>
-            </div>
-            <div className="max-w-7xl mx-auto rounded-3xl bg-white p-6 shadow-xl shadow-blue-100/30">
-              <ElfsightWidget />
-            </div>
-          </div>
+          
 
           <style jsx global>{`
             @keyframes fade-in-up {
