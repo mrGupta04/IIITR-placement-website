@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
-import clientPromise from "@/utils/db";
+import clientPromise from "../../../../../../utils/db";
+
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -22,21 +23,18 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: "User not found." });
     }
 
-    // Generate a secure reset token
     const resetToken = Math.random().toString(36).slice(-8);
 
-    // Update the user with the reset token and set an expiration time
     await db.collection("recruiters").updateOne(
       { email },
       {
         $set: {
           resetToken,
-          resetTokenExpire: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes expiration
+          resetTokenExpire: new Date(Date.now() + 10 * 60 * 1000), 
         },
       }
     );
 
-    // Configure the transporter for sending email
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {

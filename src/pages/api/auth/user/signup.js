@@ -1,4 +1,5 @@
-import { connectDB } from "../../../../lib/mongodb";
+import clientPromise from "../../../../../../utils/db";
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import multer from "multer";

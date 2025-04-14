@@ -10,7 +10,8 @@ import {
   Tooltip,
   Legend
 } from "chart.js";
-import { Award, Users, Briefcase, DollarSign, TrendingUp } from "lucide-react";
+import { Award, Users, Briefcase, DollarSign } from "lucide-react";
+import Image from "next/image";
 
 // Register chart elements
 Chart.register(BarElement, ArcElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -31,8 +32,8 @@ const Stats = () => {
         name: "TechCorp International",
         type: "tech",
         studentsHired: 45,
-        avgPackage: "18.5 LPA",
-        highestPackage: "24.5 LPA",
+        avgPackage: "18.5",
+        highestPackage: "24.5",
         logo: "/logos/img1.jpg",
         consistency: "4+ years",
         roles: ["SDE", "Data Scientist", "Product Manager"]
@@ -41,8 +42,8 @@ const Stats = () => {
         name: "GlobalSoft Solutions",
         type: "tech",
         studentsHired: 38,
-        avgPackage: "16.8 LPA",
-        highestPackage: "22.0 LPA",
+        avgPackage: "16.8",
+        highestPackage: "22.0",
         logo: "/logos/img1.jpg",
         consistency: "3+ years",
         roles: ["Frontend Dev", "Backend Dev", "DevOps"]
@@ -51,8 +52,8 @@ const Stats = () => {
         name: "FinanceCore Ltd.",
         type: "finance",
         studentsHired: 32,
-        avgPackage: "15.2 LPA",
-        highestPackage: "20.5 LPA",
+        avgPackage: "15.2",
+        highestPackage: "20.5",
         logo: "/logos/img1.jpg",
         consistency: "3+ years",
         roles: ["Financial Analyst", "Risk Manager"]
@@ -61,8 +62,8 @@ const Stats = () => {
         name: "DataMinds Analytics",
         type: "analytics",
         studentsHired: 28,
-        avgPackage: "14.5 LPA",
-        highestPackage: "19.0 LPA",
+        avgPackage: "14.5",
+        highestPackage: "19.0",
         logo: "/logos/img1.jpg",
         consistency: "2+ years",
         roles: ["Data Analyst", "ML Engineer"]
@@ -119,7 +120,7 @@ const Stats = () => {
         <div className={styles.summaryCard}>
           <DollarSign size={32} color="#9f7aea" />
           <h3>Total Package Value</h3>
-          <p>{calculateTotalPackageValue()} LPA</p>
+          <p>₹{calculateTotalPackageValue()} LPA</p>
         </div>
       </div>
 
@@ -198,9 +199,11 @@ const Stats = () => {
               <div key={index} className={styles.recruiterCard}>
                 <div className={styles.recruiterHeader}>
                   <div className={styles.recruiterLogo}>
-                    <img 
+                    <Image 
                       src={recruiter.logo} 
                       alt={`${recruiter.name} logo`}
+                      width={60}
+                      height={60}
                       onError={(e) => {
                         e.target.onerror = null; 
                         e.target.src = "/logos/default-company.png";
@@ -214,10 +217,10 @@ const Stats = () => {
                     <strong>Students Hired:</strong> {recruiter.studentsHired}
                   </p>
                   <p>
-                    <strong>Avg Package:</strong> {recruiter.avgPackage}
+                    <strong>Avg Package:</strong> ₹{recruiter.avgPackage} LPA
                   </p>
                   <p>
-                    <strong>Highest Package:</strong> {recruiter.highestPackage}
+                    <strong>Highest Package:</strong> ₹{recruiter.highestPackage} LPA
                   </p>
                   <p>
                     <strong>Consistency:</strong> {recruiter.consistency}
