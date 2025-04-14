@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs"; // Use bcryptjs for better compatibility
-import clientPromise from "../../../../../../utils/db";
+import clientPromise from "../../../../utils/db";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

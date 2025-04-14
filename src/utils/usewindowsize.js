@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useWindowSize = () => {
+const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
@@ -27,3 +27,5 @@ export const useWindowSize = () => {
   // Return true if width is less than 768px (typical mobile breakpoint)
   return windowSize.width < 768;
 };
+
+export default useWindowSize;

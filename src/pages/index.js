@@ -26,8 +26,7 @@ const AnimatedHeader = () => {
 export default function Home() {
   return (
     <>
-    
-    
+  
       <div className={styles.container}>
         {/* Hero Section */}
         <header className={styles.hero}>
