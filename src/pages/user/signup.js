@@ -546,7 +546,7 @@ const handleResendOtp = async () => {
             </div>
             
             <p className={styles.otpResend}>
-              Didn't receive the code? <button type="button" className={styles.resendLink}>Resend OTP</button>
+              Didn't receive the code? <button type="button" onClick={handleResendOtp} disabled={loading} className={styles.resendLink} >Resend OTP</button>
             </p>
           </div>
         )}
