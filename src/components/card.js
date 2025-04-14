@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Image from 'next/image'; // Add this import
+import Image from 'next/image';
 import styles from "../styles/card.module.css";
 import { FaLinkedin, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
-const Card = ({ image, name, position, idno, branch, info, small }) => {
+const Card = ({ image, name, position, idno, branch, info, small, linkedinLink = "#", whatsappLink = "#", emailLink = "#"
+}) => {
     const [flipped, setFlipped] = useState(false);
 
     return (
@@ -37,13 +38,29 @@ const Card = ({ image, name, position, idno, branch, info, small }) => {
                     <p className={styles.info}>{info}</p>
                     <p className={styles.details}>{branch} • {idno}</p>
                     <div className={styles.contactLinks}>
-                        <a href="#" className={styles.contactLink}>
+                        <a
+                            href={`mailto:${emailLink}`}
+                            className={styles.contactLink}
+                            aria-label={`Email ${name}`}
+                        >
                             <FaEnvelope />
                         </a>
-                        <a href="#" className={styles.contactLink}>
+                        <a
+                            href={linkedinLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.contactLink}
+                            aria-label={`${name}'s LinkedIn profile`}
+                        >
                             <FaLinkedin />
                         </a>
-                        <a href="#" className={styles.contactLink}>
+                        <a
+                            href={`https://wa.me/${whatsappLink}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.contactLink}
+                            aria-label={`WhatsApp ${name}`}
+                        >
                             <FaWhatsapp />
                         </a>
                     </div>

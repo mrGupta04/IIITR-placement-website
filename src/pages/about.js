@@ -3,7 +3,9 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import styles from '../styles/about.module.css';
 import { FaLinkedin, FaWhatsapp, FaEnvelope, FaGraduationCap, FaBriefcase, FaUserTie } from 'react-icons/fa';
-import Card from '../components/Card';
+import Card from '../components/card';
+import studentCoordinators from '../data/team/coordinators.js';
+import leadershipTeam from '../data/team/leaders.js';
 
 const About = () => {
   useEffect(() => {
@@ -22,81 +24,6 @@ const About = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const studentCoordinators = [
-    {
-      id: 1,
-      image: "/uploads/faculty.jpg",
-      name: "Aarav Sharma",
-      position: "Placement Coordinator",
-      idno: "IIITR2021001",
-      branch: "CSE",
-      info: "Specialized in AI/ML placements"
-    },
-    {
-      id: 2,
-      image: "/uploads/faculty.jpg",
-      name: "Priya Patel",
-      position: "Corporate Relations",
-      idno: "IIITR2021002",
-      branch: "ECE",
-      info: "Manages 30+ company partnerships"
-    },
-    {
-      id: 3,
-      image: "/uploads/faculty.jpg",
-      name: "Rahul Verma",
-      position: "Training Head",
-      idno: "IIITR2021003",
-      branch: "EEE",
-      info: "Conducts technical workshops"
-    },
-    {
-      id: 4,
-      image: "/uploads/faculty.jpg",
-      name: "Neha Gupta",
-      position: "HR Coordinator",
-      idno: "IIITR2021004",
-      branch: "CSE",
-      info: "Handles student communications"
-    },
-    {
-      id: 5,
-      image: "/uploads/faculty.jpg",
-      name: "Vikram Singh",
-      position: "Tech Coordinator",
-      idno: "IIITR2021005",
-      branch: "ECE",
-      info: "Manages coding test platforms"
-    },
-    {
-      id: 6,
-      image: "/uploads/faculty.jpg",
-      name: "Ananya Joshi",
-      position: "Documentation Head",
-      idno: "IIITR2021006",
-      branch: "CSE",
-      info: "Maintains placement records"
-    },
-    {
-      id: 7,
-      image: "/uploads/faculty.jpg",
-      name: "Karan Malhotra",
-      position: "Event Manager",
-      idno: "IIITR2021007",
-      branch: "ME",
-      info: "Organizes recruitment drives"
-    },
-    {
-      id: 8,
-      image: "/uploads/faculty.jpg",
-      name: "Divya Reddy",
-      position: "Alumni Relations",
-      idno: "IIITR2021008",
-      branch: "CSE",
-      info: "Connects with placed graduates"
-    }
-  ];
 
   return (
     <div className={styles.aboutContainer}>
@@ -157,74 +84,58 @@ const About = () => {
         <div className={`${styles.sectionContainer} ${styles.missionContent}`}>
           <h2>Leadership Team</h2>
 
-          {/* Placement Faculty */}
-          <div className={styles.leadershipCard}>
-            <div className={styles.leadershipContent}>
-              <h3>Placement Faculty</h3>
-              <p className={styles.leadershipQuote}>
-                "Steering students towards a successful future by bridging the gap between academic learning and industry demands."
-              </p>
-              <div className={styles.leaderInfo}>
-                <h4>Dr. Jhanvi Tiwari</h4>
-                <p className={styles.leaderPosition}>Professor & Placement FIC</p>
+          {leadershipTeam.map((leader) => (
+            <div key={leader.id} className={styles.leadershipCard}>
+              <div className={styles.leaderImage}>
+                <Image
+                  src={leader.image}
+                  alt={leader.name}
+                  width={240}
+                  height={240}
+                  className={styles.portrait}
+                />
               </div>
-            </div>
-            <div className={styles.leaderImage}>
-              <Image
-                src="/uploads/faculty.jpg"
-                alt="Dr. Jhanvi Tiwari"
-                width={200}
-                height={200}
-                className={styles.portrait}
-              />
-            </div>
-          </div>
 
-          {/* Placement Officer - Rajesh */}
-          <div className={styles.leadershipCard}>
-            <div className={styles.leadershipContent}>
-              <h3>Placement Officer</h3>
-              <p className={styles.leadershipQuote}>
-                "Dedicated to providing students with the best career opportunities."
-              </p>
-              <div className={styles.leaderInfo}>
-                <h4>Mr. Rajesh Kumar</h4>
-                <p className={styles.leaderPosition}>Training & Placement Officer</p>
-              </div>
-            </div>
-            <div className={styles.leaderImage}>
-              <Image
-                src="/uploads/officer.jpg"
-                alt="Mr. Rajesh Kumar"
-                width={200}
-                height={200}
-                className={styles.portrait}
-              />
-            </div>
-          </div>
+              <div className={styles.leadershipContent}>
+                <h3 className={styles.leaderRole}>{leader.position.split('&')[0].trim()}</h3>
+                <p className={styles.leadershipQuote}>"{leader.quote}"</p>
+                <div className={styles.leaderInfo}>
+                  <div className={styles.leaderNamePosition}>
+                    <h4>{leader.name}</h4>
+                    <p className={styles.leaderPosition}>{leader.position}</p>
+                    <div className={styles.contactLinks}>
+                      <a
+                        href={`mailto:${leader.emailLink}`}
+                        className={styles.contactLink}
+                        aria-label={`Email ${leader.name}`}
+                      >
+                        <FaEnvelope />
+                      </a>
+                      <a
+                        href={leader.linkedinLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.contactLink}
+                        aria-label={`${leader.name}'s LinkedIn profile`}
+                      >
+                        <FaLinkedin />
+                      </a>
+                      <a
+                        href={`https://wa.me/${leader.whatsappLink}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.contactLink}
+                        aria-label={`WhatsApp ${leader.name}`}
+                      >
+                        <FaWhatsapp />
+                      </a>
+                    </div>
+                  </div>
 
-          {/* Placement Officer - Anjali */}
-          <div className={styles.leadershipCard}>
-            <div className={styles.leadershipContent}>
-              <h3 className={styles.leadershipTitle}>Placement Officer</h3>
-              <p className={styles.leadershipQuote}>
-                "Ensuring smooth coordination between students and recruiters."
-              </p>
-              <div className={styles.leaderInfo}>
-                <h3 className={styles.leaderName}>Ms. Anjali Mehta</h3>
-                <p className={styles.leaderPosition}>Training & Placement Officer</p>
+                </div>
               </div>
             </div>
-            <div className={styles.leaderImage}>
-              <Image
-                src="/uploads/officer2.jpg"
-                alt="Ms. Anjali Mehta"
-                width={200}
-                height={200}
-                className={styles.portrait}
-              />
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -244,6 +155,9 @@ const About = () => {
                 branch={student.branch}
                 info={student.info}
                 small={true}
+                linkedinLink={student.linkedinLink}
+                whatsappLink={student.whatsappLink}
+                emailLink={student.emailLink}
               />
             ))}
           </div>

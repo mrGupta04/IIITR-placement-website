@@ -49,7 +49,7 @@ const Footer = () => {
           <h4 className={styles.footerHeading}>IIITR Links</h4>
           <ul className={styles.footerLinks}>
             <li><a href="https://iiitr.ac.in/" className={styles.footerLink}>Official Website</a></li>
-            <li><a href="https://students.iiitr.ac.in/" className={styles.footerLink}>Studnets</a></li>
+            <li><a href="https://students.iiitr.ac.in/" className={styles.footerLink}>Students</a></li>
             <li><a href="https://iiitr.ac.in/faculty" className={styles.footerLink}>Faculty</a></li>
             <li><a href="https://iiitr.ac.in/curriculum" className={styles.footerLink}>Academics</a></li>
             <li><a href="https://iiitr.ac.in/reach_us" className={styles.footerLink}>Campus</a></li>
