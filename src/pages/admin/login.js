@@ -66,7 +66,6 @@ const Login = ({ setLoginsign, setAdmin }) => {
             />
           </div>
 
-         
           <button
             onClick={handleLogin}
             disabled={loading}
@@ -74,6 +73,13 @@ const Login = ({ setLoginsign, setAdmin }) => {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
+
+          <p 
+            className={styles.forgotPasswordLink} 
+            onClick={() => setShowForgotPassword(true)}
+          >
+            Forgot Password?
+          </p>
         </>
       ) : (
         <ForgotPassword onResetSuccess={handleResetSuccess} />

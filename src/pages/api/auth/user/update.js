@@ -49,7 +49,6 @@ export default async function handler(req, res) {
         rollno,
         department,
         cgpa,
-        password,
         linkedin,
         github,
         leetcode,
@@ -90,10 +89,7 @@ export default async function handler(req, res) {
       };
 
       // If a new password is provided, hash it
-      if (password) {
-        updateData.password = await bcrypt.hash(password, 12);
-      }
-
+      
       // If a new profilepic is provided, update the user's profile picture
       if (req.files?.profilepic) {
         const profilePicPath = `/uploads/${req.files.profilepic[0].filename}`;

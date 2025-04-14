@@ -1,38 +1,41 @@
-/* Base Styles */
+/* Base Styles - Mobile First */
 .profileContainer {
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 0 1rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
+  box-sizing: border-box;
 }
 
 .profileGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.5rem;
+  width: 100%;
 }
 
 /* Profile Header */
 .profileHeader {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
   background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
-  border-radius: 12px;
+  border-radius: 8px;
   color: white;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .avatarContainer {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 3px solid white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profileImage {
@@ -49,7 +52,7 @@
   justify-content: center;
   background: #4a6cf7;
   color: white;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
@@ -57,25 +60,27 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .profileName {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
 }
 
 .profileMeta {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .metaItem {
   background: rgba(255, 255, 255, 0.2);
-  padding: 0.3rem 0.8rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .actionButtons {
@@ -116,19 +121,20 @@
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
-
 /* Profile Sections */
 .profileSection {
   background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sectionTitle {
   margin-top: 0;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.3rem;
   color: #4a6cf7;
   position: relative;
   padding-bottom: 0.5rem;
@@ -139,15 +145,15 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 60px;
-  height: 3px;
+  width: 50px;
+  height: 2px;
   background: linear-gradient(to right, #6e8efb, #a777e3);
 }
 
 /* Details Grid */
 .detailsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -160,7 +166,7 @@
 .detailLabel {
   font-weight: 600;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 /* Skills */
@@ -173,9 +179,9 @@
 .skillPill {
   background: #e0e7ff;
   color: #4a6cf7;
-  padding: 0.4rem 0.8rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
@@ -184,33 +190,34 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   background: #4a6cf7;
   color: white;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
+  font-size: 0.9rem;
 }
 
 .resumeLink:hover {
   background: #3a5bd9;
   transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(74, 108, 247, 0.3);
+  box-shadow: 0 4px 8px rgba(74, 108, 247, 0.3);
 }
 
 /* Social Links */
 .socialLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .socialLink {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   background: #f5f7ff;
   color: #333;
   border-radius: 6px;
@@ -218,6 +225,7 @@
   font-weight: 600;
   transition: all 0.3s ease;
   border: 1px solid #e0e7ff;
+  font-size: 0.9rem;
 }
 
 .socialLink:hover {
@@ -226,51 +234,53 @@
 }
 
 .socialLink i {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 /* Cards (Projects, Leadership) */
 .cardContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 }
 
 .card {
   background: white;
   border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   border: 1px solid #f0f0f0;
   transition: all 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .cardTitle {
   margin-top: 0;
   margin-bottom: 0.5rem;
   color: #4a6cf7;
+  font-size: 1.1rem;
 }
 
 .cardSubtitle {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   color: #666;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .cardText {
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
   color: #555;
+  font-size: 0.9rem;
 }
 
 .cardDate {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #888;
   margin: 0;
 }
@@ -279,22 +289,22 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .cardSkillPill {
   background: #f0f4ff;
   color: #4a6cf7;
-  padding: 0.3rem 0.6rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 20px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
 }
 
 /* Timeline (Work Experience) */
 .timeline {
   position: relative;
-  padding-left: 2rem;
+  padding-left: 1.5rem;
 }
 
 .timeline::before {
@@ -302,38 +312,39 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 7px;
+  left: 6px;
   width: 2px;
   background: #e0e7ff;
 }
 
 .timelineItem {
   position: relative;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
 }
 
 .timelineDot {
   position: absolute;
-  left: -2rem;
+  left: -1.5rem;
   top: 5px;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: #4a6cf7;
-  border: 3px solid white;
+  border: 2px solid white;
   box-shadow: 0 0 0 2px #4a6cf7;
 }
 
 .timelineContent {
-  padding: 1rem;
+  padding: 0.75rem;
   background: #f9faff;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .timelineTitle {
   margin-top: 0;
   margin-bottom: 0.5rem;
   color: #4a6cf7;
+  font-size: 1.1rem;
 }
 
 .timelineCompany {
@@ -341,24 +352,27 @@
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #555;
+  font-size: 0.95rem;
 }
 
 .timelineDuration {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #888;
   margin: 0.5rem 0;
 }
 
 .timelineDescription {
   margin-bottom: 0;
-  line-height: 1.6;
+  line-height: 1.5;
   color: #555;
+  font-size: 0.9rem;
 }
 
 /* No Content */
 .noContent {
   color: #888;
   font-style: italic;
+  font-size: 0.9rem;
 }
 
 /* Loading State */
@@ -367,15 +381,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 300px;
+  min-height: 200px;
   gap: 1rem;
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #f0f0f0;
-  border-top: 5px solid #4a6cf7;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f0f0f0;
+  border-top: 4px solid #4a6cf7;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -385,51 +399,232 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive Design */
-@media (max-width: 900px) {
+/* Tablet and Desktop Styles */
+@media (min-width: 600px) {
   .profileHeader {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 1.5rem;
-  }
-  
-  .actionButtons {
     flex-direction: row;
-    justify-content: center;
+    text-align: left;
+    padding: 2rem;
   }
-  
-  .avatarContainer {
-    margin: 0 auto;
+
+  .profileInfo {
+    align-items: flex-start;
   }
-  
+
   .profileMeta {
-    justify-content: center;
+    justify-content: flex-start;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    align-items: flex-end;
+    width: auto;
+  }
+
+  .detailsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cardContainer {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 768px) {
   .profileContainer {
-    padding: 0 0.5rem;
+    padding: 0 1.5rem;
   }
-  
-  .profileHeader {
+
+  .profileGrid {
+    gap: 2rem;
+  }
+
+  .profileSection {
     padding: 1.5rem;
   }
-  
-  .avatarContainer {
-    width: 100px;
-    height: 100px;
+
+  .detailsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
-  
+
+  .cardContainer {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .avatarContainer {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profileName {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .profileHeader {
+    grid-template-columns: auto 1fr auto;
+    display: grid;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    min-width: 100px;
+    align-items: stretch; 
+  }
+
+  .updateButton, 
+  .logoutButton {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center; 
+    text-align: center; 
+  }
+}
+
+@media (max-width: 320px) {
+  .profileContainer {
+    padding: 0.25rem;
+    margin: 0 auto;
+  }
+
+  .profileGrid {
+    gap: 1rem;
+  }
+
+  .profileHeader {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .avatarContainer {
+    width: 80px;
+    height: 80px;
+    border-width: 2px;
+  }
+
+  .profileInitials {
+    font-size: 2rem;
+  }
+
   .profileName {
     font-size: 1.5rem;
   }
-  
-  .detailsGrid {
-    grid-template-columns: 1fr;
+
+  .profileMeta {
+    gap: 0.25rem;
   }
-  
+
+  .metaItem {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .actionButtons {
+    gap: 0.5rem;
+  }
+
+  .updateButton, 
+  .logoutButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .profileSection {
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  .sectionTitle {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .detailsGrid {
+    gap: 0.75rem;
+  }
+
+  .detailLabel {
+    font-size: 0.75rem;
+  }
+
+  .skillPill {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .resumeLink {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .socialLinks {
+    gap: 0.25rem;
+  }
+
+  .socialLink {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
   .cardContainer {
-    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+  }
+
+  .cardSubtitle {
+    font-size: 0.85rem;
+  }
+
+  .cardText {
+    font-size: 0.8rem;
+  }
+
+  .cardSkillPill {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .timeline {
+    padding-left: 1rem;
+  }
+
+  .timelineDot {
+    left: -1rem;
+    width: 12px;
+    height: 12px;
+  }
+
+  .timelineContent {
+    padding: 0.5rem;
+  }
+
+  .timelineTitle {
+    font-size: 1rem;
+  }
+
+  .timelineCompany {
+    font-size: 0.85rem;
+  }
+
+  .timelineDuration {
+    font-size: 0.75rem;
+  }
+
+  .timelineDescription {
+    font-size: 0.8rem;
+  }
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
   }
 }

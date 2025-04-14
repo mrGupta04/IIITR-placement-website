@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Signinsignup from "./signinsignup";
 import AdminProfileCard from "./profilecard";
-import styles from '../../styles/profile.module.css';
+import styles from '../../styles/Admin-profile.module.css';
 
 const AdminProfile = ({ onLogout, goBackToProfile }) => {
   const [admin, setAdmin] = useState(null);
@@ -9,31 +9,32 @@ const AdminProfile = ({ onLogout, goBackToProfile }) => {
 
   useEffect(() => {
     const storedAdmin = localStorage.getItem("admin");
-
     if (storedAdmin) {
       try {
         const parsedAdmin = JSON.parse(storedAdmin);
-        if (parsedAdmin && typeof parsedAdmin === "object") {
-          setAdmin(parsedAdmin);
-          setIsLoggedIn(true);
-        } else {
-          localStorage.removeItem("admin");
-        }
+        console.log("Retrieved Admin:", parsedAdmin);
+        setAdmin(parsedAdmin);
+        setIsLoggedIn(true);
       } catch (error) {
-        localStorage.removeItem("admin");
+        console.error("Error parsing Admin data:", error);
+        localStorage.removeItem("admin"); 
       }
     }
   }, []);
 
-  const handleLogin = (adminData) => {
+  const handleLoginSuccess = (adminData) => {
+    console.log("Login successful, Admin data:", adminData);
     if (adminData) {
       localStorage.setItem("admin", JSON.stringify(adminData));
       setAdmin(adminData);
       setIsLoggedIn(true);
+    } else {
+      console.error("Invalid Admin data received:", adminData);
     }
   };
 
   const handleLogout = () => {
+    console.log("Admin logged out");
     localStorage.removeItem("admin");
     setAdmin(null);
     setIsLoggedIn(false);
@@ -41,18 +42,25 @@ const AdminProfile = ({ onLogout, goBackToProfile }) => {
   };
 
   return (
-    <div>
+    <div className={styles.profileContainer}>
       {isLoggedIn ? (
-        <AdminProfileCard handleLogout={handleLogout} />
+        <AdminProfileCard 
+          admin={admin} 
+          handleLogout={handleLogout}
+        />
       ) : (
         <div className={styles.authContainer}>
-          <button 
+         
+          <Signinsignup 
+            setAdmin={handleLoginSuccess} 
+            setLoginsign={setIsLoggedIn} 
+          />
+           <button 
             className={styles.backButton} 
             onClick={goBackToProfile}
           >
             Back to Profile
           </button>
-          <Signinsignup setAdmin={handleLogin} />
         </div>
       )}
     </div>

@@ -1,200 +1,242 @@
-/* Main container */
-.container {
+/* Base Styles */
+.authPortalContainer {
   display: flex;
-  width: 100%;
-  max-width: 1400px;
-  min-height: 500px;
-  margin: 30px auto;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  min-height: 100vh;
+  background-color: #f8fafc;
 }
 
-/* Panel styles */
-.panel {
-  flex: 1;
+.authLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+.authFormPanel {
+  width: 50%;
+  padding: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 0px;
-  transition: all 0.6s ease-in-out;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
 }
 
-.leftPanel {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  color: white;
-  text-align: center;
-}
 
-.rightPanel {
-  background: #1a202c;
-  color: #333;
-}
-
-.contentFeatures {
+.authContentPanel {
+  width: 50%;
+  padding: 4rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin: 2rem 0;
+  justify-content: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
 }
 
-.featureItem {
+/* Login Content Panel */
+.authLoginContentPanel {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+}
+
+/* Signup Content Panel */
+.authSignupContentPanel {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+/* Content Styles */
+.authPortalContent {
+  max-width: 480px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.authPortalTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.75rem;
+  line-height: 1.3;
+}
+
+.authFeatureList {
+  margin-top: 3rem;
+}
+
+.authFeatureItem {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.75rem;
+}
+
+.authFeatureIconContainer {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 8px;
-  transition: transform 0.2s ease;
+  justify-content: center;
+  margin-right: 1.25rem;
+  flex-shrink: 0;
+  backdrop-filter: blur(4px);
 }
 
-.featureItem:hover {
-  transform: translateX(5px);
-}
-
-.featureIcon {
+.authFeatureIcon {
   font-size: 1.5rem;
 }
 
-/* Mobile Specific Styles */
-.mobileHeader {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.mobileSubtitle {
-  color: #94a3b8;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
-
-/* Content styles */
-.content {
-  max-width: 80%;
-}
-
-.content h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  margin-top: .5rem;
-  line-height: 1.2;
-  background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.content p {
-  font-size: 16px;
+.authFeatureText {
+  font-size: 1.1rem;
   line-height: 1.6;
-  margin-bottom: -10px;
+  opacity: 0.95;
+  margin-top: 0.25rem;
 }
 
-/* Switch button */
-.switchFormButton {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-  padding: 12px 30px;
-  border-radius: 30px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.switchFormButton:hover {
-  background: white;
-  color: #2563eb;
-}
-
-/* Mobile Container Styles */
-.mobileContainer {
-  min-height: 100vh;
-  min-width: 90vw;
-  padding: 1rem;
-  background: #1a202c;
-}
-
-.mobilePanel {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
-
-.mobileSwitch {
+/* Switch Container */
+.authSwitchContainer {
   text-align: center;
-  margin-top: 1.5rem;
-  color: #f7f7f8;
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  color: black;
 }
 
-.switchLink {
-  color: #3b82f6;
+.authSwitchButton {
+  background: none;
+  border: none;
+  color: #2563eb;
   font-weight: 600;
   cursor: pointer;
-  text-decoration: underline;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 1.2rem;
 }
 
-.switchLink:hover {
-  color: #2563eb;
+.authSwitchButton:hover {
+  background-color: #f1f5f9;
 }
 
-/* Responsive design */
-@media only screen and (width: 768px) {
-  .container {
-    flex-direction: column;
-    min-height: auto;
-    width: 100%;
-    margin: 0;
-  }
-  
-  .panel {
-    padding: 20px;
-    width: 100%;
-  }
-  
-  .leftPanel {
-    order: 2;
-    padding: 30px 20px;
-  }
-  
-  .rightPanel {
-    order: 1;
-  }
-
-  .content {
-    max-width: 90%;
-    padding: 0 15px;
-  }
-
-  .mobileContainer {
-    min-height: 100vh;
-    padding: 1rem;
-  }
-
-  .mobilePanel {
-    width: 100%;
-    max-width: 768px;
-    margin: 0 auto;
-    padding: 1.5rem;
-  }
+/* Mobile Styles */
+.authMobileContainer {
+  padding: 2rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* For mobile devices */
+.authMobileHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.authMobileTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.authMobileSubtitle {
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.authMobilePanel {
+  background-color: white;
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.authMobileSwitchText {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Decorative Elements */
+.authContentPanel::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.authContentPanel::after {
+  content: "";
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Animation */
+.authFormPanel,
+.authContentPanel {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* Responsive Layout */
 @media (max-width: 768px) {
-  .container {
-    display: none; /* Hide the desktop version */
+  .authPortalContainer {
+    flex-direction: column;
+  }
+  
+  .authFormPanel,
+  .authContentPanel {
+    width: 100%;
+    padding: 3rem 1.5rem;
+  }
+  
+  /* Swap order for signup on mobile */
+  .authSignupContentPanel {
+    order: -1;
+  }
+ 
+  .authPortalTitle {
+    font-size: 1.75rem;
+  }
+  
+  .authFeatureIconContainer {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .authFeatureText {
+    font-size: 1rem;
   }
 }
 
-/* For larger screens */
-@media (min-width: 769px) {
-  .mobileContainer {
-    display: none; /* Hide the mobile version */
+/* Small mobile devices */
+@media (max-width: 480px) {
+  
+  .authMobileContainer {
+    padding: 0rem 0rem;
+  }
+  
+  .authMobilePanel {
+    padding: 1rem 1rem;
+    border-radius: 8px;
+  }
+  
+  .authMobileTitle {
+    font-size: 1.5rem;
   }
 }

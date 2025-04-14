@@ -14,20 +14,25 @@ export default function RecruiterSignup({ setAdmin, setLoginsign }) {
     industryType: "",
     website: "",
     password: "",
-    reenterpassword: "",
   });
 
-  const [profilepic, setProfilepic] = useState(null);
   const [logo, setLogo] = useState(null); 
+  const [logoName, setLogoName] = useState("Choose Logo");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
   const validateMobile = (mobileno) => /^[0-9]{10}$/.test(mobileno);
-  const validatePassword = (password) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleLogoChange = (e) => {
+    if (e.target.files[0]) {
+      setLogo(e.target.files[0]);
+      setLogoName(e.target.files[0].name);
+    }
   };
 
   const handleSignup = async (e) => {
@@ -44,21 +49,21 @@ export default function RecruiterSignup({ setAdmin, setLoginsign }) {
       return;
     }
 
-    if (!validatePassword(formData.password)) {
-      setError("Password must be at least 8 characters, contain a letter, number, and special character.");
+    if (formData.password !== "admin@iiitr") {
+      setError("Please use the password provided by IIITR.");
       return;
     }
 
-    if (formData.password !== formData.reenterpassword) {
-      setError("Passwords do not match.");
-      return;
-    }
+   
 
     setLoading(true);
 
     const data = new FormData();
-    Object.entries(formData).forEach(([key, value]) => data.append(key, value));
-    if (profilepic) data.append("profilepic", profilepic);
+    Object.entries(formData).forEach(([key, value]) => {
+       
+        data.append(key, value);
+      
+    });
     if (logo) data.append("logo", logo);
 
     try {
@@ -99,10 +104,21 @@ export default function RecruiterSignup({ setAdmin, setLoginsign }) {
           <textarea name="aboutCompany" placeholder="About Company" value={formData.aboutCompany} onChange={handleChange} className={styles.signupTextarea} required />
           <input type="text" name="industryType" placeholder="Industry Type" value={formData.industryType} onChange={handleChange} className={styles.signupInput} required />
           <input type="url" name="website" placeholder="Website URL" value={formData.website} onChange={handleChange} className={styles.signupInput} required />
-          <input type="file" onChange={(e) => setProfilepic(e.target.files[0])} className={styles.signupFileInput} required  placeholder="Upload Profile"/>
-          <input type="file" onChange={(e) => setLogo(e.target.files[0])} className={styles.signupFileInput} required placeholder="Upload Logo"/>
+          
+          <div className={styles.fileInputContainer}>
+            <label className={styles.fileInputLabel}>
+              {logoName}
+              <input 
+                type="file" 
+                onChange={handleLogoChange} 
+                className={styles.signupFileInput} 
+                accept="image/*"
+                required
+              />
+            </label>
+          </div>
+          
           <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} className={styles.signupInput} required />
-          <input type="password" name="reenterpassword" placeholder="Confirm Password" value={formData.reenterpassword} onChange={handleChange} className={styles.signupInput} required />
           <button type="submit" className={styles.signupButton} disabled={loading}>
             {loading ? "Processing..." : "Sign Up"}
           </button>

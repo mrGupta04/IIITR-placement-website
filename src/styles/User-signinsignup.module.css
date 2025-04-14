@@ -1,215 +1,55 @@
-/* Main container */
-.container {
-  display: flex;
-  width: 100%;
-  max-width: 1400px;
-  min-height: 500px;
-  margin: 30px auto;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
+/* Base Styles */
 
-/* Panel styles */
-.panel {
-  flex: 1;
+
+.toggleContainer {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 0px;
-  transition: all 0.6s ease-in-out;
-}
-
-.leftPanel {
-  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
-  color: white;
-  text-align: center;
-}
-
-.rightPanel {
-  background: #2c2c2c;
-  color: #333;
-}
-
-.contentFeatures {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.featureItem {
-  display: flex;
-  align-items: center;
-  /* gap: 1rem; */
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 8px;
-  transition: transform 0.2s ease;
-}
-
-.featureItem:hover {
-  transform: translateX(5px);
-}
-
-.featureIcon {
-  font-size: 1.5rem;
-}
-
-/* Mobile Specific Styles */
-.mobileHeader {
-  text-align: center;
   margin-bottom: 2rem;
 }
 
-.mobileSubtitle {
-  color: #94a3b8;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
-
-
-/* Content styles */
-.content {
-  max-width: 80%;
-}
-
-.content h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  margin-top: .5rem;
-  line-height: 1.2;
-  background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.content p {
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: -10px;
-}
-
-/* Switch button */
-.switchFormButton {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-  padding: 12px 30px;
-  border-radius: 30px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.toggleButton {
+  background: none;
+  border: none;
+  color:black;
+  font-size: 1.3rem;
   cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  position: relative;
   transition: all 0.3s ease;
 }
 
-.switchFormButton:hover {
-  background: white;
-  color: #5a67d8;
+.toggleButton:hover {
+  color: #3b82f6;
 }
 
-@media only screen and (width: 768px) {
-  .container {
-    flex-direction: column;
-    min-height: auto;
-    width: 100%;
-    margin: 0;
-  }
-  
-  .panel {
-    padding: 20px;
-    width: 100%;
-  }
-  
-  .leftPanel {
-    order: 2;
-    padding: 30px 20px;
-  }
-  
-  .rightPanel {
-    order: 1;
-  }
-
-  .content {
-    max-width: 90%;
-    padding: 0 15px;
-  }
-
-  .mobileContainer {
-    min-height: 100vh;
-    padding: 1rem;
-  }
-
-  .mobilePanel {
-    width: 100%;
-    max-width: 768px;
-    margin: 0 auto;
-    padding: 1.5rem;
-  }
-}
-/* Responsive design */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    min-height: auto;
-    width:100%;
-  }
-  
-  .panel {
-    padding: 20px;
-  }
-  
-  .leftPanel {
-    order: 2;
-    padding: 30px 20px;
-  }
-  
-  .rightPanel {
-    order: 1;
-  }
+.toggleButton::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #3b82f6;
+  transition: width 0.3s ease;
 }
 
-/* Add these new styles */
-.mobileContainer {
-  min-height: 100vh;
-  min-width: 90vw;
-  padding: 1rem;
-  background: rgb(39, 39, 39);
-}
-
-.mobilePanel {
+.toggleButton:hover::after {
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1.5rem;
 }
 
-.mobileSwitch {
+.switchContainer {
   text-align: center;
   margin-top: 1.5rem;
-  color: #f7f7f8;
+  padding: 1rem;
 }
 
-.switchLink {
+.switchButton {
   color: #3b82f6;
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
-}
-
-.switchLink:hover {
-  color: #2563eb;
-}
-
-
-/* Update your existing media query */
-@media (max-width: 768px) {
-  .container {
-    display: none; /* Hide the desktop version */
-  }
+  background: none;
+  border: none;
+  padding: 0;
 }

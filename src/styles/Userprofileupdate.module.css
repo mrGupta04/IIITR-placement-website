@@ -1,311 +1,317 @@
 .container {
-    display: flex;
-    min-height: 100vh;
-    background-color: #f8f9fa;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  flex-direction: column;
+}
+
+.sidebar {
+  width: 100%;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  padding: .5rem;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:.3rem;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;  /* reduced padding */
+  margin-right: 0.3rem;  /* reduced margin */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 0.85rem;  /* slightly smaller font */
+}
+
+.sidebarItem:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.icon {
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 1.5rem;
+  background-color: white;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  border-radius: 2px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup {
+  margin-bottom: 0;
+}
+
+.inputLabel {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  background-color: #f8fafc;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #a777e3;
+  box-shadow: 0 0 0 3px rgba(167, 119, 227, 0.1);
+  background-color: white;
+}
+
+.fileUploadGroup {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.fileUpload {
+  margin-bottom: 0;
+}
+
+.fileUploadLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+.fileUploadLabel span:first-child {
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.fileInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.fileUploadButton {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  background-color: #edf2f7;
+  border: 1px dashed #cbd5e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  color: #4a5568;
+  font-size: 0.85rem;
+}
+
+.fileUploadButton:hover {
+  background-color: #e2e8f0;
+}
+
+.fileName {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #718096;
+  word-break: break-all;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(110, 142, 251, 0.3);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.errorMessage {
+  padding: 0.8rem;
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-radius: 6px;
+  margin-bottom: 1.2rem;
+  border-left: 3px solid #e53e3e;
+  font-size: 0.85rem;
+}
+
+/* Tablet and larger screens */
+@media (min-width: 640px) {
+  .container {
+    flex-direction: row;
   }
   
   .sidebar {
-    width: 100%;
-    background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
-    padding: 1rem;
-    color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    overflow-x: auto;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    scrollbar-width: none;
-  }
-  
-  .sidebar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .sidebarItem {
-    display: flex;
-    align-items: center;
-    padding: 0.6rem 1rem;
-    margin-right: 0.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
+    width: 220px;
+    padding: 1.5rem 1rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0;
+    overflow-x: visible;
+    position: static;
+}
+
+.sidebarItem {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    padding: 0.7rem 1rem;
     font-size: 0.9rem;
-  }
-  
-  .sidebarItem:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .active {
-    background-color: rgba(255, 255, 255, 0.2);
-    font-weight: 600;
-  }
-  
-  .icon {
-    margin-right: 8px;
-    font-size: 1rem;
-  }
-  
+}
   .mainContent {
-    flex: 1;
-    padding: 1.5rem;
-    background-color: white;
-  }
-  
-  .sectionTitle {
-    font-size: 1.5rem;
-    color: #2d3748;
-    margin-bottom: 1.2rem;
-    font-weight: 700;
-    position: relative;
-    padding-bottom: 0.5rem;
-  }
-  
-  .sectionTitle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
-    border-radius: 2px;
+    padding: 2rem;
   }
   
   .formGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .formGroup {
-    margin-bottom: 0;
-  }
-  
-  .inputLabel {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-size: 0.85rem;
-    color: #4a5568;
-    font-weight: 500;
-  }
-  
-  .formInput {
-    width: 100%;
-    padding: 0.7rem 0.9rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-    background-color: #f8fafc;
-  }
-  
-  .formInput:focus {
-    outline: none;
-    border-color: #a777e3;
-    box-shadow: 0 0 0 3px rgba(167, 119, 227, 0.1);
-    background-color: white;
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .fileUploadGroup {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .fileUpload {
-    margin-bottom: 0;
-  }
-  
-  .fileUploadLabel {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .fileUploadLabel span:first-child {
-    margin-bottom: 0.4rem;
-    font-size: 0.85rem;
-    color: #4a5568;
-    font-weight: 500;
-  }
-  
-  .fileInput {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-  
-  .fileUploadButton {
-    display: inline-block;
-    padding: 0.7rem 1.2rem;
-    background-color: #edf2f7;
-    border: 1px dashed #cbd5e0;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-align: center;
-    color: #4a5568;
-    font-size: 0.85rem;
-  }
-  
-  .fileUploadButton:hover {
-    background-color: #e2e8f0;
-  }
-  
-  .fileName {
-    margin-top: 0.4rem;
-    font-size: 0.8rem;
-    color: #718096;
-    word-break: break-all;
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .submitButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.8rem 1.5rem;
-    background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    width: 100%;
-    margin: 0 auto;
+    max-width: 300px;
+  }
+}
+
+/* Larger screens */
+@media (min-width: 768px) {
+  .sidebar {
+    width: 250px;
   }
   
-  .submitButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(110, 142, 251, 0.3);
+  .mainContent {
+    padding: 2rem 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    padding: 2rem 1rem;
   }
   
-  .submitButton:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+  .mainContent {
+    padding: 2.5rem 3rem;
   }
   
-  .spinner {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 6px;
+  .sectionTitle {
+    font-size: 1.8rem;
   }
   
-  @keyframes spin {
-    to { transform: rotate(360deg); }
+  .formGrid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* iPhone 5/SE and smaller */
+@media (max-width: 320px) {
+  .sidebarItem {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
   }
   
-  .errorMessage {
-    padding: 0.8rem;
-    background-color: #fff5f5;
-    color: #e53e3e;
-    border-radius: 6px;
-    margin-bottom: 1.2rem;
-    border-left: 3px solid #e53e3e;
-    font-size: 0.85rem;
+  .mainContent {
+    padding: 1rem;
   }
   
-  /* Tablet and larger screens */
-  @media (min-width: 640px) {
-    .container {
-      flex-direction: row;
-    }
-    
-    .sidebar {
-      width: 220px;
-      padding: 1.5rem 1rem;
-      flex-direction: column;
-      overflow-x: visible;
-      position: static;
-    }
-    
-    .sidebarItem {
-      margin-right: 0;
-      margin-bottom: 0.5rem;
-      padding: 0.7rem 1rem;
-    }
-    
-    .mainContent {
-      padding: 2rem;
-    }
-    
-    .formGrid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .fileUploadGroup {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .submitButton {
-      max-width: 300px;
-    }
+  .sectionTitle {
+    font-size: 1.3rem;
   }
   
-  /* Larger screens */
-  @media (min-width: 768px) {
-    .sidebar {
-      width: 250px;
-    }
-    
-    .mainContent {
-      padding: 2rem 2.5rem;
-    }
+  .formInput, .fileUploadButton {
+    padding: 0.6rem 0.8rem;
   }
-  
-  @media (min-width: 1024px) {
-    .sidebar {
-      padding: 2rem 1rem;
-    }
-    
-    .mainContent {
-      padding: 2.5rem 3rem;
-    }
-    
-    .sectionTitle {
-      font-size: 1.8rem;
-    }
-    
-    .formGrid {
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-  }
-  
-  /* iPhone 5/SE and smaller */
-  @media (max-width: 320px) {
-    .sidebarItem {
-      padding: 0.5rem 0.8rem;
-      font-size: 0.8rem;
-    }
-    
-    .mainContent {
-      padding: 1rem;
-    }
-    
-    .sectionTitle {
-      font-size: 1.3rem;
-    }
-    
-    .formInput, .fileUploadButton {
-      padding: 0.6rem 0.8rem;
-    }
-  }
+}

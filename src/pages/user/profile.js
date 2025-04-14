@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Signinsignup from "./signinsignup";
 import ProfileCard from "./profilecard";
 import Update from './update';
-import styles from '../../styles/profile.module.css';
+import styles from '../../styles/Userprofile.module.css';
 
 const Userprofile = ({ onLogout, goBackToProfile }) => {
   const [user, setUser] = useState(null);
@@ -14,7 +14,6 @@ const Userprofile = ({ onLogout, goBackToProfile }) => {
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        console.log("Retrieved User:", parsedUser);
         setUser(parsedUser);
         setIsLoggedIn(true);
       } catch (error) {
@@ -25,18 +24,14 @@ const Userprofile = ({ onLogout, goBackToProfile }) => {
   }, []);
 
   const handleLoginSuccess = (userData) => {
-    console.log("Login successful, User data:", userData);
     if (userData) {
       localStorage.setItem("User", JSON.stringify(userData));
       setUser(userData);
       setIsLoggedIn(true);
-    } else {
-      console.error("Invalid User data received:", userData);
     }
   };
 
   const handleLogout = () => {
-    console.log("User logged out");
     localStorage.removeItem("User");
     setUser(null);
     setIsLoggedIn(false);
@@ -67,16 +62,17 @@ const Userprofile = ({ onLogout, goBackToProfile }) => {
         )
       ) : (
         <div className={styles.authContainer}>
+          
+          <Signinsignup 
+            setUser={handleLoginSuccess} 
+            setLoginsign={setIsLoggedIn} 
+          />
           <button 
             className={styles.backButton} 
             onClick={goBackToProfile}
           >
             Back to Profile
           </button>
-          <Signinsignup 
-            setUser={handleLoginSuccess} 
-            setLoginsign={setIsLoggedIn} 
-          />
         </div>
       )}
     </div>

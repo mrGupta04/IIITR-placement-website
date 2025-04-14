@@ -24,7 +24,6 @@ const upload = multer({
   { name: "logo", maxCount: 1 },
 ]);
 
-// Disable bodyParser to allow multer to handle form data
 export const config = {
   api: {
     bodyParser: false,
@@ -47,15 +46,11 @@ export default async function handler(req, res) {
       console.log("Connected to database:", db.databaseName);
 
       // Extract form data from req.body and req.files
-      const { email, password, reenterpassword, ...rest } = req.body;
+      const { email, password,  ...rest } = req.body;
       const profilePic = req.files["profilepic"] ? req.files["profilepic"][0].path : null;
       const logo = req.files["logo"] ? req.files["logo"][0].path : null;
 
-      // Validate password match
-      if (password !== reenterpassword) {
-        return res.status(400).json({ message: "Passwords do not match." });
-      }
-
+      
       // Check if recruiter already exists
       const existingRecruiter = await db.collection("recruiters").findOne({ email });
       if (existingRecruiter) {
@@ -74,10 +69,8 @@ export default async function handler(req, res) {
         logo,
       };
 
-      // Insert recruiter into the database
       const result = await db.collection("recruiters").insertOne(recruiterData);
 
-      // Generate JWT token
       const token = jwt.sign({ id: result.insertedId, email }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
