@@ -49,9 +49,9 @@ export default async function handler(req, res) {
     else if (req.method === "POST") {
 
       const body = await parseJsonBody(req);
-      const { jobType, title, email, location, salary, description, duration, status, skills, eligibleBatch, eligibleBranch } = body;
+      const { jobType, title, email,name, location, salary, description, duration, status, skills, eligibleBatch, eligibleBranch } = body;
 
-      if (!jobType || !title || !email || !location || !salary || !description) {
+      if (!jobType || !title || !email || !name||!location || !salary || !description) {
         return res.status(400).json({ message: "Missing required fields." });
       }
 
@@ -59,6 +59,7 @@ export default async function handler(req, res) {
         jobType,
         title,
         email,
+        name,
         location,
         salary,
         description,

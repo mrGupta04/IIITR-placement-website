@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import styles from '../styles/about.module.css';
 import { FaLinkedin, FaWhatsapp, FaEnvelope, FaGraduationCap, FaBriefcase, FaUserTie } from 'react-icons/fa';
-import Card from '../components/card';
+import Card from '../components/Card';
 
 const About = () => {
   useEffect(() => {
@@ -35,7 +35,7 @@ const About = () => {
     },
     {
       id: 2,
-      image: "/uploads/student2.jpg",
+      image: "/uploads/faculty.jpg",
       name: "Priya Patel",
       position: "Corporate Relations",
       idno: "IIITR2021002",
@@ -44,7 +44,7 @@ const About = () => {
     },
     {
       id: 3,
-      image: "/uploads/student3.jpg",
+      image: "/uploads/faculty.jpg",
       name: "Rahul Verma",
       position: "Training Head",
       idno: "IIITR2021003",
@@ -53,7 +53,7 @@ const About = () => {
     },
     {
       id: 4,
-      image: "/uploads/student4.jpg",
+      image: "/uploads/faculty.jpg",
       name: "Neha Gupta",
       position: "HR Coordinator",
       idno: "IIITR2021004",
@@ -62,7 +62,7 @@ const About = () => {
     },
     {
       id: 5,
-      image: "/uploads/student5.jpg",
+      image: "/uploads/faculty.jpg",
       name: "Vikram Singh",
       position: "Tech Coordinator",
       idno: "IIITR2021005",
@@ -71,7 +71,7 @@ const About = () => {
     },
     {
       id: 6,
-      image: "/uploads/student6.jpg",
+      image: "/uploads/faculty.jpg",
       name: "Ananya Joshi",
       position: "Documentation Head",
       idno: "IIITR2021006",
@@ -80,7 +80,7 @@ const About = () => {
     },
     {
       id: 7,
-      image: "/uploads/student7.jpg",
+      image: "/uploads/faculty.jpg",
       name: "Karan Malhotra",
       position: "Event Manager",
       idno: "IIITR2021007",
@@ -89,7 +89,7 @@ const About = () => {
     },
     {
       id: 8,
-      image: "/uploads/student8.jpg",
+      image: "/uploads/faculty.jpg",
       name: "Divya Reddy",
       position: "Alumni Relations",
       idno: "IIITR2021008",
@@ -117,7 +117,7 @@ const About = () => {
           className={styles.heroContent}
         >
           <h1>About Our <span className={styles.highlight}>Placement Cell</span></h1>
-          <p>Bridging academic excellence with industry success since 2016</p>
+          <p>Bridging academic excellence with industry success since 2019</p>
         </motion.div>
       </section>
 
@@ -160,12 +160,12 @@ const About = () => {
           {/* Placement Faculty */}
           <div className={styles.leadershipCard}>
             <div className={styles.leadershipContent}>
-              <h3 className={styles.leadershipTitle}>Placement Faculty</h3>
+              <h3>Placement Faculty</h3>
               <p className={styles.leadershipQuote}>
                 "Steering students towards a successful future by bridging the gap between academic learning and industry demands."
               </p>
               <div className={styles.leaderInfo}>
-                <h3 className={styles.leaderName}>Dr. Jhanvi Tiwari</h3>
+                <h4>Dr. Jhanvi Tiwari</h4>
                 <p className={styles.leaderPosition}>Professor & Placement FIC</p>
               </div>
             </div>
@@ -183,12 +183,12 @@ const About = () => {
           {/* Placement Officer - Rajesh */}
           <div className={styles.leadershipCard}>
             <div className={styles.leadershipContent}>
-              <h3 className={styles.leadershipTitle}>Placement Officer</h3>
+              <h3>Placement Officer</h3>
               <p className={styles.leadershipQuote}>
                 "Dedicated to providing students with the best career opportunities."
               </p>
               <div className={styles.leaderInfo}>
-                <h3 className={styles.leaderName}>Mr. Rajesh Kumar</h3>
+                <h4>Mr. Rajesh Kumar</h4>
                 <p className={styles.leaderPosition}>Training & Placement Officer</p>
               </div>
             </div>
@@ -232,13 +232,6 @@ const About = () => {
       <section className={`${styles.missionSection} ${styles.coordinatorsSection} ${styles.fadeIn}`}>
         <div className={`${styles.sectionContainer} ${styles.missionContent}`}>
           <h2>Student Placement Team</h2>
-        </div>
-      </section>
-
-      <section className={`${styles.coordinatorsSection} ${styles.fadeIn}`}>
-        <div className={styles.sectionContainer}>
-          <h2>Student Placement Champions</h2>
-          <p className={styles.sectionSubtitle}>Dedicated students facilitating campus recruitment</p>
 
           <div className={styles.coordinatorsGrid}>
             {studentCoordinators.map((student) => (

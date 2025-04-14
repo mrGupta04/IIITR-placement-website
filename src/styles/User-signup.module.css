@@ -1,297 +1,531 @@
-.signupPageContainer {
-  display: grid;
-  grid-template-columns: 1fr minmax(350px, 40vw) 1fr; 
-  min-height: 100vh;
-  background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
-  overflow: hidden;
-  position: relative;
-}
 
-/* Left Side - Animated Art Component */
-.signupArtContainer {
-  position: relative;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+.signupPageContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding: 0rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .signupBoxContainer {
-  grid-column: 2;
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
   width: 100%;
+  max-width: 900px;
+  min-width: 900px;
+  background: white;
   border-radius: 16px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 1rem;
+  box-sizing: border-box;
+  position: relative;
 }
-
 
 .signupHeading {
-  font-size: 2.8rem;
+  text-align: center;
   color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+
+.progressSteps {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 2rem;
   position: relative;
-  display: inline-block;
-  background: linear-gradient(45deg, #6a11cb, #2575fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.signupForm {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.2rem;
+.progressSteps::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: #e0e6ed;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  max-width: 25%;
+}
+
+.stepNumber {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e0e6ed;
+  color: #64748b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.stepLabel {
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.progressStep.active .stepNumber {
+  background: #3b82f6;
+  color: white;
+}
+
+.progressStep.active .stepLabel {
+  color: #1e293b;
+}
+
+/* Form Steps Container */
+.formStepsContainer {
+  width: 100%;
+  min-height: 500px;
   position: relative;
 }
 
-/* Form Elements Styling */
-.signupInput, .signupTextarea {
-  padding: .9rem;
-  border: none;
+/* Form Steps */
+.formStep {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  overflow-y: auto;
+}
+
+.formStep.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.stepContent {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 80px; /* Space for buttons */
+}
+
+/* Form Elements */
+.signupInput, .signupSelect {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  color: #2c3e50;
+  font-size: 0.9375rem;
+  box-sizing: border-box;
+  background-color: #f8fafc;
 }
 
-.signupInput:focus, .signupTextarea:focus {
+.signupInput:focus, .signupSelect:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #6a11cb, 0 8px 20px rgba(106, 17, 203, 0.2);
-  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+  background-color: white;
 }
 
-.signupTextarea {
-  grid-column: span 2;
-  min-height: 120px;
-  resize: vertical;
-}
-
-
-.fileUploadContainer {
-  grid-column: span 2;
+.formRow {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.inputGroup {
+  flex: 1;
+  min-width: 0;
+}
+
+.halfWidth {
+  width: calc(50% - 0.5rem);
+  box-sizing: border-box;
+}
+
+/* File Upload */
+.fileUploadContainer {
+  width: 100%;
+  margin-bottom: 1.5rem;
 }
 
 .customFileInput {
-  flex: 1;
   position: relative;
-  border: 2px dashed #6a11cb;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(106, 17, 203, 0.04), rgba(37, 117, 252, 0.04));
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  padding: 0.8rem; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100px; 
 }
-
-.customFileInput:hover {
-  background: rgba(106, 17, 203, 0.08);
-  transform: translateY(-2px); 
-  border-color: #2575fc;
-}
-
 
 .fileLabel {
-  font-size: 1rem;
-  color: #6a11cb;
-  font-weight: 600;
+  display: block;
+  padding: 0.75rem 1rem;
+  background-color: #f8fafc;
+  border: 1px dashed #93c5fd;
+  border-radius: 8px;
+  color: #3b82f6;
+  font-size: 0.875rem;
+  text-align: center;
   cursor: pointer;
-  transition: color 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
+  transition: all 0.2s ease;
 }
 
-
-.fileName {
-  margin-top: 0.5rem; 
-  font-size: 0.85rem; 
-  color: #2c3e50;
-  word-break: break-word;
-  text-align: center;
-  font-weight: 500;
+.fileLabel:hover {
+  background-color: #f0f9ff;
+  border-color: #3b82f6;
 }
 
 .fileInput {
   display: none;
 }
 
-.customFileInput::before {
-  display: block;
-  font-size: 0.95rem; 
-  color: #6a11cb;
-  font-weight: 600;
-}
-
-
-@media (max-width: 768px) {
-  .fileUploadContainer {
-    flex-direction: column;
-  }
-
-  .customFileInput {
-    width: 100%;
-    min-height: 90px; 
-  }
-}
-
-
-
-.signupButton {
-  grid-column: span 2;
-  padding: 1.2rem;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
-}
-
-.signupButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(106, 17, 203, 0.4);
-}
-
-.signupErrorMessage {
-  grid-column: span 2;
-  color: #ff4757;
+.fileName {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #64748b;
   text-align: center;
-  padding: 1rem;
-  border-radius: 8px;
-  background: rgba(255, 71, 87, 0.1);
-  animation: errorShake 0.4s ease;
+  word-break: break-word;
 }
 
-@keyframes errorShake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .signupPageContainer {
-    grid-template-columns: 1fr;
-  }
-
-  .signupBoxContainer {
-    margin: 2rem;
-    padding: 2rem;
-  }
-
-  .signupArtContainer {
-    display: none;
-  }
-}
-
-/* Dynamic Sections Styling */
-.dynamicSection {
-  grid-column: span 2;
-  margin-bottom: 1.5rem;
-}
-
-.dynamicSectionLabel {
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.dynamicField {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.addButton {
-  padding: 0.8rem 1.5rem;
-  background: #6a11cb;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.addButton:hover {
-  background: #2575fc;
-  transform: translateY(-2px);
-}
-
-/* Skills Container Styling */
+/* Skills Section */
 .skillsContainer {
-  grid-column: span 2;
   margin-bottom: 1.5rem;
 }
 
 .skillsLabel {
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
   display: block;
-}
-
-.addSkillsBox {
-  padding: 1rem;
-  border: 2px dashed #6a11cb;
-  border-radius: 8px;
-  background: rgba(106, 17, 203, 0.05);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  color:#0f0c29;
-}
-
-.addSkillsBox:hover {
-  background: rgba(106, 17, 203, 0.1);
-  transform: translateY(-2px);
+  margin-bottom: 0.5rem;
+  color: #475569;
+  font-weight: 500;
+  font-size: 0.875rem;
 }
 
 .selectedSkillsBox {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .selectedSkill {
-  padding: 0.5rem 1rem;
-  background: #6a11cb;
-  color: white;
-  border-radius: 8px;
+  background-color: #e1f0fa;
+  color: #2980b9;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 5px;
 }
 
 .removeSkill {
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  line-height: 1;
+  transition: color 0.2s;
 }
 
-.dropdown {
-  margin-top: 1rem;
-  color:#0f0c29;
+.removeSkill:hover {
+  color: #e74c3c;
+}
+
+/* Dynamic Sections */
+.dynamicSection {
+  width: 100%;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e0e6ed;
+  box-sizing: border-box;
+}
+
+.dynamicSectionLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.dynamicField {
+  width: 100%;
+  background-color: white;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.addButton {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 0.5rem;
+}
+
+.addButton:hover {
+  background-color: #2563eb;
+}
+
+/* Terms Checkbox */
+.termsCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.termsCheckbox input {
+  width: auto;
+}
+
+.termsCheckbox label {
+  color: #475569;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+/* Buttons */
+.buttonGroup {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.primaryButton, .secondaryButton, .submitButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.primaryButton {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+}
+
+.primaryButton:hover {
+  background-color: #2563eb;
+}
+
+.secondaryButton {
+  background-color: white;
+  color: #3b82f6;
+  border: 1px solid #e2e8f0;
+}
+
+.secondaryButton:hover {
+  background-color: #f8fafc;
+  border-color: #bfdbfe;
+}
+
+.submitButton {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  width: 100%;
+}
+
+.submitButton:hover {
+  background-color: #059669;
+}
+
+/* Error Message */
+.signupErrorMessage {
+  color: #e74c3c;
+  text-align: center;
+  margin: 0 0 1.5rem;
+  padding: 0.75rem;
+  background-color: #fde8e8;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* React Select Customization */
+.react-select-container {
+  width: 100% !important;
+}
+
+.react-select__control {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  min-height: 44px !important;
+  box-shadow: none !important;
+  background-color: #f8fafc !important;
+}
+
+.react-select__control--is-focused {
+  border-color: #93c5fd !important;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3) !important;
+  background-color: white !important;
+}
+
+.react-select__multi-value {
+  background-color: #dbeafe !important;
+  border-radius: 6px !important;
+}
+
+.react-select__multi-value__label {
+  color: #1d4ed8 !important;
+  font-size: 0.8125rem !important;
+}
+
+.react-select__multi-value__remove:hover {
+  background-color: #bfdbfe !important;
+  color: #1e40af !important;
+}
+
+
+
+@media (min-width: 1200px) {
+  .signupBoxContainer {
+    max-width: 1000px;
+    min-width: 1000px;
+  }
+}
+
+@media (max-width: 991px) {
+  .signupBoxContainer {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 1.5rem;
+  }
+  
+  .signupPageContainer {
+    padding: 0;
+    align-items: flex-start;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .signupBoxContainer {
+    padding: 1.75rem;
+  }
+  
+  .formRow {
+    flex-wrap: wrap;
+  }
+  
+  .halfWidth {
+    width: 100%;
+  }
+  
+  .progressSteps::before {
+    left: 12%;
+    right: 12%;
+  }
+}
+
+
+@media (max-width: 599px) {
+  .signupBoxContainer {
+    padding: 1.5rem;
+  }
+  
+  .signupHeading {
+    font-size: 1.8rem;
+  }
+  
+  .stepLabel {
+    font-size: 0.8rem;
+  }
+  
+  .buttonGroup {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .signupBoxContainer {
+    padding: 1.25rem;
+  }
+  
+  .signupHeading {
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .progressSteps::before {
+    left: 15%;
+    right: 15%;
+  }
+  
+  .stepLabel {
+    display: none;
+  }
+  
+  .buttonGroup {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}
+
+/* Small Mobile (below 400px) */
+@media (max-width: 399px) {
+  .signupBoxContainer {
+    padding: 1rem;
+  }
+  
+  .signupHeading {
+    font-size: 1.5rem;
+  }
+  
+  .stepNumber {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+  
+  .signupInput, 
+  .signupSelect {
+    padding: 0.7rem;
+  }
 }

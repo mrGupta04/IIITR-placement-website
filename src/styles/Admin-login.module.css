@@ -1,87 +1,146 @@
-/* Center the login container */
+/* Admin-login.module.css */
+
+/* Container Styles */
 .adminloginContainer {
-  max-width: 350px;
-  margin: 100px auto;
-  padding: 30px;
-  background: #23252b;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   text-align: center;
-  color: #ffffff;
+  transition: all 0.3s ease;
 }
 
-/* Login heading */
+.adminloginContainer:hover {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading Styles */
 .loginheading {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 15px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
 }
 
-/* Error message styling */
-.errorMessage {
-  color: #ff4b4b;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-/* Input fields stacked vertically */
+/* Input Wrapper */
 .inputWrapper {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Adds space between email and password */
-  margin-bottom: 20px;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Input fields */
+/* Input Fields */
 .adminlogininput {
-  width: 100%;
-  padding: 12px;
-  background: #2e2f38;
-  border: 1px solid #444;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #ffffff;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
   outline: none;
-  transition: 0.3s ease-in-out;
+  color: #4a5568;
 }
 
 .adminlogininput:focus {
-  border-color: #5a67d8;
-  box-shadow: 0px 0px 6px rgba(90, 103, 216, 0.5);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
 
-/* Forgot password link */
-.adminforgetpasswordlink {
-  display: block;
-  margin-bottom: 15px;
-  color: #b3b3b3;
-  font-size: 14px;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.adminlogininput::placeholder {
+  color: #a0aec0;
 }
 
-.adminforgetpasswordlink:hover {
-  color: #5a67d8;
-}
-
-/* Login button */
+/* Button Styles */
 .adminloginbutton {
   width: 100%;
-  padding: 12px;
-  background: #5a67d8;
-  border: none;
-  border-radius: 6px;
+  padding: 0.8rem;
+  background: #667eea;
   color: white;
-  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
 }
 
 .adminloginbutton:hover {
-  background: #4c5ac7;
+  background: #5a67d8;
+  transform: translateY(-1px);
+}
+
+.adminloginbutton:active {
+  transform: translateY(0);
 }
 
 .adminloginbutton:disabled {
-  background: #444;
+  background: #c3dafe;
   cursor: not-allowed;
+  transform: none;
+}
+
+/* Forgot Password Link */
+.forgotPasswordLink {
+  display: inline-block;
+  color: #667eea;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.forgotPasswordLink:hover {
+  color: #5a67d8;
+  text-decoration: underline;
+}
+
+/* Error Message */
+.errorMessage {
+  color: #e53e3e;
+  background: #fff5f5;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #fed7d7;
+}
+
+.forgotPasswordContainer {
+  text-align: left;
+}
+
+.forgotPasswordHeading {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+.backToLogin {
+  display: inline-block;
+  color: #718096;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backToLogin:hover {
+  color: #4a5568;
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .adminloginContainer {
+    padding: 1rem;
+  }
+  
+  .loginheading {
+    font-size: 1.5rem;
+  }
 }

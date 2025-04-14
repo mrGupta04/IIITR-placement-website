@@ -70,9 +70,6 @@ export default async function handler(req, res) {
         aboutCompany,
         industryType,
         website,
-
-    
-        
       };
 
       // Hash password if provided

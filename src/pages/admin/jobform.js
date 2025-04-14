@@ -66,6 +66,7 @@ const JobForm = () => {
       status,
       duration: jobType === "Internship" ? duration : null,
       email: storedAdmin.email,
+      name:storedAdmin.name,
       skills: skills.map((s) => s.value),
       eligibleBatch: eligibleBatch.map((b) => b.value),
       eligibleBranch: eligibleBranch.map((br) => br.value),
