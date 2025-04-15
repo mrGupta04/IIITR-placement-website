@@ -4,11 +4,8 @@ import Image from 'next/image';
 import styles from '../styles/About.module.css';
 import { FaLinkedin, FaWhatsapp, FaEnvelope, FaGraduationCap, FaBriefcase, FaUserTie } from 'react-icons/fa';
 import Card from '../components/card';
-<<<<<<< HEAD
 import studentCoordinators from '../data/team/coordinators.js';
 import leadershipTeam from '../data/team/leaders.js';
-=======
->>>>>>> 10537d12abdab4658958124d4af11d79bbd60278
 
 const About = () => {
   useEffect(() => {

@@ -71,10 +71,6 @@ const DirectorsCorner = () => {
             </div>
           </div>
 
-<<<<<<< HEAD
-=======
-          
->>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
 
           <style jsx global>{`
             @keyframes fade-in-up {
