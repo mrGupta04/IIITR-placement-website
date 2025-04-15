@@ -3,7 +3,7 @@
 import Image from 'next/image'; // Single import here
 import styles from '../styles/Home.module.css';
 import Header from '../components/header';
-import FAQ from '../components/FAQ';
+import FAQ from '../components/faq';
 import { useRouter } from 'next/router';
 import  DirectorsCorner from '../components/directorcorner';
 import dynamic from 'next/dynamic';
