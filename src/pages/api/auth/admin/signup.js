@@ -20,7 +20,6 @@ const upload = multer({
     },
   }),
 }).fields([
-  { name: "profilepic", maxCount: 1 },
   { name: "logo", maxCount: 1 },
 ]);
 
@@ -47,8 +46,8 @@ export default async function handler(req, res) {
 
       // Extract form data from req.body and req.files
       const { email, password,  ...rest } = req.body;
-      const profilePic = req.files["profilepic"] ? req.files["profilepic"][0].path : null;
-      const logo = req.files["logo"] ? req.files["logo"][0].path : null;
+  
+      const logo = req.files["logo"] ? `/uploads/${req.files["logo"][0].filename}` : null;
 
       
       // Check if recruiter already exists
@@ -65,7 +64,6 @@ export default async function handler(req, res) {
         ...rest,
         email,
         password: hashedPassword,
-        profilePic,
         logo,
       };
 

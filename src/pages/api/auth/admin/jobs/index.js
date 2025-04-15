@@ -56,6 +56,7 @@ export default async function handler(req, res) {
         eligibleBranch: Array.isArray(job.eligibleBranch) ? job.eligibleBranch : [],
         email: job.email || email,
         name: job.name || "Unknown",
+        logo: job.logo || "",
         createdAt: job.createdAt?.toISOString() || new Date().toISOString()
       }));
 
@@ -66,7 +67,7 @@ export default async function handler(req, res) {
     }
     else if (req.method === "POST") {
       const body = await parseJsonBody(req);
-      
+
       const requiredFields = ['jobType', 'title', 'email', 'name', 'location', 'salary', 'description'];
       const missingFields = requiredFields.filter(field => !body[field]);
       
@@ -82,6 +83,7 @@ export default async function handler(req, res) {
         title: body.title,
         email: body.email,
         name: body.name,
+        logo: body.logo || "",
         location: body.location,
         salary: body.salary,
         description: body.description,

@@ -35,9 +35,9 @@ const AdminProfileCard = ({ handleLogout }) => {
                 <>
                     <div className={styles.profileHeader}>
                         <div className={styles.avatarContainer}>
-                            {adminData.profilePic ? (
+                            {adminData.logo ? (
                                 <img 
-                                    src={adminData.profilePic} 
+                                    src={adminData.logo} 
                                     alt="Profile" 
                                     className={styles.avatar}
                                     onError={(e) => {
