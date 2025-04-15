@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import Image from 'next/image';
-import styles from '../styles/about.module.css';
+import styles from '../styles/About.module.css';
 import { FaLinkedin, FaWhatsapp, FaEnvelope, FaGraduationCap, FaBriefcase, FaUserTie } from 'react-icons/fa';
-import Card from '../components/Card';
+import Card from '../components/card';
 
 const About = () => {
   useEffect(() => {

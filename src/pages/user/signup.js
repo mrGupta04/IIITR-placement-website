@@ -43,7 +43,12 @@ export default function Signup({ setUser, setLoginsign }) {
   const router = useRouter();
   const [step, setStep] = useState(1);
 
-  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validateEmail = (email) => {
+    const lowerEmail = email.toLowerCase();
+    const regex = /^(cs|ad|mc)(21|22|23|24|25)b1\d{3}@iiitr\.ac\.in$/;
+    return regex.test(lowerEmail);
+  };
+  
   const validateMobile = (mobile) => /^\d{10}$/.test(mobile);
   const validatePassword = (password) => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password);
 
@@ -110,7 +115,11 @@ export default function Signup({ setUser, setLoginsign }) {
   };
 
   const nextStep = () => {
-    if (step === 1 && (!formData.name || !validateEmail(formData.email) || !validateMobile(formData.mobileno))) {
+    if(step===1&& !validateEmail(formData.email))
+    {
+      return setError("Use your college email!");
+    }
+    if (step === 1 && (!formData.name  || !validateMobile(formData.mobileno))) {
       return setError("Please fill all required fields correctly");
     }
     setError("");
@@ -124,6 +133,7 @@ export default function Signup({ setUser, setLoginsign }) {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+   
     if (!validatePassword(formData.password) || formData.password !== formData.reenterpassword) {
       return setError("Password requirements not met or passwords don't match");
     }

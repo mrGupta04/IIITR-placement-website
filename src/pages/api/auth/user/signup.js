@@ -1,4 +1,4 @@
-import { connectDB } from "../../../../lib/mongodb";
+import clientPromise from "../../../../utils/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import multer from "multer";
@@ -16,35 +16,59 @@ const upload = multer({
       cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname));
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      cb(null, uniqueSuffix + path.extname(file.originalname));
     },
   }),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only JPEG, PNG, and PDF are allowed.'));
+    }
+  }
 }).fields([
   { name: "profilepic", maxCount: 1 },
   { name: "resume", maxCount: 1 },
 ]);
 
-// Disable Next.js bodyParser to handle file uploads
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-// API route handler
+// Utility function to connect to DB
+async function connectDB() {
+  const client = await clientPromise;
+  return { db: client.db() };
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
-  // Wrap multer in a promise to ensure it completes before processing the request
   upload(req, res, async (err) => {
     if (err) {
+      // Handle specific multer errors
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ message: 'File size too large. Maximum 5MB allowed.' });
+      }
       return res.status(500).json({ message: `File upload error: ${err.message}` });
     }
 
     try {
-      // Manually parse form data after file upload
+      // Validate required files
+      if (!req.files?.resume?.[0]) {
+        return res.status(400).json({ message: "Resume is required." });
+      }
+
+      // Parse and validate form data
       const {
         name,
         email,
@@ -54,10 +78,10 @@ export default async function handler(req, res) {
         department,
         cgpa,
         gender,
+        password,
         linkedin,
         github,
         leetcode,
-        password,
         skills,
         project,
         workExperience,
@@ -65,65 +89,124 @@ export default async function handler(req, res) {
       } = req.body;
 
       // Validate required fields
-      if (!name || !email || !mobileno || !batch || !rollno || !department || !cgpa || !gender || !password) {
-        return res.status(400).json({ message: "All required fields must be provided." });
+      const requiredFields = {
+        name, email, mobileno, batch, rollno, department, cgpa, gender, password
+      };
+      
+      const missingFields = Object.entries(requiredFields)
+        .filter(([_, value]) => !value)
+        .map(([key]) => key);
+
+      if (missingFields.length > 0) {
+        return res.status(400).json({ 
+          message: "Missing required fields.",
+          missingFields 
+        });
       }
 
-      // Connect to the database
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: "Invalid email format." });
+      }
+
+      // Validate mobile number
+      if (!/^\d{10,15}$/.test(mobileno)) {
+        return res.status(400).json({ message: "Invalid mobile number." });
+      }
+
+      // Validate CGPA
+      const cgpaNum = parseFloat(cgpa);
+      if (isNaN(cgpaNum) || cgpaNum < 0 || cgpaNum > 10) {
+        return res.status(400).json({ message: "CGPA must be between 0 and 10." });
+      }
+
+      // Connect to database
       const { db } = await connectDB();
 
-      // Check if user already exists
+      // Check for existing user
       const existingUser = await db.collection("users").findOne({ email });
       if (existingUser) {
-        return res.status(400).json({ message: "User already exists." });
+        return res.status(409).json({ message: "User already exists." });
       }
 
-      // Hash the password
+      // Hash password
       const hashedPassword = await bcrypt.hash(password, 12);
+
+      // Parse optional fields safely
+      const parseJSONSafe = (str) => {
+        try {
+          return str ? JSON.parse(str) : [];
+        } catch {
+          return [];
+        }
+      };
 
       // Prepare user data
       const userData = {
-        name,
-        email,
-        mobileno,
-        batch,
-        rollno,
-        department,
-        cgpa: parseFloat(cgpa),
-        gender,
+        ...requiredFields,
+        cgpa: cgpaNum,
+        password: hashedPassword,
         linkedin: linkedin || "",
         github: github || "",
         leetcode: leetcode || "",
-        password: hashedPassword,
-        skills: skills ? JSON.parse(skills) : [],
-        project: project ? JSON.parse(project) : [],
-        workExperience: workExperience ? JSON.parse(workExperience) : [],
-        leadership: leadership ? JSON.parse(leadership) : [],
-        profilepic: req.files.profilepic ? `/uploads/${req.files.profilepic[0].filename}` : null,
-        resume: req.files.resume ? `/uploads/${req.files.resume[0].filename}` : null,
+        skills: parseJSONSafe(skills),
+        project: parseJSONSafe(project),
+        workExperience: parseJSONSafe(workExperience),
+        leadership: parseJSONSafe(leadership),
+        profilepic: req.files.profilepic?.[0] 
+          ? `/uploads/${req.files.profilepic[0].filename}` 
+          : null,
+        resume: req.files.resume?.[0] 
+          ? `/uploads/${req.files.resume[0].filename}` 
+          : null,
         createdAt: new Date(),
+        updatedAt: new Date(),
       };
 
-      // Insert the user into the database
+      // Insert user
       const result = await db.collection("users").insertOne(userData);
 
-      // Check for missing JWT_SECRET
       if (!process.env.JWT_SECRET) {
-        return res.status(500).json({ message: "JWT secret key is missing." });
+        throw new Error("JWT secret key is missing.");
       }
 
-      // Generate JWT token
-      const token = jwt.sign({ id: result.insertedId, email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+      // Generate token
+      const token = jwt.sign(
+        { id: result.insertedId, email }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: "7d" } // Longer expiration for better UX
+      );
 
-      // Respond with success message and user data
+      // Omit sensitive data from response
+      const { password: _, ...userWithoutPassword } = userData;
+
       return res.status(201).json({
         message: "User registered successfully.",
         token,
-        user: userData,
+        user: userWithoutPassword,
       });
+
     } catch (error) {
       console.error("Signup error:", error);
-      return res.status(500).json({ message: "Internal Server Error." });
+      
+      // Clean up uploaded files if error occurred
+      if (req.files) {
+        Object.values(req.files).forEach((files) => {
+          files.forEach((file) => {
+            try {
+              fs.unlinkSync(path.join("./public/uploads", file.filename));
+            } catch (err) {
+              console.error("Error cleaning up file:", err);
+            }
+          });
+        });
+      }
+
+      return res.status(500).json({ 
+        message: "Internal Server Error",
+        error: process.env.NODE_ENV === "development" ? error.message : undefined
+      });
     }
   });
 }

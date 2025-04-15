@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Login from "./login";
 import Signup from "./signup";
-import { useWindowSize } from "../user/useWindowSize";
+import  useWindowSize  from "../../utils/useuserwindow";
 import styles from "../../styles/User-signinsignup.module.css";
 
 const Signinsignup = ({ setUser, setLoginsign }) => {
