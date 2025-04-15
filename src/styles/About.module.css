@@ -49,11 +49,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 39, 77, 0.8) 0%,
-    rgba(0, 39, 77, 0.4) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(0, 39, 77, 0.8) 0%,
+      rgba(0, 39, 77, 0.4) 100%);
   z-index: -1;
 }
 
@@ -260,6 +258,7 @@
 
 /* ========== Leadership Section ========== */
 /* Leadership Section */
+/* Leadership Section Base Styles */
 .leadershipSection {
   padding: 4rem 0;
   background: #f9f9f9;
@@ -271,17 +270,25 @@
   padding: 0 2rem;
 }
 
+/* Leadership Card Styles */
 .leadershipCard {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 3rem;
   margin-bottom: 4rem;
   background: white;
   border-radius: 12px;
   padding: 2.5rem;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
+.leadershipCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Content Area */
 .leadershipContent {
   flex: 1;
 }
@@ -293,6 +300,26 @@
   font-weight: 600;
 }
 
+/* Leader Image Styles */
+.leaderImage {
+  flex: 0 0 250px;
+}
+
+.portrait {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+
+.leadershipCard:hover .portrait {
+  transform: scale(1.03);
+}
+
+/* Quote Styles */
 .leadershipQuote {
   font-size: 1.1rem;
   line-height: 1.6;
@@ -304,6 +331,7 @@
   border-left: 3px solid var(--primary);
 }
 
+/* Leader Info Styles */
 .leaderInfo {
   margin-top: 2rem;
 }
@@ -314,40 +342,93 @@
   margin-bottom: 0.3rem;
 }
 
+.leaderNamePosition {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+}
+
 .leaderPosition {
-  color: #666;
+  color: #777;
+  margin: 0;
   font-size: 0.95rem;
 }
 
-.leaderImage {
-  flex: 0 0 250px;
+.leaderRole {
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
 }
 
-.portrait {
-  border-radius: 8px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+/* Contact Links */
+.contactLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
-/* Responsive */
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.contactLink:hover {
+  background: #3498db;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.contactLink:nth-child(2):hover {
+  background: #0077b5; /* LinkedIn blue */
+}
+
+.contactLink:nth-child(3):hover {
+  background: #25D366; /* WhatsApp green */
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .leadershipCard {
     flex-direction: column;
-    text-align: center;
     padding: 2rem;
+    gap: 2rem;
   }
-  
+
+  .leaderImage {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .leaderNamePosition {
+    align-items: center;
+    text-align: center;
+  }
+
   .leadershipQuote {
     padding-left: 0;
     border-left: none;
     text-align: center;
   }
-  
-  .leaderImage {
-    margin-top: 2rem;
-    order: -1;
+
+  .contactLinks {
+    justify-content: center;
   }
 }
 
+/* Section Subtitle */
 .sectionSubtitle {
   text-align: center;
   font-size: 1.2rem;
@@ -356,121 +437,6 @@
   margin: 0 auto 3rem;
   opacity: 0.8;
 }
-
-
-.leaderCard {
-  display: flex;
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.leaderCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-
-.portrait {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  transition: transform 0.5s ease;
-}
-
-.leaderCard:hover .portrait {
-  transform: scale(1.03);
-}
-
-.leaderStats {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 39, 77, 0.9), transparent);
-  color: white;
-  padding: 1rem;
-  font-weight: 600;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.leaderInfo {
-  flex: 1;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.leaderInfo h3 {
-  font-size: 1.8rem;
-  color: var(--primary);
-  margin-bottom: 0.5rem;
-}
-
-.leaderMeta {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.leaderRole {
-  color: var(--secondary);
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.leaderDept {
-  color: var(--dark);
-  font-size: 0.9rem;
-  opacity: 0.8;
-  position: relative;
-  padding-left: 1rem;
-}
-
-.leaderDept::before {
-  content: "•";
-  position: absolute;
-  left: 0.2rem;
-}
-
-.leaderQuote {
-  font-style: italic;
-  color: var(--dark);
-  padding: 1rem 0;
-  margin: 1rem 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 0.95rem;
-}
-
-.leaderContact {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.contactBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.5rem;
-  background: var(--primary);
-  color: white;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.contactBtn:hover {
-  background: var(--secondary);
-  transform: translateY(-2px);
-}
-
 /* ========== Coordinators Section ========== */
 .coordinatorsSection {
   padding: 1rem 2rem;
@@ -577,7 +543,7 @@
   .leaderCard {
     flex-direction: column;
   }
-  
+
   .leaderImage {
     min-height: 250px;
   }
@@ -587,28 +553,28 @@
   .heroContent h1 {
     font-size: 2.5rem;
   }
-  
+
   .heroContent p {
     font-size: 1.1rem;
   }
-  
+
   .missionContent h2,
   .leadershipSection h2 {
     font-size: 2rem;
   }
-  
+
   .sectionSubtitle {
     font-size: 1.1rem;
   }
-  
+
   .leaderInfo {
     padding: 1.5rem;
   }
-  
+
   .leaderInfo h3 {
     font-size: 1.6rem;
   }
-  
+
   .contactBtn {
     padding: 0.5rem 1.2rem;
   }
@@ -618,15 +584,15 @@
   .aboutHero {
     min-height: 50vh;
   }
-  
+
   .heroContent h1 {
     font-size: 2rem;
   }
-  
+
   .missionCards {
     grid-template-columns: 1fr;
   }
-  
+
   .coordinatorCard {
     max-width: 280px;
     margin: 0 auto;
@@ -636,19 +602,23 @@
 /* Horizontal Row - Never Wraps */
 .leadershipRow {
   display: flex;
-  justify-content: space-between; /* Distributes space evenly */
-  gap: 20px; /* Fixed gap between cards */
+  justify-content: space-between;
+  /* Distributes space evenly */
+  gap: 20px;
+  /* Fixed gap between cards */
   margin-top: 2rem;
   width: 100%;
 }
 
 .leaderCardHorizontal {
-  flex: 1; /* Each card takes equal width */
-  min-width: 200px; /* Minimum card width */
+  flex: 1;
+  /* Each card takes equal width */
+  min-width: 200px;
+  /* Minimum card width */
   background: white;
   border-radius: 10px;
   padding: 1.5rem;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
