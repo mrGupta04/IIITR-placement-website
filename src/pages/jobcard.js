@@ -1,11 +1,14 @@
-
-
 import React, { useState } from "react";
 import styles from "../styles/UserJobcard.module.css";
 
 const JobCard = ({ job, onApply }) => {
   const [expanded, setExpanded] = useState(false);
   const [applying, setApplying] = useState(false);
+
+  // Return null or a loading state if job is undefined
+  if (!job) {
+    return <div className={styles.card}>Loading job details...</div>;
+  }
 
   const handleApply = async () => {
     setApplying(true);
@@ -20,8 +23,8 @@ const JobCard = ({ job, onApply }) => {
   return (
     <div className={`${styles.card} ${expanded ? styles.expanded : ''}`}>
       <div className={styles.cardHeader}>
-        <h3>{job.title}</h3>
-        <span className={styles.jobType}>{job.jobType}</span>
+        <h3>{job.title || 'Untitled Job'}</h3>
+        {job.jobType && <span className={styles.jobType}>{job.jobType}</span>}
       </div>
 
       <div className={styles.companyInfo}>
@@ -37,38 +40,50 @@ const JobCard = ({ job, onApply }) => {
           </div>
         )}
         <div>
-          <p className={styles.companyName}>{job.company}</p>
-          <p className={styles.location}>{job.location}</p>
+          <p className={styles.companyName}>{job.company || 'Unknown Company'}</p>
+          {job.location && <p className={styles.location}>{job.location}</p>}
         </div>
       </div>
 
-      <div className={styles.salary}>
-        <span>💵</span> {job.salary}
-      </div>
+      {job.salary && (
+        <div className={styles.salary}>
+          <span>💵</span> {job.salary}
+        </div>
+      )}
 
       {expanded ? (
         <div className={styles.details}>
-          <div className={styles.detailRow}>
-            <span>Duration:</span>
-            <span>{job.duration}</span>
-          </div>
-          <div className={styles.detailRow}>
-            <span>Skills:</span>
-            <span>{job.skills}</span>
-          </div>
-          <div className={styles.detailRow}>
-            <span>Eligible Batch:</span>
-            <span>{job.eligibleBatch}</span>
-          </div>
-          <div className={styles.detailRow}>
-            <span>Eligible Branch:</span>
-            <span>{job.eligibleBranch}</span>
-          </div>
+          {job.duration && (
+            <div className={styles.detailRow}>
+              <span>Duration:</span>
+              <span>{job.duration}</span>
+            </div>
+          )}
+          {job.skills && (
+            <div className={styles.detailRow}>
+              <span>Skills:</span>
+              <span>{job.skills}</span>
+            </div>
+          )}
+          {job.eligibleBatch && (
+            <div className={styles.detailRow}>
+              <span>Eligible Batch:</span>
+              <span>{job.eligibleBatch}</span>
+            </div>
+          )}
+          {job.eligibleBranch && (
+            <div className={styles.detailRow}>
+              <span>Eligible Branch:</span>
+              <span>{job.eligibleBranch}</span>
+            </div>
+          )}
 
-          <div className={styles.description}>
-            <h4>Job Description</h4>
-            <p>{job.description}</p>
-          </div>
+          {job.description && (
+            <div className={styles.description}>
+              <h4>Job Description</h4>
+              <p>{job.description}</p>
+            </div>
+          )}
 
           <div className={styles.actions}>
             <button
