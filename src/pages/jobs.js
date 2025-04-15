@@ -27,7 +27,11 @@ const JobPortal = () => {
                 ...job,
                 title: job.title || "",
                 company: job.name || "",
+<<<<<<< HEAD
                 logo: job.logo || "/default-logo.png",
+=======
+                logo: job.logo || "/default-logo.png", // Add this line
+>>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
                 skills: Array.isArray(job.skills) ? job.skills.join(', ') : job.skills || "",
                 jobType: job.jobType?.toLowerCase().includes("intern") ? "Internship" : "Full-time",
                 location: job.location || "",
@@ -85,15 +89,27 @@ const JobPortal = () => {
   };
 
   const filteredJobs = jobs.filter(job => {
+<<<<<<< HEAD
+=======
+    // Job type filter
+>>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
     const matchesType = 
       jobTypeFilter === "all" || 
       (jobTypeFilter === "internship" && job.jobType === "Internship") ||
       (jobTypeFilter === "fulltime" && job.jobType === "Full-time");
     
+<<<<<<< HEAD
+=======
+    // If no search term, just apply type filter
+>>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
     if (!searchTerm.trim()) return matchesType;
     
     const searchTermLower = searchTerm.toLowerCase();
     
+<<<<<<< HEAD
+=======
+    // Search across all fields
+>>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
     return matchesType && (
       job.title.toLowerCase().includes(searchTermLower) ||
       job.company.toLowerCase().includes(searchTermLower) ||

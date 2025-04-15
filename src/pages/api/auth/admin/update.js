@@ -19,6 +19,7 @@ const upload = multer({
       cb(null, Date.now() + path.extname(file.originalname));
     },
   }),
+<<<<<<< HEAD
   fileFilter: (req, file, cb) => {
     // Validate file types if needed
     const filetypes = /jpeg|jpg|png|gif/;
@@ -35,6 +36,9 @@ const upload = multer({
   { name: "logo", maxCount: 1 },
   { name: "profilepic", maxCount: 1 }
 ]);
+=======
+}).fields([{ name: "logo", maxCount: 1 }]);
+>>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
 
 export const config = {
   api: {
@@ -75,6 +79,10 @@ export default async function handler(req, res) {
       const updateData = {
         name,
         mobileno,
+<<<<<<< HEAD
+=======
+        logo,
+>>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
         city,
         state,
         aboutCompany,
@@ -83,6 +91,7 @@ export default async function handler(req, res) {
         updatedAt: new Date()
       };
 
+<<<<<<< HEAD
       // Handle file uploads
       if (req.files?.logo) {
         // Delete old logo if exists
@@ -93,6 +102,13 @@ export default async function handler(req, res) {
             console.error("Error deleting old logo:", err);
           }
         }
+=======
+      // Hash password if provided
+    
+
+      // Handle profile picture update
+      if (req.files.logo) {
+>>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
         updateData.logo = `/uploads/${req.files.logo[0].filename}`;
       }
 

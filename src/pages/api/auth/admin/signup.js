@@ -45,9 +45,15 @@ export default async function handler(req, res) {
       console.log("Connected to database:", db.databaseName);
 
       // Extract form data from req.body and req.files
+<<<<<<< HEAD
       const { email, password, ...rest } = req.body;
   
       const logo = req.files && req.files["logo"] ? `/uploads/${req.files["logo"][0].filename}` : null;
+=======
+      const { email, password,  ...rest } = req.body;
+  
+      const logo = req.files["logo"] ? `/uploads/${req.files["logo"][0].filename}` : null;
+>>>>>>> 9006144d314423521b16024ce0a0bb137b4f1aa3
 
       // Check if recruiter already exists
       const existingRecruiter = await db.collection("recruiters").findOne({ email });
