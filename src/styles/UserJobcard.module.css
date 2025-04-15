@@ -79,9 +79,9 @@
     gap: 0.3rem;
   }
   
-  .location::before {
+  /* .location::before {
     content: '📍';
-  }
+  } */
   
   .salary {
     margin: 0.5rem 0 1.2rem;
@@ -171,12 +171,12 @@
   }
   
   .applyButton {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
     color: white;
   }
   
   .applyButton:hover {
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    background: linear-gradient(135deg, #4f8ef7 0%, #1c2b49 100%);
     transform: translateY(-2px);
   }
   

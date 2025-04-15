@@ -669,3 +669,44 @@
 
 
 }
+/* Recruiters Section - Invitation Style */
+.recruitersSection {
+  background-color: #f4f7fa;
+  padding: 4rem 2rem;
+  margin: 4rem 0; /* adds space above and below */
+  border: 1px solid #d9e1e8; /* light border */
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.recruitersContent {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.recruiterMessage {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  margin: 1.5rem 0;
+}
+
+.recruiterButton {
+  background-color: #0070f3;
+  color: white;
+  padding: 0.75rem 1.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.recruiterButton:hover {
+  background-color: #005dc1;
+  transform: translateY(-2px);
+}
+
+
