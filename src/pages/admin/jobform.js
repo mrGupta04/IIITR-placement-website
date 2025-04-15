@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/jobForm.module.css";
+import styles from "../../styles/JobForm.module.css";
 import { useRouter } from "next/router";
 import Select from "react-select";
 

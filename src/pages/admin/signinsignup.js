@@ -1,7 +1,9 @@
+"use client"
+
 import { useState } from "react";
 import Login from "./login";
 import Signup from "./signup";
-import { useWindowSize } from "./usewindowsize";
+import  useWindowSize  from "../../utils/usewindowsize";
 import styles from "../../styles/Admin-signinsignup.module.css";
 
 const LoginContent = () => (

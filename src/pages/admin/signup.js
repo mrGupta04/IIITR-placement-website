@@ -54,8 +54,6 @@ export default function RecruiterSignup({ setAdmin, setLoginsign }) {
       return;
     }
 
-   
-
     setLoading(true);
 
     const data = new FormData();

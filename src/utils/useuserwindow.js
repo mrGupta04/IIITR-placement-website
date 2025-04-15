@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // Add this import
 
-export const useWindowSize = () => {
+const useWindowSize = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -16,3 +16,5 @@ export const useWindowSize = () => {
 
   return isMobile;
 };
+
+export default useWindowSize;  // Default export

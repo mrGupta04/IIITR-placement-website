@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import styles from "../styles/DirectorCorner.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const ElfsightWidget = dynamic(() => import("./ElfsightWidget"), { ssr: false });
+const ElfsightWidget = dynamic(() => import("./elfsightwidget"), { ssr: false });
 
 const SocialSection = () => {
   useEffect(() => {
