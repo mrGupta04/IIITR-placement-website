@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from 'next/image';
-import styles from "../styles/card.module.css";
+import styles from "../styles/Card.module.css";
 import { FaLinkedin, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 const Card = ({ image, name, position, idno, branch, info, small, linkedinLink = "#", whatsappLink = "#", emailLink = "#"
