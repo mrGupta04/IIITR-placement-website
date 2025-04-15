@@ -58,9 +58,7 @@ export default function RecruiterSignup({ setAdmin, setLoginsign }) {
 
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-       
-        data.append(key, value);
-      
+      data.append(key, value);
     });
     if (logo) data.append("logo", logo);
 

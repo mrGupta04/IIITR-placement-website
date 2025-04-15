@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/JobForm.module.css";
+import styles from "../../styles/jobForm.module.css";
 import { useRouter } from "next/router";
 import Select from "react-select";
 
@@ -67,6 +67,7 @@ const JobForm = () => {
       duration: jobType === "Internship" ? duration : null,
       email: storedAdmin.email,
       name:storedAdmin.name,
+      logo: storedAdmin.logo || '/default-logo.png',  // Provide a fallback
       skills: skills.map((s) => s.value),
       eligibleBatch: eligibleBatch.map((b) => b.value),
       eligibleBranch: eligibleBranch.map((br) => br.value),

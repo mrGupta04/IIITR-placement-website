@@ -19,22 +19,34 @@ const upload = multer({
       cb(null, Date.now() + path.extname(file.originalname));
     },
   }),
-}).fields([{ name: "profilepic", maxCount: 1 }, { name: "logo", maxCount: 1 }]);
+  fileFilter: (req, file, cb) => {
+    // Validate file types if needed
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    cb(new Error('Only image files are allowed!'));
+  },
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+}).fields([
+  { name: "logo", maxCount: 1 },
+  { name: "profilepic", maxCount: 1 }
+]);
 
-// Disable Next.js bodyParser for handling file uploads
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-// Admin update API route handler
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
-  // Use multer to handle file uploads before processing request
   upload(req, res, async function (err) {
     if (err) {
       return res.status(500).json({ message: `File upload error: ${err.message}` });
@@ -42,11 +54,11 @@ export default async function handler(req, res) {
 
     try {
       // Extract form data
-      const { email, name, mobileno,logo,profilepic,city,state,aboutCompany,industryType,website } = req.body;
+      const { email, name, mobileno, city, state, aboutCompany, industryType, website } = req.body;
 
       // Validate required fields
       if (!email) {
-        return res.status(400).json({ message: "Email  ID are required." });
+        return res.status(400).json({ message: "Email is required." });
       }
 
       // Connect to database
@@ -63,26 +75,37 @@ export default async function handler(req, res) {
       const updateData = {
         name,
         mobileno,
-        logo,
-        profilepic,
         city,
         state,
         aboutCompany,
         industryType,
         website,
+        updatedAt: new Date()
       };
 
-      // Hash password if provided
-    
-
-      // Handle profile picture update
-      if (req.files.profilepic) {
-        updateData.profilepic = `/uploads/${req.files.profilepic[0].filename}`;
+      // Handle file uploads
+      if (req.files?.logo) {
+        // Delete old logo if exists
+        if (admin.logo) {
+          try {
+            fs.unlinkSync(`./public${admin.logo}`);
+          } catch (err) {
+            console.error("Error deleting old logo:", err);
+          }
+        }
+        updateData.logo = `/uploads/${req.files.logo[0].filename}`;
       }
 
-      // Handle resume update
-      if (req.files.resume) {
-        updateData.resume = `/uploads/${req.files.resume[0].filename}`;
+      if (req.files?.profilepic) {
+        // Delete old profile pic if exists
+        if (admin.profilepic) {
+          try {
+            fs.unlinkSync(`./public${admin.profilepic}`);
+          } catch (err) {
+            console.error("Error deleting old profile picture:", err);
+          }
+        }
+        updateData.profilepic = `/uploads/${req.files.profilepic[0].filename}`;
       }
 
       // Update admin in the database
@@ -95,23 +118,45 @@ export default async function handler(req, res) {
         return res.status(404).json({ message: "Admin update failed." });
       }
 
-      // Generate JWT token for the updated admin
+      // Generate JWT token
       if (!process.env.JWT_SECRET) {
         return res.status(500).json({ message: "JWT secret key is missing." });
       }
 
-      const token = jwt.sign({ id: admin._id, email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+      const token = jwt.sign(
+        { id: admin._id, email, role: "admin" }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: "1h" }
+      );
 
-      // Respond with success message and updated admin data
+      // Get updated admin data
+      const updatedAdmin = await db.collection("recruiters").findOne({ email });
+
+      // Respond with success
       return res.status(200).json({
-        message: "Admin updated successfully.",
+        message: "Admin updated successfully",
         token,
-        admin: { ...admin, ...updateData },
-        redirectUrl: "/admin-dashboard",
+        admin: {
+          ...updatedAdmin,
+          password: undefined // Never send password back
+        },
+        redirectUrl: "/admin-dashboard"
       });
+
     } catch (error) {
       console.error("Admin update error:", error);
-      return res.status(500).json({ message: "Internal Server Error." });
+      
+      // Clean up uploaded files if error occurred
+      if (req.files?.logo) {
+        fs.unlinkSync(`./public/uploads/${req.files.logo[0].filename}`);
+      }
+      if (req.files?.profilepic) {
+        fs.unlinkSync(`./public/uploads/${req.files.profilepic[0].filename}`);
+      }
+      
+      return res.status(500).json({ 
+        message: error.message || "Internal Server Error" 
+      });
     }
   });
 }

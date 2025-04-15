@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import JobCard from "./jobcard";
+import JobCard from "./jobCard";
 import styles from "../../styles/Appliedjob.module.css";
 
 const AppliedJobs = () => {

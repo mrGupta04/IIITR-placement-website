@@ -20,7 +20,6 @@ const upload = multer({
     },
   }),
 }).fields([
-  { name: "profilepic", maxCount: 1 },
   { name: "logo", maxCount: 1 },
 ]);
 
@@ -46,14 +45,17 @@ export default async function handler(req, res) {
       console.log("Connected to database:", db.databaseName);
 
       // Extract form data from req.body and req.files
-      const { email, password,  ...rest } = req.body;
-      const profilePic = req.files["profilepic"] ? req.files["profilepic"][0].path : null;
-      const logo = req.files["logo"] ? req.files["logo"][0].path : null;
+      const { email, password, ...rest } = req.body;
+  
+      const logo = req.files && req.files["logo"] ? `/uploads/${req.files["logo"][0].filename}` : null;
 
-      
       // Check if recruiter already exists
       const existingRecruiter = await db.collection("recruiters").findOne({ email });
       if (existingRecruiter) {
+        // Clean up uploaded file if recruiter exists
+        if (logo) {
+          fs.unlinkSync(`./public${logo}`);
+        }
         return res.status(400).json({ message: "Recruiter already exists." });
       }
 
@@ -65,8 +67,8 @@ export default async function handler(req, res) {
         ...rest,
         email,
         password: hashedPassword,
-        profilePic,
         logo,
+        createdAt: new Date(),
       };
 
       const result = await db.collection("recruiters").insertOne(recruiterData);
@@ -79,10 +81,18 @@ export default async function handler(req, res) {
       res.status(201).json({
         message: "Signup successful.",
         token,
-        recruiter: { ...recruiterData, password: undefined }, // Exclude password from response
+        recruiter: { 
+          ...recruiterData, 
+          _id: result.insertedId,
+          password: undefined // Exclude password from response
+        },
       });
     } catch (error) {
       console.error("Error in handler:", error);
+      // Clean up uploaded file if error occurs
+      if (req.files && req.files["logo"]) {
+        fs.unlinkSync(`./public/uploads/${req.files["logo"][0].filename}`);
+      }
       res.status(500).json({ message: "Internal Server Error." });
     }
   });

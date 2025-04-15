@@ -7,25 +7,43 @@ const JobPortal = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [jobTypeFilter, setJobTypeFilter] = useState("all");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const res = await fetch("/api/auth/jobs");
+        
+        if (!res.ok) throw new Error("Failed to fetch jobs");
+
         const data = await res.json();
         if (data.userjobs) {
-          const uniqueJobs = data.userjobs.reduce((acc, job) => {
+          const normalizedJobs = data.userjobs.reduce((acc, job) => {
             if (!acc.find((j) => j._id === job._id)) {
-              acc.push(job);
+              acc.push({
+                ...job,
+                title: job.title || "",
+                company: job.name || "",
+                logo: job.logo || "/default-logo.png",
+                skills: Array.isArray(job.skills) ? job.skills.join(', ') : job.skills || "",
+                jobType: job.jobType?.toLowerCase().includes("intern") ? "Internship" : "Full-time",
+                location: job.location || "",
+                salary: job.salary ? job.salary.toString() : "",
+                description: job.description || ""
+              });
             }
             return acc;
           }, []);
-          setJobs(uniqueJobs);
+          setJobs(normalizedJobs);
         } else {
           setJobs([]);
         }
       } catch (error) {
         console.error("Error fetching jobs:", error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -66,11 +84,26 @@ const JobPortal = () => {
     }
   };
 
-  const filteredJobs = jobs.filter(job =>
-    job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.skills.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredJobs = jobs.filter(job => {
+    const matchesType = 
+      jobTypeFilter === "all" || 
+      (jobTypeFilter === "internship" && job.jobType === "Internship") ||
+      (jobTypeFilter === "fulltime" && job.jobType === "Full-time");
+    
+    if (!searchTerm.trim()) return matchesType;
+    
+    const searchTermLower = searchTerm.toLowerCase();
+    
+    return matchesType && (
+      job.title.toLowerCase().includes(searchTermLower) ||
+      job.company.toLowerCase().includes(searchTermLower) ||
+      job.skills.toLowerCase().includes(searchTermLower) ||
+      job.jobType.toLowerCase().includes(searchTermLower) ||
+      job.location.toLowerCase().includes(searchTermLower) ||
+      job.salary.includes(searchTerm) ||
+      job.description.toLowerCase().includes(searchTermLower)
+    );
+  });
 
   return (
     <div className={styles.container}>
@@ -97,7 +130,7 @@ const JobPortal = () => {
         <div className={styles.searchContainer}>
           <input
             type="text"
-            placeholder="Search jobs by title, company or skills..."
+            placeholder="Search jobs by title, company, skills..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className={styles.searchInput}
@@ -105,9 +138,24 @@ const JobPortal = () => {
           <span className={styles.searchIcon}>🔍</span>
         </div>
         <div className={styles.filterButtons}>
-          <button className={styles.filterButton}>All Jobs</button>
-          <button className={styles.filterButton}>Internships</button>
-          <button className={styles.filterButton}>Full-time</button>
+          <button 
+            className={`${styles.filterButton} ${jobTypeFilter === "all" ? styles.activeFilter : ""}`}
+            onClick={() => setJobTypeFilter("all")}
+          >
+            All Jobs
+          </button>
+          <button 
+            className={`${styles.filterButton} ${jobTypeFilter === "internship" ? styles.activeFilter : ""}`}
+            onClick={() => setJobTypeFilter("internship")}
+          >
+            Internships
+          </button>
+          <button 
+            className={`${styles.filterButton} ${jobTypeFilter === "fulltime" ? styles.activeFilter : ""}`}
+            onClick={() => setJobTypeFilter("fulltime")}
+          >
+            Full-time
+          </button>
         </div>
       </div>
 
@@ -115,7 +163,12 @@ const JobPortal = () => {
       <div className={styles.jobsContainer}>
         <h2 className={styles.sectionTitle}>Available Opportunities</h2>
         
-        {loading ? (
+        {error ? (
+          <div className={styles.error}>
+            <p>Error loading jobs: {error}</p>
+            <button onClick={() => window.location.reload()}>Try Again</button>
+          </div>
+        ) : loading ? (
           <div className={styles.loading}>
             <div className={styles.spinner}></div>
             <p>Loading opportunities...</p>
