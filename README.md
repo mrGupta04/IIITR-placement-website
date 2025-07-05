@@ -13,7 +13,16 @@
 - 🧑‍🎓 Student Profile Creation & Management
 - 🗃️ Placement & Training Data Handling
 - 💻 Clean, Responsive UI (Mobile-first)
-- 📊 (Coming Soon) Admin Dashboard for Placement Cell
+- 🛠️ Admin Panel for Placement Officers
+- 📁 Resume Upload & Verification
+- 📊 Data Visualization with Charts
+- 🔍 Search & Filter for Student Profiles
+- 👥 Separate Profile Sections for Companies and Students
+- 🧠 Companies can filter students by resume, skills, and batch  
+- 📞 Direct call initiation to selected students from the platform
+- 💼 Companies can post job openings directly on the portal  
+- 📥 Students can view and apply to jobs via a dedicated job dashboard
+  
 
 ---
 
@@ -112,12 +121,15 @@ PORT=5000
 
 ---
 
-## 🧪 Future Improvements
+## ✅ Implemented Features
 
-- ✅ Admin Panel for Placement Officers
-- 📄 Resume Upload & Verification
+In addition to core features, the following advanced features are already implemented:
+
+- 🛠️ Admin Panel for Placement Officers
+- 📁 Resume Upload & Verification
 - 📊 Data Visualization with Charts
-- 🔎 Search & Filter for Student Profiles
+- 🔍 Search & Filter for Student Profiles
+-  👥 Separate Profile Sections for Companies and Students
 
 ---
 
