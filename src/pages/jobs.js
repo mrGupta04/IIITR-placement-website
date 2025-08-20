@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import JobCard from "./jobcard";
 import styles from "../styles/Jobportal.module.css";
-import Link from "next/link";
 
 const JobPortal = () => {
+  const router = useRouter();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,7 +17,7 @@ const JobPortal = () => {
         setLoading(true);
         setError(null);
         const res = await fetch("/api/auth/jobs");
-        
+
         if (!res.ok) throw new Error("Failed to fetch jobs");
 
         const data = await res.json();
@@ -28,11 +29,15 @@ const JobPortal = () => {
                 title: job.title || "",
                 company: job.name || "",
                 logo: job.logo || "/default-logo.png",
-                skills: Array.isArray(job.skills) ? job.skills.join(', ') : job.skills || "",
-                jobType: job.jobType?.toLowerCase().includes("intern") ? "Internship" : "Full-time",
+                skills: Array.isArray(job.skills)
+                  ? job.skills.join(", ")
+                  : job.skills || "",
+                jobType: job.jobType?.toLowerCase().includes("intern")
+                  ? "Internship"
+                  : "Full-time",
                 location: job.location || "",
                 salary: job.salary ? job.salary.toString() : "",
-                description: job.description || ""
+                description: job.description || "",
               });
             }
             return acc;
@@ -84,26 +89,32 @@ const JobPortal = () => {
     }
   };
 
-  const filteredJobs = jobs.filter(job => {
-    const matchesType = 
-      jobTypeFilter === "all" || 
+  const filteredJobs = jobs.filter((job) => {
+    const matchesType =
+      jobTypeFilter === "all" ||
       (jobTypeFilter === "internship" && job.jobType === "Internship") ||
       (jobTypeFilter === "fulltime" && job.jobType === "Full-time");
-    
+
     if (!searchTerm.trim()) return matchesType;
-    
+
     const searchTermLower = searchTerm.toLowerCase();
-    
-    return matchesType && (
-      job.title.toLowerCase().includes(searchTermLower) ||
-      job.company.toLowerCase().includes(searchTermLower) ||
-      job.skills.toLowerCase().includes(searchTermLower) ||
-      job.jobType.toLowerCase().includes(searchTermLower) ||
-      job.location.toLowerCase().includes(searchTermLower) ||
-      job.salary.includes(searchTerm) ||
-      job.description.toLowerCase().includes(searchTermLower)
+
+    return (
+      matchesType &&
+      (job.title.toLowerCase().includes(searchTermLower) ||
+        job.company.toLowerCase().includes(searchTermLower) ||
+        job.skills.toLowerCase().includes(searchTermLower) ||
+        job.jobType.toLowerCase().includes(searchTermLower) ||
+        job.location.toLowerCase().includes(searchTermLower) ||
+        job.salary.includes(searchTerm) ||
+        job.description.toLowerCase().includes(searchTermLower))
     );
   });
+
+  // ✅ Corrected back to profile handler
+  const handleBackToProfile = () => {
+    router.back();
+  };
 
   return (
     <div className={styles.container}>
@@ -112,16 +123,12 @@ const JobPortal = () => {
         <div className={styles.heroContent}>
           <h1>Discover Your Dream Career</h1>
           <p>
-            Connect with <span>top companies</span> and find opportunities that match your skills and aspirations.
+            Connect with <span>top companies</span> and find opportunities
+            that match your skills and aspirations.
           </p>
-          <div className={styles.ctaButtons}>
-            <Link href="/profile" className={styles.primaryButton}>
-              Student Login
-            </Link>
-            <Link href="/recruiter" className={styles.secondaryButton}>
-              Recruiter Portal
-            </Link>
-          </div>
+          <button onClick={handleBackToProfile} className={styles.backButton}>
+            ← Back to Profile
+          </button>
         </div>
       </div>
 
@@ -138,20 +145,26 @@ const JobPortal = () => {
           <span className={styles.searchIcon}>🔍</span>
         </div>
         <div className={styles.filterButtons}>
-          <button 
-            className={`${styles.filterButton} ${jobTypeFilter === "all" ? styles.activeFilter : ""}`}
+          <button
+            className={`${styles.filterButton} ${
+              jobTypeFilter === "all" ? styles.activeFilter : ""
+            }`}
             onClick={() => setJobTypeFilter("all")}
           >
             All Jobs
           </button>
-          <button 
-            className={`${styles.filterButton} ${jobTypeFilter === "internship" ? styles.activeFilter : ""}`}
+          <button
+            className={`${styles.filterButton} ${
+              jobTypeFilter === "internship" ? styles.activeFilter : ""
+            }`}
             onClick={() => setJobTypeFilter("internship")}
           >
             Internships
           </button>
-          <button 
-            className={`${styles.filterButton} ${jobTypeFilter === "fulltime" ? styles.activeFilter : ""}`}
+          <button
+            className={`${styles.filterButton} ${
+              jobTypeFilter === "fulltime" ? styles.activeFilter : ""
+            }`}
             onClick={() => setJobTypeFilter("fulltime")}
           >
             Full-time
@@ -162,7 +175,7 @@ const JobPortal = () => {
       {/* Job Listings */}
       <div className={styles.jobsContainer}>
         <h2 className={styles.sectionTitle}>Available Opportunities</h2>
-        
+
         {error ? (
           <div className={styles.error}>
             <p>Error loading jobs: {error}</p>

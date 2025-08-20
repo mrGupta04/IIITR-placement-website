@@ -16,12 +16,20 @@ const upload = multer({
       cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+      cb(null, Date.now() + path.extname(file.originalname));
     },
   }),
-}).fields([
-  { name: "logo", maxCount: 1 },
-]);
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed!'), false);
+    }
+  },
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit
+  }
+}).single("logo"); // Using single instead of fields since you only have one file
 
 export const config = {
   api: {
@@ -30,70 +38,82 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  // Handle file upload and form data
   upload(req, res, async (err) => {
     if (err) {
-      return res.status(500).json({ message: `File upload error: ${err.message}` });
+      console.error('Upload error:', err);
+      return res.status(400).json({ 
+        message: err.message || 'File upload failed',
+        ...(err.code === 'LIMIT_FILE_SIZE' && { maxSize: '5MB' })
+      });
     }
 
     try {
       const { db } = await connectDB();
-      console.log("Connected to database:", db.databaseName);
+      
+      // Parse form data from req.body (text fields)
+      const { name, email, mobileno, city, state, aboutCompany, industryType, website, password } = req.body;
 
-      // Extract form data from req.body and req.files
-      const { email, password, ...rest } = req.body;
-  
-      const logo = req.files && req.files["logo"] ? `/uploads/${req.files["logo"][0].filename}` : null;
-
-      // Check if recruiter already exists
-      const existingRecruiter = await db.collection("recruiters").findOne({ email });
-      if (existingRecruiter) {
-        // Clean up uploaded file if recruiter exists
-        if (logo) {
-          fs.unlinkSync(`./public${logo}`);
-        }
-        return res.status(400).json({ message: "Recruiter already exists." });
+      // Validate required fields
+      if (!email || !password || !name) {
+        if (req.file) fs.unlinkSync(req.file.path);
+        return res.status(400).json({ message: 'Missing required fields' });
       }
 
-      // Hash the password
+      // Check if recruiter exists
+      const existingRecruiter = await db.collection("recruiters").findOne({ email });
+      if (existingRecruiter) {
+        if (req.file) fs.unlinkSync(req.file.path);
+        return res.status(409).json({ message: "Recruiter already exists" });
+      }
+
+      // Hash password
       const hashedPassword = await bcrypt.hash(password, 12);
 
       // Prepare recruiter data
       const recruiterData = {
-        ...rest,
+        name,
         email,
+        mobileno,
+        city,
+        state,
+        aboutCompany,
+        industryType,
+        website,
         password: hashedPassword,
-        logo,
+        logo: req.file ? `/uploads/${req.file.filename}` : null,
         createdAt: new Date(),
       };
 
+      // Insert into database
       const result = await db.collection("recruiters").insertOne(recruiterData);
 
-      const token = jwt.sign({ id: result.insertedId, email }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
+      // Generate JWT token
+      const token = jwt.sign(
+        { id: result.insertedId, email, role: 'recruiter' },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
+
+      // Return response
+      res.status(201).json({
+        message: "Signup successful",
+        token,
+        recruiter: {
+          ...recruiterData,
+          _id: result.insertedId,
+          password: undefined // Remove password from response
+        }
       });
 
-      // Return success response
-      res.status(201).json({
-        message: "Signup successful.",
-        token,
-        recruiter: { 
-          ...recruiterData, 
-          _id: result.insertedId,
-          password: undefined // Exclude password from response
-        },
-      });
     } catch (error) {
-      console.error("Error in handler:", error);
+      console.error('Server error:', error);
       // Clean up uploaded file if error occurs
-      if (req.files && req.files["logo"]) {
-        fs.unlinkSync(`./public/uploads/${req.files["logo"][0].filename}`);
-      }
-      res.status(500).json({ message: "Internal Server Error." });
+      if (req.file) fs.unlinkSync(req.file.path);
+      res.status(500).json({ message: 'Internal server error' });
     }
   });
 }

@@ -40,12 +40,10 @@ const DirectorsCorner = () => {
     <section className="py-16 relative overflow-hidden">
       <section className="bg-gray-100 py-10 px-6">
         <section className="relative py-16 bg-gradient-to-b from-blue-50/20 to-white">
-          <div className={`container ${styles.container}`}>
+          <div className={`container ${styles.container}`} style={{ paddingTop: '0' }}>
             <div className={`row ${styles.card} shadow-lg p-4`}>
+              {/* Left Content */}
               <div className="col-md-6 d-flex flex-column justify-content-center text-center">
-                <div className="blockquote">
-                  <span className={styles.quoteIcon}>&ldquo;</span>
-                </div>
                 <h1 className="fw-bold">Director Sir's Message</h1>
                 <h2 className="fw-bold">Prof. Harish Kumar Sardana</h2>
                 <p className="lead">{showFull ? fullText : shortText}</p>
@@ -54,12 +52,13 @@ const DirectorsCorner = () => {
                 </button>
               </div>
 
+              {/* Right Video */}
               <div className="col-md-6 d-flex align-items-center justify-content-center">
-                <div className={styles.video} style={{ width: '100%', height: '275px' }}>
+                <div className={styles.video} style={{ width: '100%', height: '290px' }}>
                   <iframe
                     width="100%"
                     height="100%"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    src="https://www.youtube.com/embed/iyD4E5tjzgg"
                     title="Director's Message"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -71,30 +70,40 @@ const DirectorsCorner = () => {
             </div>
           </div>
 
-
           <style jsx global>{`
-            @keyframes fade-in-up {
-              0% {
-                opacity: 0;
-                transform: translateY(20px);
-              }
-              100% {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            }
+        @keyframes fade-in-up {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
-            .animate-fade-in-up {
-              animation: fade-in-up 0.8s ease-out forwards;
-            }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+        }
 
-            video::-webkit-media-controls-panel {
-              background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
-            }
-          `}</style>
+        video::-webkit-media-controls-panel {
+          background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+        }
+
+        /* Remove extra top space */
+        .${styles.container} {
+          padding-top: 0 !important;
+        }
+
+        /* Remove the quote icon block */
+        .blockquote {
+          display: none;
+        }
+      `}</style>
         </section>
       </section>
     </section>
+
   );
 };
 

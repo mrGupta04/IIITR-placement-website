@@ -88,8 +88,7 @@
   flex-direction: column;
   gap: 0.8rem;
 }
-
-.updateButton, .logoutButton {
+.updateButton, .logoutButton, .jobsButton {
   padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 6px;
@@ -101,6 +100,7 @@
   gap: 0.5rem;
 }
 
+/* Edit Profile button style */
 .updateButton {
   background: white;
   color: #6e8efb;
@@ -111,16 +111,21 @@
   transform: translateY(-2px);
 }
 
-.logoutButton {
+/* Logout & Jobs button style (identical) */
+.logoutButton, .jobsButton {
   background: rgba(255, 255, 255, 0.1);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.logoutButton:hover {
+.logoutButton:hover, .jobsButton:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
+
+
+
+
 /* Profile Sections */
 .profileSection {
   background: white;

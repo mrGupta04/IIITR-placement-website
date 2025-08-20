@@ -22,9 +22,7 @@ const Header = () => {
             <li>
               <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
             </li>
-            <li>
-              <Link href="/jobs" onClick={() => setMenuOpen(false)}>Jobs</Link>
-            </li>
+           
             <li>
               <Link href="/recruiters" onClick={() => setMenuOpen(false)}>Recruiters</Link>
             </li>
